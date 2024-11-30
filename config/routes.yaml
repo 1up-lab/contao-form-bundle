@@ -1,0 +1,3 @@
+oneup_contao_form:
+    resource: ../src/Controller
+    type: attribute

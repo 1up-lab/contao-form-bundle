@@ -1,0 +1,81 @@
+{
+    "name": "oneup/contao-form-bundle",
+    "type": "contao-bundle",
+    "description": "Integrates Symfony forms into Contao",
+    "keywords": [
+        "contao",
+        "forms",
+        "symfony"
+    ],
+    "homepage": "https://github.com/1up-lab/contao-form-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jim Schmid",
+            "email": "js@1up.io",
+            "homepage": "https://github.com/sheeep",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "contao/core-bundle": "^4.13 || ^5.3",
+        "contao/manager-plugin": "^2.3",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
+        "symfony/form": "^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oneup\\ContaoFormBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Oneup\\ContaoFormBundle\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true,
+            "contao-components/installer": true,
+            "contao/manager-plugin": true,
+            "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.3"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "forward-command": true
+        },
+        "contao-manager-plugin": "Oneup\\ContaoFormBundle\\ContaoManager\\Plugin"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@composer bin all install --ansi"
+        ],
+        "post-update-cmd": [
+            "@composer bin all update --ansi"
+        ],
+        "cs-fixer": [
+            "@php vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix -vvv --ansi"
+        ],
+        "phpstan": [
+            "@php vendor-bin/phpstan/vendor/bin/phpstan analyze src/ --level max --memory-limit=-1 --ansi"
+        ],
+        "phpunit": [
+            "@php vendor-bin/phpunit/vendor/bin/phpunit --colors=always"
+        ],
+        "require-checker": [
+            "@php vendor-bin/require-checker/vendor/bin/composer-require-checker check --config-file=vendor-bin/require-checker/config.json composer.json --ansi"
+        ]
+    }
+}
