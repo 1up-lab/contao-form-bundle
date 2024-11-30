@@ -10,6 +10,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
     'config' => [
         'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
+        'ctable' => ['tl_symfony_form_field'],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -20,12 +21,12 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
     'list' => [
         'sorting' => [
             'mode' => DataContainer::MODE_SORTED,
-            'fields' => ['title'],
+            'fields' => ['name'],
             'flag' => 1,
             'panelLayout' => 'filter;sort,search,limit',
         ],
         'label' => [
-            'fields' => ['title'],
+            'fields' => ['name'],
             'format' => '%s',
             'showColumns' => false,
         ],
@@ -38,8 +39,14 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
         ],
         'operations' => [
             'edit' => [
-                'href' => 'act=edit',
+                'href' => 'table=tl_symfony_form_field',
                 'icon' => 'edit.svg',
+                'attributes' => 'class="contextmenu"',
+            ],
+            'editheader' => [
+                'href' => 'act=edit',
+                'icon' => 'header.svg',
+                'attributes' => 'class="edit-header"',
             ],
             'copy' => [
                 'href' => 'act=copy',
@@ -50,10 +57,6 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
                 'icon' => 'delete.svg',
                 'attributes' => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? '') . '\'))return false;Backend.getScrollOffset()"',
             ],
-            'toggle' => [
-                'href' => 'act=toggle&amp;field=published',
-                'icon' => 'visible.svg',
-            ],
             'show' => [
                 'href' => 'act=show',
                 'icon' => 'show.svg',
@@ -63,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
 
     'palettes' => [
         '__selector__' => [],
-        'default' => '{title_legend},name,type',
+        'default' => '{title_legend},name',
     ],
 
     'fields' => [
@@ -72,14 +75,14 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
                 'type' => Types::INTEGER,
                 'unsigned' => true,
                 'autoIncrement' => true,
-            ]
+            ],
         ],
         'tstamp' => [
             'sql' => [
                 'type' => Types::INTEGER,
                 'unsigned' => true,
                 'default' => 0,
-            ]
+            ],
         ],
         'name' => [
             'inputType' => 'text',
@@ -90,34 +93,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
             ],
             'sql' => [
                 'type' => Types::STRING,
-                'default' => ''
-            ],
-        ],
-        'type' => [
-            'inputType' => 'select',
-            'eval' => [
-                'chosen' => true,
-                'mandatory' => true,
-                'submitOnChange' => true,
-                'tl_class' => 'w50',
-            ],
-            'sql' => [
-                'type' => Types::STRING,
-                'default' => ''
-            ],
-        ],
-        'published' => [
-            'filter' => true,
-            'flag' => 1,
-            'inputType' => 'checkbox',
-            'eval' => [
-                'doNotCopy' => true,
-                'tl_class' => 'w50',
-            ],
-            'save_callback' => [static fn ($v) => '1' === $v], // Correctly store boolean types
-            'sql' => [
-                'type' => Types::BOOLEAN,
-                'default' => false,
+                'default' => '',
             ],
         ],
     ],
