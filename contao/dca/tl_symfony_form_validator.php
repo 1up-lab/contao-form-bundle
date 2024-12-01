@@ -200,7 +200,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form_validator'] = [
                 'tl_class' => 'clr',
             ],
             'sql' => [
-                'type' => Types::TEXT,
+                'type' => Types::STRING,
                 'default' => '',
             ],
         ],
