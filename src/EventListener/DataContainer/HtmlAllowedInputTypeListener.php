@@ -10,7 +10,7 @@ use Contao\DataContainer;
 #[AsCallback(table: 'tl_symfony_form_field', target: 'config.onload')]
 class HtmlAllowedInputTypeListener
 {
-    public function __invoke(DataContainer|null $dc = null): void
+    public function __invoke(?DataContainer $dc = null): void
     {
         if (null === $dc) {
             return;
