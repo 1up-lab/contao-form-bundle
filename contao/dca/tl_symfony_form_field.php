@@ -74,6 +74,11 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
                 'href' => 'act=edit',
                 'icon' => 'edit.svg',
             ],
+            'children' => [
+                'href' => 'table=tl_symfony_form_validator',
+                'icon' => 'children.svg',
+                'attributes' => 'class="contextmenu"',
+            ],
             'copy' => [
                 'href' => 'act=copy',
                 'icon' => 'copy.svg',

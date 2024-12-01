@@ -6,5 +6,6 @@ $GLOBALS['BE_MOD']['content']['symfony_form'] = [
     'tables' => [
         'tl_symfony_form',
         'tl_symfony_form_field',
+        'tl_symfony_form_validator',
     ],
 ];

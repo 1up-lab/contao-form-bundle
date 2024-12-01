@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Oneup\ContaoFormBundle\EventListener\DataContainer;
+namespace Oneup\ContaoFormBundle\EventListener\DataContainer\FormField;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
