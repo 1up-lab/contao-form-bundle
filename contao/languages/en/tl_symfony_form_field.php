@@ -36,12 +36,22 @@ use Symfony\Component\Form\Extension\Core\Type\WeekType;
 
 $GLOBALS['TL_LANG']['tl_symfony_form_field'] = [
     // Legends
-    'title_legend' => 'Title',
+    'title_legend' => 'Form field',
+    'label_legend' => 'Label and Placeholder',
+    'help_legend' => 'Help Text',
+    'expert_legend' => 'Expert settings',
     'publish_legend' => 'Publish settings',
 
     // Fields
     'type' => ['Type', 'Please select a type'],
     'name' => ['Name', 'Internal name for this field, will not be shown in the frontend'],
+    'required' => ['Required', 'A * will be shown in the frontend indicating that this field is required'],
+    'trim' => ['Trim', 'If true, the whitespace at the start and at the end of the submitted string value will be stripped.'],
+    'placeholder' => ['Placeholder', 'The placeholder attribute defines the text displayed in a form control when the control has no value.'],
+    'label' => ['Label', 'The label represents a caption for an item in a user interface.'],
+    'labelHtml' => ['Use HTML in Label', 'Will switch the label text field for an RTE field, allowing you to insert HTML elements like links.'],
+    'help' => ['Help', 'The help text will be displayed under the corresponding form field'],
+    'helpHtml' => ['Use HTML in help', 'Will switch the label text field for an RTE field, allowing you to insert HTML elements like links.'],
 
     // Options & Groups
     'types' => [

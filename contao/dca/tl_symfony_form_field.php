@@ -58,9 +58,9 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
             'panelLayout' => 'filter;sort,search,limit',
         ],
         'label' => [
-            'fields' => ['type', 'name'],
+            'fields' => ['name', 'type'],
             'showColumns' => false,
-            'format' => '<span style="color:#aaa;">[%s]</span> %s',
+            'format' => ' %s <small style="color:#aaa;">[%s]</small>',
         ],
         'global_operations' => [
             'all' => [
@@ -97,6 +97,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
     'palettes' => [
         '__selector__' => ['type'],
         'default' => '{title_legend},name,type',
+
         BirthdayType::class => '
             {title_legend},name,type;
             {publish_legend},published;
@@ -199,6 +200,9 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
         ',
         TextType::class => '
             {title_legend},name,type;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {expert_legend},required,trim;
             {publish_legend},published;
         ',
         TextareaType::class => '
@@ -282,6 +286,82 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
                 'default' => TextType::class,
             ],
         ],
+        'placeholder' => [
+            'inputType' => 'text',
+            'eval' => [
+                'mandatory' => false,
+                'maxlength' => 255,
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
+            ],
+        ],
+        'label' => [
+            'inputType' => 'text',
+            'eval' => [
+                'mandatory' => false,
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::TEXT,
+                'default' => '',
+            ],
+        ],
+        'labelHtml' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'submitOnChange' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'help' => [
+            'inputType' => 'text',
+            'eval' => [
+                'mandatory' => false,
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::TEXT,
+                'default' => '',
+            ],
+        ],
+        'helpHtml' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'submitOnChange' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'trim' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'required' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
         'published' => [
             'inputType' => 'checkbox',
             'eval' => [
@@ -289,11 +369,9 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
                 'tl_class' => 'w50',
             ],
             'toggle' => true,
-            // 'save_callback' => [static fn ($v) => '1' === $v],
             'sql' => [
-                'type' => Types::STRING,
-                'length' => 1,
-                'default' => '',
+                'type' => Types::BOOLEAN,
+                'default' => false,
             ],
         ],
     ],

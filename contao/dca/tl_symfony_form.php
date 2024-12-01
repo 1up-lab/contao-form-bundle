@@ -39,14 +39,14 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
         ],
         'operations' => [
             'edit' => [
-                'href' => 'table=tl_symfony_form_field',
-                'icon' => 'edit.svg',
-                'attributes' => 'class="contextmenu"',
-            ],
-            'editheader' => [
                 'href' => 'act=edit',
-                'icon' => 'header.svg',
+                'icon' => 'edit.svg',
                 'attributes' => 'class="edit-header"',
+            ],
+            'children' => [
+                'href' => 'table=tl_symfony_form_field',
+                'icon' => 'children.svg',
+                'attributes' => 'class="contextmenu"',
             ],
             'copy' => [
                 'href' => 'act=copy',
