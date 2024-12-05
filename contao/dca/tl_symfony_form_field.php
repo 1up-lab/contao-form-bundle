@@ -42,6 +42,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
         'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
         'ptable' => 'tl_symfony_form',
+        'ctable' => ['tl_symfony_form_validator'],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -63,39 +64,15 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
             'format' => ' %s <small style="color:#aaa;">[%s]</small>',
         ],
         'global_operations' => [
-            'all' => [
-                'href' => 'act=select',
-                'class' => 'header_edit_all',
-                'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
-            ],
+            'all',
         ],
         'operations' => [
-            'edit' => [
-                'href' => 'act=edit',
-                'icon' => 'edit.svg',
-            ],
-            'children' => [
-                'href' => 'table=tl_symfony_form_validator',
-                'icon' => 'children.svg',
-                'attributes' => 'class="contextmenu"',
-            ],
-            'copy' => [
-                'href' => 'act=copy',
-                'icon' => 'copy.svg',
-            ],
-            'delete' => [
-                'href' => 'act=delete',
-                'icon' => 'delete.svg',
-                'attributes' => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? '') . '\'))return false;Backend.getScrollOffset()"',
-            ],
-            'toggle' => [
-                'href' => 'act=toggle&amp;field=published',
-                'icon' => 'visible.svg',
-            ],
-            'show' => [
-                'href' => 'act=show',
-                'icon' => 'show.svg',
-            ],
+            'edit',
+            'children',
+            'copy',
+            'delete',
+            'toggle',
+            'show',
         ],
     ],
 

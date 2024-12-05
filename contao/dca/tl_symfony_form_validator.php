@@ -46,26 +46,12 @@ $GLOBALS['TL_DCA']['tl_symfony_form_validator'] = [
             'format' => '%s',
         ],
         'global_operations' => [
-            'all' => [
-                'href' => 'act=select',
-                'class' => 'header_edit_all',
-                'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
-            ],
+            'all',
         ],
         'operations' => [
-            'edit' => [
-                'href' => 'act=edit',
-                'icon' => 'edit.svg',
-            ],
-            'delete' => [
-                'href' => 'act=delete',
-                'icon' => 'delete.svg',
-                'attributes' => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? '') . '\'))return false;Backend.getScrollOffset()"',
-            ],
-            'show' => [
-                'href' => 'act=show',
-                'icon' => 'show.svg',
-            ],
+            'edit',
+            'delete',
+            'show',
         ],
     ],
 

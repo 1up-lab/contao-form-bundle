@@ -31,36 +31,14 @@ $GLOBALS['TL_DCA']['tl_symfony_form'] = [
             'showColumns' => false,
         ],
         'global_operations' => [
-            'all' => [
-                'href' => 'act=select',
-                'class' => 'header_edit_all',
-                'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
-            ],
+            'all',
         ],
         'operations' => [
-            'edit' => [
-                'href' => 'act=edit',
-                'icon' => 'edit.svg',
-                'attributes' => 'class="edit-header"',
-            ],
-            'children' => [
-                'href' => 'table=tl_symfony_form_field',
-                'icon' => 'children.svg',
-                'attributes' => 'class="contextmenu"',
-            ],
-            'copy' => [
-                'href' => 'act=copy',
-                'icon' => 'copy.svg',
-            ],
-            'delete' => [
-                'href' => 'act=delete',
-                'icon' => 'delete.svg',
-                'attributes' => 'onclick="if(!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? '') . '\'))return false;Backend.getScrollOffset()"',
-            ],
-            'show' => [
-                'href' => 'act=show',
-                'icon' => 'show.svg',
-            ],
+            'edit',
+            'children',
+            'copy',
+            'delete',
+            'show',
         ],
     ],
 
