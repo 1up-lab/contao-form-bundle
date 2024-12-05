@@ -34,7 +34,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\WeekType;
 
-$GLOBALS['TL_LANG']['tl_symfony_form_field'] = [
+$GLOBALS['TL_LANG']['tl_oneup_form_field'] = [
     // Legends
     'title_legend' => 'Form field',
     'label_legend' => 'Label and Placeholder',

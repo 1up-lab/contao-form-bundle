@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-$GLOBALS['BE_MOD']['content']['symfony_form'] = [
+$GLOBALS['BE_MOD']['content']['oneup_form'] = [
     'tables' => [
-        'tl_symfony_form',
-        'tl_symfony_form_field',
-        'tl_symfony_form_validator',
+        'tl_oneup_form',
+        'tl_oneup_form_field',
+        'tl_oneup_form_validator',
     ],
 ];

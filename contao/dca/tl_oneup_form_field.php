@@ -37,12 +37,12 @@ use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\WeekType;
 
-$GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
+$GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
     'config' => [
         'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
-        'ptable' => 'tl_symfony_form',
-        'ctable' => ['tl_symfony_form_validator'],
+        'ptable' => 'tl_oneup_form',
+        'ctable' => ['tl_oneup_form_validator'],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -218,7 +218,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
             ],
         ],
         'pid' => [
-            'foreignKey' => 'tl_symfony_form.id',
+            'foreignKey' => 'tl_oneup_form.id',
             'sql' => [
                 'type' => Types::INTEGER,
                 'unsigned' => true,
@@ -256,7 +256,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form_field'] = [
         ],
         'type' => [
             'inputType' => 'select',
-            'reference' => &$GLOBALS['TL_LANG']['tl_symfony_form_field']['types'],
+            'reference' => &$GLOBALS['TL_LANG']['tl_oneup_form_field']['types'],
             'eval' => [
                 'chosen' => true,
                 'mandatory' => true,

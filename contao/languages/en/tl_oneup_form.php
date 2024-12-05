@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$GLOBALS['TL_LANG']['tl_symfony_form'] = [
+$GLOBALS['TL_LANG']['tl_oneup_form'] = [
     // Legends
     'title_legend' => 'Form settings',
 

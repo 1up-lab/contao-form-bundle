@@ -20,11 +20,11 @@ use Symfony\Component\Validator\Constraints\PositiveOrZero;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Regex;
 
-$GLOBALS['TL_DCA']['tl_symfony_form_validator'] = [
+$GLOBALS['TL_DCA']['tl_oneup_form_validator'] = [
     'config' => [
         'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
-        'ptable' => 'tl_symfony_form_field',
+        'ptable' => 'tl_oneup_form_field',
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -130,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form_validator'] = [
             ],
         ],
         'pid' => [
-            'foreignKey' => 'tl_symfony_form_field.id',
+            'foreignKey' => 'tl_oneup_form_field.id',
             'sql' => [
                 'type' => Types::INTEGER,
                 'unsigned' => true,
@@ -156,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_symfony_form_validator'] = [
         ],
         'type' => [
             'inputType' => 'select',
-            'reference' => &$GLOBALS['TL_LANG']['tl_symfony_form_validator']['types'],
+            'reference' => &$GLOBALS['TL_LANG']['tl_oneup_form_validator']['types'],
             'eval' => [
                 'chosen' => true,
                 'mandatory' => true,

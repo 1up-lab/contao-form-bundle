@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\PositiveOrZero;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Regex;
 
-$GLOBALS['TL_LANG']['tl_symfony_form_validator'] = [
+$GLOBALS['TL_LANG']['tl_oneup_form_validator'] = [
     // Legends
     'title_legend' => 'Validator',
     'message_legend' => 'Error Message',

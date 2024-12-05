@@ -6,11 +6,11 @@ use Contao\DataContainer;
 use Contao\DC_Table;
 use Doctrine\DBAL\Types\Types;
 
-$GLOBALS['TL_DCA']['tl_symfony_form'] = [
+$GLOBALS['TL_DCA']['tl_oneup_form'] = [
     'config' => [
         'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
-        'ctable' => ['tl_symfony_form_field'],
+        'ctable' => ['tl_oneup_form_field'],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
