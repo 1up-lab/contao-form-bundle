@@ -7,8 +7,15 @@ namespace Oneup\ContaoFormBundle\Service;
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Constraint;
@@ -58,19 +65,30 @@ class FormBuilder
 
     private function getFieldOptions(array $field): array
     {
+        $defaultTextOptions = [
+            'required' => (bool) $field['required'],
+            'label' => $field['label'] ?: $field['name'],
+            'label_html' => (bool) $field['labelHtml'],
+            'help' => $field['help'],
+            'help_html' => (bool) $field['helpHtml'],
+            'trim' => (bool) $field['trim'],
+            'constraints' => $this->getConstraints($field['id']),
+            'attr' => [
+                'placeholder' => $field['placeholder'],
+            ]
+        ];
+
         return match ($field['type']) {
-            TextType::class => [
-                'required' => (bool) $field['required'],
-                'label' => $field['label'] ?: $field['name'],
-                'label_html' => (bool) $field['labelHtml'],
-                'help' => $field['help'],
-                'help_html' => (bool) $field['helpHtml'],
-                'trim' => (bool) $field['trim'],
-                'constraints' => $this->getConstraints($field['id']),
-                'attr' => [
-                    'placeholder' => $field['placeholder'],
-                ]
-            ],
+            EmailType::class,
+            SearchType::class,
+            TelType::class,
+            TextType::class,
+            TextareaType::class => $defaultTextOptions,
+            UrlType::class => [...$defaultTextOptions, ...[
+                'default_protocol' => $field['defaultProtocol'],
+            ]],
+            ButtonType::class,
+            ResetType::class,
             SubmitType::class => [
                 'label' => $field['label'] ?: $field['name'],
             ],

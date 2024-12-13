@@ -30,13 +30,19 @@ class FieldAliasGenerator
             return;
         }
 
+        $name = (string) $record['name'];
+
+        if (!$name) {
+            return;
+        }
+
         if ($record['alias'] ?? false) {
             return;
         }
 
         $formId = (int) $record['pid'];
 
-        $alias = $this->slugGenerator->generate((string) $record['name'], options: ['validChars' => '0-9a-z'], duplicateCheck: function (string $slug) use ($formId): bool {
+        $alias = $this->slugGenerator->generate($name, options: ['validChars' => '0-9a-z'], duplicateCheck: function (string $slug) use ($formId): bool {
             $res = $this->database->createQueryBuilder()
                 ->select('COUNT(1)')
                 ->from('tl_oneup_form_field', 'f')

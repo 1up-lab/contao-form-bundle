@@ -80,14 +80,15 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
     'palettes' => [
         '__selector__' => ['type'],
         // You need every field in the default palette, otherwise they will not be persisted to the database
-        'default' => 'type,name,alias,placeholder,label,labelHtml,help,helpHtml,required,trim,published',
+        'default' => 'type,name,alias,placeholder,label,labelHtml,help,helpHtml,required,trim,defaultProtocol,published',
 
         BirthdayType::class => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
         ButtonType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},label;
             {publish_legend},published;
         ',
         CheckboxType::class => '
@@ -123,7 +124,10 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         EmailType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {expert_legend},required,trim;
             {publish_legend},published;
         ',
         FileType::class => '
@@ -167,11 +171,15 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         ResetType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},label;
             {publish_legend},published;
         ',
         SearchType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {expert_legend},required,trim;
             {publish_legend},published;
         ',
         SubmitType::class => '
@@ -180,7 +188,10 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         TelType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {expert_legend},required,trim;
             {publish_legend},published;
         ',
         TextType::class => '
@@ -191,7 +202,10 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         TextareaType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {expert_legend},required,trim;
             {publish_legend},published;
         ',
         TimeType::class => '
@@ -203,7 +217,11 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         UrlType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {config_legend},defaultProtocol;
+            {expert_legend},required,trim;
             {publish_legend},published;
         ',
         WeekType::class => '
@@ -345,7 +363,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             ],
             'sql' => [
                 'type' => Types::BOOLEAN,
-                'default' => false,
+                'default' => true,
             ],
         ],
         'required' => [
@@ -356,6 +374,28 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'sql' => [
                 'type' => Types::BOOLEAN,
                 'default' => false,
+            ],
+        ],
+        'defaultProtocol' => [
+            'inputType' => 'select',
+            'options' => [
+                'file://',
+                'ftp://',
+                'https://',
+                'http://',
+                'imap://',
+                'irc://',
+                'nntp://',
+                'wss://',
+            ],
+            'eval' => [
+                'chosen' => true,
+                'mandatory' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => 'https://',
             ],
         ],
         'published' => [

@@ -41,6 +41,7 @@ $GLOBALS['TL_LANG']['tl_oneup_form_field'] = [
     'help_legend' => 'Help Text',
     'expert_legend' => 'Expert settings',
     'publish_legend' => 'Publish settings',
+    'config_legend' => 'Configuration',
 
     // Fields
     'type' => ['Type', 'Please select a type'],
@@ -53,6 +54,7 @@ $GLOBALS['TL_LANG']['tl_oneup_form_field'] = [
     'labelHtml' => ['Use HTML in Label', 'Will switch the label text field for an RTE field, allowing you to insert HTML elements like links.'],
     'help' => ['Help', 'The help text will be displayed under the corresponding form field'],
     'helpHtml' => ['Use HTML in help', 'Will switch the label text field for an RTE field, allowing you to insert HTML elements like links.'],
+    'defaultProtocol' => ['Default Protocol', 'If no scheme is added to the url, use this protocol'],
     'published' => ['Published', 'Output this field to the frontend.'],
 
     // Options & Groups
