@@ -8,4 +8,5 @@ $GLOBALS['TL_LANG']['tl_oneup_form'] = [
 
     // Fields
     'name' => ['Name', 'Internal name for this form, will not be shown in the frontend'],
+    'jumpTo' => ['Redirect page', 'Please choose the page to which visitors will be redirected after submitting the form.'],
 ];

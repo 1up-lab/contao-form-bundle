@@ -44,7 +44,9 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
 
     'palettes' => [
         '__selector__' => [],
-        'default' => '{title_legend},name',
+        'default' => '
+            {title_legend},name,jumpTo;
+        ',
     ],
 
     'fields' => [
@@ -74,5 +76,22 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
                 'default' => '',
             ],
         ],
+        'jumpTo' => [
+            'inputType' => 'pageTree',
+            'foreignKey' => 'tl_page.title',
+            'eval' => [
+                'fieldType' => 'radio',
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::INTEGER,
+                'unsigned' => true,
+                'default' => 0,
+            ],
+            'relation' => [
+                'type' => 'hasOne',
+                'load' => 'lazy',
+            ]
+        ]
     ],
 ];
