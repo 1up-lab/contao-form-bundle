@@ -57,7 +57,7 @@ class FormBuilder
 
     private function getFieldOptions(array $field): array
     {
-        $options = match ($field['type']) {
+        return match ($field['type']) {
             TextType::class => [
                 'required' => (bool) $field['required'],
                 'label' => $field['label'] ?: $field['name'],
@@ -66,6 +66,9 @@ class FormBuilder
                 'help_html' => (bool) $field['helpHtml'],
                 'trim' => (bool) $field['trim'],
                 'constraints' => $this->getConstraints($field['id']),
+                'attr' => [
+                    'placeholder' => $field['placeholder'],
+                ]
             ],
             SubmitType::class => [
                 'label' => $field['label'] ?: $field['name'],
@@ -73,8 +76,6 @@ class FormBuilder
 
             default => [],
         };
-
-        return $options;
     }
 
     private function getConstraints(int $fieldId): array
