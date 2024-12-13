@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Oneup\ContaoFormBundle\EventListener\DataContainer\FormValidator;
+namespace Oneup\ContaoFormBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Symfony\Component\Validator\Constraints\DivisibleBy;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Regex;
 
 #[AsCallback(table: 'tl_oneup_form_validator', target: 'fields.type.options')]
-class TypeOptionListener
+class ValidatorTypeOptionListener
 {
     public function __invoke(): array
     {

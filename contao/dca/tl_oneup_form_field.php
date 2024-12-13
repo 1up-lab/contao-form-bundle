@@ -80,7 +80,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
     'palettes' => [
         '__selector__' => ['type'],
         // You need every field in the default palette, otherwise they will not be persisted to the database
-        'default' => 'type,placeholder,label,labelHtml,help,helpHtml,required,trim,published',
+        'default' => 'type,name,alias,placeholder,label,labelHtml,help,helpHtml,required,trim,published',
 
         BirthdayType::class => '
             {title_legend},name,type;
@@ -175,7 +175,8 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         SubmitType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},label;
             {publish_legend},published;
         ',
         TelType::class => '
@@ -183,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         TextType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
             {label_legend},placeholder,label,labelHtml;
             {help_legend},help,helpHtml;
             {expert_legend},required,trim;
@@ -249,6 +250,17 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'eval' => [
                 'mandatory' => true,
                 'maxlength' => 255,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
+            ],
+        ],
+        'alias' => [
+            'inputType' => 'text',
+            'eval' => [
+                'readonly' => true,
                 'tl_class' => 'w50',
             ],
             'sql' => [

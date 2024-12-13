@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Oneup\ContaoFormBundle\EventListener\DataContainer\FormField;
+namespace Oneup\ContaoFormBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
@@ -38,7 +38,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\WeekType;
 
 #[AsCallback(table: 'tl_oneup_form_field', target: 'fields.type.options')]
-class TypeOptionListener
+class FieldTypeOptionListener
 {
     public function __invoke(): array
     {
