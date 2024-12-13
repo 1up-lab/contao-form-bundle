@@ -47,6 +47,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'keys' => [
                 'id' => 'primary',
                 'pid' => 'index',
+                'type' => 'index',
             ],
         ],
     ],
@@ -78,7 +79,8 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
 
     'palettes' => [
         '__selector__' => ['type'],
-        'default' => '{title_legend},name,type',
+        // You need every field in the default palette, otherwise they will not be persisted to the database
+        'default' => 'type,placeholder,label,labelHtml,help,helpHtml,required,trim,published',
 
         BirthdayType::class => '
             {title_legend},name,type;

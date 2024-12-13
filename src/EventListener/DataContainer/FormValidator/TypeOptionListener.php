@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\PositiveOrZero;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Regex;
 
-#[AsCallback(table: 'tl_symfony_form_validator', target: 'fields.type.options')]
+#[AsCallback(table: 'tl_oneup_form_validator', target: 'fields.type.options')]
 class TypeOptionListener
 {
     public function __invoke(): array

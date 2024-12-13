@@ -37,7 +37,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\WeekType;
 
-#[AsCallback(table: 'tl_symfony_form_field', target: 'fields.type.options')]
+#[AsCallback(table: 'tl_oneup_form_field', target: 'fields.type.options')]
 class TypeOptionListener
 {
     public function __invoke(): array

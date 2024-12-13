@@ -52,6 +52,7 @@ $GLOBALS['TL_LANG']['tl_oneup_form_field'] = [
     'labelHtml' => ['Use HTML in Label', 'Will switch the label text field for an RTE field, allowing you to insert HTML elements like links.'],
     'help' => ['Help', 'The help text will be displayed under the corresponding form field'],
     'helpHtml' => ['Use HTML in help', 'Will switch the label text field for an RTE field, allowing you to insert HTML elements like links.'],
+    'published' => ['Published', 'Output this field to the frontend.'],
 
     // Options & Groups
     'types' => [

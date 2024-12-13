@@ -57,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_validator'] = [
 
     'palettes' => [
         '__selector__' => ['type', 'overwriteMessage'],
-        'default' => '{title_legend},type',
+        'default' => 'type,overwriteMessage,message',
 
         NotBlank::class => '
             {title_legend},type;
