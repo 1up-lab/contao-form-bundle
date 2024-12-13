@@ -30,6 +30,7 @@ class FormBuilder
             'csrf_field_name' => 'REQUEST_TOKEN',
             'csrf_token_manager' => $this->contaoCsrfTokenManager,
             'csrf_token_id' => $this->parameterBag->get('contao.csrf_token_name'),
+            'translation_domain' => false,
         ]);
 
         $fields = $this->getFields($id);
