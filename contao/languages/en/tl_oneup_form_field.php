@@ -55,6 +55,7 @@ $GLOBALS['TL_LANG']['tl_oneup_form_field'] = [
     'help' => ['Help', 'The help text will be displayed under the corresponding form field'],
     'helpHtml' => ['Use HTML in help', 'Will switch the label text field for an RTE field, allowing you to insert HTML elements like links.'],
     'defaultProtocol' => ['Default Protocol', 'If no scheme is added to the url, use this protocol'],
+    'html5' => ['Check format', 'If set, the value must match the HTML5 color format.'],
     'published' => ['Published', 'Output this field to the frontend.'],
 
     // Options & Groups

@@ -80,7 +80,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
     'palettes' => [
         '__selector__' => ['type'],
         // You need every field in the default palette, otherwise they will not be persisted to the database
-        'default' => 'type,name,alias,placeholder,label,labelHtml,help,helpHtml,required,trim,defaultProtocol,published',
+        'default' => 'type,name,alias,placeholder,label,labelHtml,help,helpHtml,required,trim,defaultProtocol,html5,published',
 
         BirthdayType::class => '
             {title_legend},name,type;
@@ -100,7 +100,9 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         ColorType::class => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},label;
+            {config_legend},html5;
             {publish_legend},published;
         ',
         CountryType::class => '
@@ -396,6 +398,16 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'sql' => [
                 'type' => Types::STRING,
                 'default' => 'https://',
+            ],
+        ],
+        'html5' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
             ],
         ],
         'published' => [

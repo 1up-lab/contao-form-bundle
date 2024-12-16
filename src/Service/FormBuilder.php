@@ -8,6 +8,7 @@ use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -84,9 +85,15 @@ class FormBuilder
             TelType::class,
             TextType::class,
             TextareaType::class => $defaultTextOptions,
+
+            ColorType::class => [...$defaultTextOptions, ...[
+                'html5' => (bool) $field['html5'],
+            ]],
+
             UrlType::class => [...$defaultTextOptions, ...[
                 'default_protocol' => $field['defaultProtocol'],
             ]],
+
             ButtonType::class,
             ResetType::class,
             SubmitType::class => [
