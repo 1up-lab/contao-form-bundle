@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Contao\DataContainer;
 use Contao\DC_Table;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -322,7 +323,8 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             ],
             'sql' => [
                 'type' => Types::TEXT,
-                'default' => '',
+                'length' => AbstractMySQLPlatform::LENGTH_LIMIT_MEDIUMTEXT,
+                'notnull' => false,
             ],
         ],
         'labelHtml' => [
@@ -344,7 +346,8 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             ],
             'sql' => [
                 'type' => Types::TEXT,
-                'default' => '',
+                'length' => AbstractMySQLPlatform::LENGTH_LIMIT_MEDIUMTEXT,
+                'notnull' => false,
             ],
         ],
         'helpHtml' => [
