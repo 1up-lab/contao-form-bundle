@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle;
 
-use Oneup\ContaoFormBundle\DependencyInjection\Compiler\FormFieldPass;
+use Oneup\ContaoFormBundle\DependencyInjection\Compiler\FormPass;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -16,7 +16,7 @@ class OneupContaoFormBundle extends AbstractBundle
     {
         // Must run before Symfony's AttributeAutoconfigurationPass (priority 100),
         // which is what actually invokes registered attribute autoconfigurators.
-        $container->addCompilerPass(new FormFieldPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 101);
+        $container->addCompilerPass(new FormPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 101);
     }
 
     public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $container): void

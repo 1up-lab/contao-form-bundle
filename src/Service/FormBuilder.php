@@ -6,7 +6,9 @@ namespace Oneup\ContaoFormBundle\Service;
 
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Oneup\ContaoFormBundle\Form\FormRegistry;
+use Oneup\ContaoFormBundle\Form\Registry\ConstraintRegistry;
 use Oneup\ContaoFormBundle\Model\FormFieldModel;
+use Oneup\ContaoFormBundle\Model\FormValidatorModel;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -18,6 +20,7 @@ class FormBuilder
         private readonly ContaoCsrfTokenManager $contaoCsrfTokenManager,
         private readonly FormFactoryInterface $formFactory,
         private readonly FormRegistry $formRegistry,
+        private readonly ConstraintRegistry $constraintRegistry,
         private readonly ParameterBagInterface $parameterBag,
     ) {
     }
@@ -60,6 +63,12 @@ class FormBuilder
 
             $options = $formType->resolveOptions($row);
 
+            if ($formType->isConstrainable()) {
+                $options['constraints'] = $this->getConstraints($row['id']);
+
+                dump($options);
+            }
+
             $builder->add($row['alias'], $formType->getFormType(), $options);
 
             if ($formType->isNestable()) {
@@ -68,5 +77,34 @@ class FormBuilder
                 $this->buildForm($nestedBuilder, $row['id'], 'tl_oneup_form_field');
             }
         }
+    }
+
+    private function getConstraints(int $pid): array
+    {
+        $constraints = [];
+
+        /** @var FormValidatorModel[] $constraintModels */
+        $constraintModels = FormValidatorModel::findBy('pid', $pid, [
+            'published' => true,
+            'order' => 'sorting ASC',
+        ]);
+
+        if (null === $constraintModels) {
+            return [];
+        }
+
+        foreach ($constraintModels as $constraintModel) {
+            $row = $constraintModel->row();
+
+            try {
+                $constraintType = $this->constraintRegistry->get($row['type']);
+            } catch (\InvalidArgumentException) {
+                return [];
+            }
+
+            $constraints[] = new ($constraintType->getConstraintType())($constraintType->resolveOptions($row));
+        }
+
+        return $constraints;
     }
 }

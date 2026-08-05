@@ -27,26 +27,26 @@ class ValidatorTypeOptionListener
     {
         return [
             'basic' => [
-                NotBlank::class,
+                'notBlank',
             ],
             'string' => [
-                Regex::class,
+                'regex',
             ],
             'comparison' => [
-                DivisibleBy::class,
-                EqualTo::class,
-                GreaterThan::class,
-                GreaterThanOrEqual::class,
-                LessThan::class,
-                LessThanOrEqual::class,
-                NotEqualTo::class,
-                Range::class,
+                'divisibleBy',
+                'equalTo',
+                'greaterThan',
+                'greaterThanOrEqual',
+                'lessThan',
+                'lessThanOrEqual',
+                'notEqualTo',
             ],
             'number' => [
-                Negative::class,
-                NegativeOrZero::class,
-                Positive::class,
-                PositiveOrZero::class,
+                'range',
+                'negative',
+                'negativeOrZero',
+                'positive',
+                'positiveOrZero',
             ],
         ];
     }

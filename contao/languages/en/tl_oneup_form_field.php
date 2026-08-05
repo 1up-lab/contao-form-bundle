@@ -26,6 +26,9 @@ $GLOBALS['TL_LANG']['tl_oneup_form_field'] = [
     'html5' => ['Check format', 'If set, the value must match the HTML5 color format.'],
     'published' => ['Published', 'Output this field to the frontend.'],
 
+    // Operations
+    'constraints' => ['Constraints', 'Edit the validation constraints of %s'],
+
     // Options & Groups
     'types' => [
         // Groups

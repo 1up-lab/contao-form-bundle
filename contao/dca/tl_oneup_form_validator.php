@@ -59,59 +59,59 @@ $GLOBALS['TL_DCA']['tl_oneup_form_validator'] = [
         '__selector__' => ['type', 'overwriteMessage'],
         'default' => 'type',
 
-        NotBlank::class => '
+        'notBlank' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        Regex::class => '
+        'regex' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        DivisibleBy::class => '
+        'divisibleBy' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        EqualTo::class => '
+        'equalTo' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        GreaterThan::class => '
+        'greaterThan' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        GreaterThanOrEqual::class => '
+        'greaterThanOrEqual' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        LessThan::class => '
+        'lessThan' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        LessThanOrEqual::class => '
+        'lessThanOrEqual' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        NotEqualTo::class => '
+        'notEqualTo' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        Range::class => '
+        'range' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        Negative::class => '
+        'negative' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        NegativeOrZero::class => '
+        'negativeOrZero' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        Positive::class => '
+        'positive' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
-        PositiveOrZero::class => '
+        'positiveOrZero' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
