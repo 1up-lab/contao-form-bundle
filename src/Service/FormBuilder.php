@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Oneup\ContaoFormBundle\Service;
 
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
-use Oneup\ContaoFormBundle\Form\FormRegistry;
 use Oneup\ContaoFormBundle\Form\Registry\ConstraintRegistry;
+use Oneup\ContaoFormBundle\Form\Registry\FormRegistry;
 use Oneup\ContaoFormBundle\Model\FormFieldModel;
 use Oneup\ContaoFormBundle\Model\FormValidatorModel;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -42,9 +42,7 @@ class FormBuilder
     private function buildForm(FormBuilderInterface $builder, int $pid, string $ptable = 'tl_oneup_form'): void
     {
         /** @var FormFieldModel[] $fieldModels */
-        $fieldModels = FormFieldModel::findBy('pid', $pid, [
-            'ptable' => $ptable,
-            'published' => true,
+        $fieldModels = FormFieldModel::findBy(['pid=?', 'ptable=?', 'published=?'], [$pid, $ptable, true], [
             'order' => 'sorting ASC',
         ]);
 
@@ -65,8 +63,6 @@ class FormBuilder
 
             if ($formType->isConstrainable()) {
                 $options['constraints'] = $this->getConstraints($row['id']);
-
-                dump($options);
             }
 
             $builder->add($row['alias'], $formType->getFormType(), $options);

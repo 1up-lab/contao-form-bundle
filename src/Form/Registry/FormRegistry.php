@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Oneup\ContaoFormBundle\Form;
+namespace Oneup\ContaoFormBundle\Form\Registry;
 
+use Oneup\ContaoFormBundle\Form\FormFieldInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 class FormRegistry

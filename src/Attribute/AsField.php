@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oneup\ContaoFormBundle\Attribute;
 
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
-class AsFormField
+class AsField
 {
     public function __construct(
         public string $name,
