@@ -20,3 +20,6 @@ composer.phar
 
 # Contao
 .skip
+
+# Tools
+.phpunit.result.cache

@@ -5,29 +5,19 @@ declare(strict_types=1);
 namespace Oneup\ContaoFormBundle\Service;
 
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
-use Doctrine\DBAL\Connection;
+use Oneup\ContaoFormBundle\Form\FormRegistry;
+use Oneup\ContaoFormBundle\Model\FormFieldModel;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FormBuilder
 {
     public function __construct(
         private readonly ContaoCsrfTokenManager $contaoCsrfTokenManager,
-        private readonly Connection $database,
         private readonly FormFactoryInterface $formFactory,
+        private readonly FormRegistry $formRegistry,
         private readonly ParameterBagInterface $parameterBag,
     ) {
     }
@@ -41,97 +31,42 @@ class FormBuilder
             'translation_domain' => false,
         ]);
 
-        $fields = $this->getFields($id);
-
-        foreach ($fields as $field) {
-            $builder->add($field['alias'], $field['type'], $this->getFieldOptions($field));
-        }
+        $this->buildForm($builder, $id);
 
         return $builder->getForm();
     }
 
-    private function getFields(int $formId): array
+    private function buildForm(FormBuilderInterface $builder, int $pid, string $ptable = 'tl_oneup_form'): void
     {
-        return $this->database->createQueryBuilder()
-            ->select('f.*')
-            ->from('tl_oneup_form_field', 'f')
-            ->andWhere('f.pid = :formId')
-            ->addOrderBy('f.sorting')
+        /** @var FormFieldModel[] $fieldModels */
+        $fieldModels = FormFieldModel::findBy('pid', $pid, [
+            'ptable' => $ptable,
+            'published' => true,
+            'order' => 'sorting ASC',
+        ]);
 
-            ->setParameter('formId', $formId)
+        if (null === $fieldModels) {
+            return;
+        }
 
-            ->fetchAllAssociative()
-        ;
-    }
+        foreach ($fieldModels as $fieldModel) {
+            $row = $fieldModel->row();
 
-    private function getFieldOptions(array $field): array
-    {
-        $defaultTextOptions = [
-            'required' => (bool) $field['required'],
-            'label' => $field['label'] ?: $field['name'],
-            'label_html' => (bool) $field['labelHtml'],
-            'help' => $field['help'],
-            'help_html' => (bool) $field['helpHtml'],
-            'trim' => (bool) $field['trim'],
-            'constraints' => $this->getConstraints($field['id']),
-            'attr' => [
-                'placeholder' => $field['placeholder'],
-            ]
-        ];
+            try {
+                $formType = $this->formRegistry->get($row['type']);
+            } catch (\InvalidArgumentException) {
+                continue;
+            }
 
-        return match ($field['type']) {
-            EmailType::class,
-            SearchType::class,
-            TelType::class,
-            TextType::class,
-            TextareaType::class => $defaultTextOptions,
+            $options = $formType->resolveOptions($row);
 
-            ColorType::class => [...$defaultTextOptions, ...[
-                'html5' => (bool) $field['html5'],
-            ]],
+            $builder->add($row['alias'], $formType->getFormType(), $options);
 
-            UrlType::class => [...$defaultTextOptions, ...[
-                'default_protocol' => $field['defaultProtocol'],
-            ]],
+            if ($formType->isNestable()) {
+                $nestedBuilder = $builder->get($row['alias']);
 
-            ButtonType::class,
-            ResetType::class,
-            SubmitType::class => [
-                'label' => $field['label'] ?: $field['name'],
-            ],
-
-            default => [],
-        };
-    }
-
-    private function getConstraints(int $fieldId): array
-    {
-        $constraints = $this->database->createQueryBuilder()
-            ->select('f.*')
-            ->from('tl_oneup_form_validator', 'f')
-            ->andWhere('f.pid = :fieldId')
-            ->addOrderBy('f.sorting')
-
-            ->setParameter('fieldId', $fieldId)
-
-            ->fetchAllAssociative()
-        ;
-
-        return array_map(function (array $constraint): Constraint {
-            $type = $constraint['type'];
-
-            return new $type(options: $this->getConstraintOptions($constraint));
-        }, $constraints);
-    }
-
-    private function getConstraintOptions(array $constraint): array
-    {
-        return match ($constraint['type']) {
-            NotBlank::class => [
-                'message' => $constraint['overwriteMessage'] ? $constraint['message'] : null,
-            ],
-
-            default => [],
-        };
+                $this->buildForm($nestedBuilder, $row['id'], 'tl_oneup_form_field');
+            }
+        }
     }
 }

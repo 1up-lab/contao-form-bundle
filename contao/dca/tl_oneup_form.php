@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
             'relation' => [
                 'type' => 'hasOne',
                 'load' => 'lazy',
-            ]
-        ]
+            ],
+        ],
     ],
 ];

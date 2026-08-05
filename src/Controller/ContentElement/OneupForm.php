@@ -10,6 +10,7 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
 use Contao\CoreBundle\Twig\FragmentTemplate;
 use Doctrine\DBAL\Connection;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
+use Oneup\ContaoFormBundle\Model\FormModel;
 use Oneup\ContaoFormBundle\Service\FormBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,15 +34,9 @@ class OneupForm extends AbstractContentElementController
             return new Response('');
         }
 
-        $formConfig = $this->database->createQueryBuilder()
-            ->select('f.*')
-            ->from('tl_oneup_form', 'f')
-            ->where('f.id = :id')
-            ->setParameter('id', $id)
-            ->fetchAssociative()
-        ;
+        $formModel = FormModel::findById($id);
 
-        if (false === $formConfig) {
+        if (null === $formModel) {
             return new Response('');
         }
 
@@ -49,9 +44,9 @@ class OneupForm extends AbstractContentElementController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->eventDispatcher->dispatch($event = new PostSubmitEvent($formConfig));
+            $this->eventDispatcher->dispatch($event = new PostSubmitEvent($form, $formModel));
 
-            if (($response = $event->getResponse()) instanceof Response) {
+            if (($response = $event->response) instanceof Response) {
                 return $response;
             }
         }

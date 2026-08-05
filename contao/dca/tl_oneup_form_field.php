@@ -4,46 +4,16 @@ declare(strict_types=1);
 
 use Contao\DataContainer;
 use Contao\DC_Table;
-use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Types\Types;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
-use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\LanguageType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\PercentType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\WeekType;
 
 $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
     'config' => [
         'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
+        'dynamicPtable' => true,
         'ptable' => 'tl_oneup_form',
-        'ctable' => ['tl_oneup_form_validator'],
+        'ctable' => ['tl_oneup_form_field'],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -81,145 +51,149 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
     'palettes' => [
         '__selector__' => ['type'],
         // You need every field in the default palette, otherwise they will not be persisted to the database
-        'default' => 'type,name,alias,placeholder,label,labelHtml,help,helpHtml,required,trim,defaultProtocol,html5,published',
+        'default' => 'type,name,',
 
-        BirthdayType::class => '
+        'birthday' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        ButtonType::class => '
+        'button' => '
             {title_legend},name,type,alias;
             {label_legend},label;
             {publish_legend},published;
         ',
-        CheckboxType::class => '
+        'checkbox' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        ChoiceType::class => '
+        'choice' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        ColorType::class => '
+        'color' => '
             {title_legend},name,type,alias;
             {label_legend},label;
             {config_legend},html5;
             {publish_legend},published;
         ',
-        CountryType::class => '
+        'country' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        CurrencyType::class => '
+        'currency' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        DateIntervalType::class => '
+        'dateInterval' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        DateTimeType::class => '
+        'dateTime' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        DateType::class => '
+        'date' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        EmailType::class => '
+        'mail' => '
             {title_legend},name,type,alias;
             {label_legend},placeholder,label,labelHtml;
             {help_legend},help,helpHtml;
             {expert_legend},required,trim;
             {publish_legend},published;
         ',
-        FileType::class => '
+        'file' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        HiddenType::class => '
+        'group' => '
+            {title_legend},name,type,alias;
+            {publish_legend},published;
+        ',
+        'hidden' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        IntegerType::class => '
+        'integer' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        LanguageType::class => '
+        'language' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        MoneyType::class => '
+        'money' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        NumberType::class => '
+        'number' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        PasswordType::class => '
+        'password' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        PercentType::class => '
+        'percent' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        RadioType::class => '
+        'radio' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        RangeType::class => '
+        'range' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        ResetType::class => '
+        'reset' => '
             {title_legend},name,type,alias;
             {label_legend},label;
             {publish_legend},published;
         ',
-        SearchType::class => '
+        'search' => '
             {title_legend},name,type,alias;
             {label_legend},placeholder,label,labelHtml;
             {help_legend},help,helpHtml;
             {expert_legend},required,trim;
             {publish_legend},published;
         ',
-        SubmitType::class => '
+        'submit' => '
             {title_legend},name,type,alias;
             {label_legend},label;
             {publish_legend},published;
         ',
-        TelType::class => '
+        'tel' => '
             {title_legend},name,type,alias;
             {label_legend},placeholder,label,labelHtml;
             {help_legend},help,helpHtml;
             {expert_legend},required,trim;
             {publish_legend},published;
         ',
-        TextType::class => '
+        'text' => '
             {title_legend},name,type,alias;
             {label_legend},placeholder,label,labelHtml;
             {help_legend},help,helpHtml;
             {expert_legend},required,trim;
             {publish_legend},published;
         ',
-        TextareaType::class => '
+        'textarea' => '
             {title_legend},name,type,alias;
             {label_legend},placeholder,label,labelHtml;
             {help_legend},help,helpHtml;
             {expert_legend},required,trim;
             {publish_legend},published;
         ',
-        TimeType::class => '
+        'time' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        TimezoneType::class => '
+        'timezone' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        UrlType::class => '
+        'url' => '
             {title_legend},name,type,alias;
             {label_legend},placeholder,label,labelHtml;
             {help_legend},help,helpHtml;
@@ -227,7 +201,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {expert_legend},required,trim;
             {publish_legend},published;
         ',
-        WeekType::class => '
+        'week' => '
             {title_legend},name,type;
             {publish_legend},published;
         ',
@@ -250,6 +224,12 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'relation' => [
                 'type' => 'belongsTo',
                 'load' => 'eager',
+            ],
+        ],
+        'ptable' => [
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
             ],
         ],
         'tstamp' => [
@@ -310,21 +290,12 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
                 'maxlength' => 255,
                 'tl_class' => 'clr',
             ],
-            'sql' => [
-                'type' => Types::STRING,
-                'default' => '',
-            ],
         ],
         'label' => [
             'inputType' => 'text',
             'eval' => [
                 'mandatory' => false,
                 'tl_class' => 'clr',
-            ],
-            'sql' => [
-                'type' => Types::TEXT,
-                'length' => AbstractMySQLPlatform::LENGTH_LIMIT_MEDIUMTEXT,
-                'notnull' => false,
             ],
         ],
         'labelHtml' => [
@@ -333,21 +304,12 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
                 'submitOnChange' => true,
                 'tl_class' => 'w50',
             ],
-            'sql' => [
-                'type' => Types::BOOLEAN,
-                'default' => false,
-            ],
         ],
         'help' => [
             'inputType' => 'text',
             'eval' => [
                 'mandatory' => false,
                 'tl_class' => 'clr',
-            ],
-            'sql' => [
-                'type' => Types::TEXT,
-                'length' => AbstractMySQLPlatform::LENGTH_LIMIT_MEDIUMTEXT,
-                'notnull' => false,
             ],
         ],
         'helpHtml' => [
@@ -356,29 +318,17 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
                 'submitOnChange' => true,
                 'tl_class' => 'w50',
             ],
-            'sql' => [
-                'type' => Types::BOOLEAN,
-                'default' => false,
-            ],
         ],
         'trim' => [
             'inputType' => 'checkbox',
             'eval' => [
                 'tl_class' => 'clr',
             ],
-            'sql' => [
-                'type' => Types::BOOLEAN,
-                'default' => true,
-            ],
         ],
         'required' => [
             'inputType' => 'checkbox',
             'eval' => [
                 'tl_class' => 'clr',
-            ],
-            'sql' => [
-                'type' => Types::BOOLEAN,
-                'default' => false,
             ],
         ],
         'defaultProtocol' => [
@@ -398,19 +348,11 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
                 'mandatory' => true,
                 'tl_class' => 'w50',
             ],
-            'sql' => [
-                'type' => Types::STRING,
-                'default' => 'https://',
-            ],
         ],
         'html5' => [
             'inputType' => 'checkbox',
             'eval' => [
                 'tl_class' => 'clr',
-            ],
-            'sql' => [
-                'type' => Types::BOOLEAN,
-                'default' => false,
             ],
         ],
         'published' => [

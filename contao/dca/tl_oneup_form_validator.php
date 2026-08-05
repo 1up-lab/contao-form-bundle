@@ -57,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_validator'] = [
 
     'palettes' => [
         '__selector__' => ['type', 'overwriteMessage'],
-        'default' => 'type,overwriteMessage,message',
+        'default' => 'type',
 
         NotBlank::class => '
             {title_legend},type;
@@ -174,20 +174,12 @@ $GLOBALS['TL_DCA']['tl_oneup_form_validator'] = [
                 'submitOnChange' => true,
                 'tl_class' => 'clr',
             ],
-            'sql' => [
-                'type' => Types::BOOLEAN,
-                'default' => false,
-            ],
         ],
         'message' => [
             'inputType' => 'text',
             'eval' => [
                 'mandatory' => true,
                 'tl_class' => 'clr',
-            ],
-            'sql' => [
-                'type' => Types::STRING,
-                'default' => '',
             ],
         ],
     ],

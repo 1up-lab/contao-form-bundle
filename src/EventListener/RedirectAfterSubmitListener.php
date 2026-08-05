@@ -19,14 +19,12 @@ class RedirectAfterSubmitListener
 
     public function __invoke(PostSubmitEvent $event): void
     {
-        $config = $event->getForm();
-
-        ['jumpTo' => $jumpTo] = $config;
+        $jumpTo = $event->formModel->jumpTo;
 
         if (!$jumpTo) {
             return;
         }
 
-        $event->setResponse(new RedirectResponse($this->router->generate('tl_page.' . $jumpTo)));
+        $event->response = new RedirectResponse($this->router->generate('tl_page.' . $jumpTo));
     }
 }
