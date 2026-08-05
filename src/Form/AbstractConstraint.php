@@ -35,8 +35,12 @@ class AbstractConstraint
 
     public function resolveOptions(array $options): array
     {
-        return [
-            'message' => $options['message'] ?? null,
-        ];
+        if ($options['message'] ?? null) {
+            return [
+                'message' => $options['message'],
+            ];
+        }
+
+        return [];
     }
 }

@@ -165,7 +165,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_validator'] = [
             ],
             'sql' => [
                 'type' => Types::STRING,
-                'default' => NotBlank::class,
+                'default' => 'notBlank',
             ],
         ],
         'overwriteMessage' => [
