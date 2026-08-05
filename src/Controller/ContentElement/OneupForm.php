@@ -8,7 +8,6 @@ use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
 use Contao\CoreBundle\Twig\FragmentTemplate;
-use Doctrine\DBAL\Connection;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
 use Oneup\ContaoFormBundle\Model\FormModel;
 use Oneup\ContaoFormBundle\Service\FormBuilder;
@@ -21,7 +20,6 @@ class OneupForm extends AbstractContentElementController
 {
     public function __construct(
         private readonly FormBuilder $formBuilder,
-        private readonly Connection $database,
         private readonly EventDispatcherInterface $eventDispatcher,
     ) {
     }

@@ -9,7 +9,7 @@ use Oneup\ContaoFormBundle\Form\Registry\ConstraintRegistry;
 use Oneup\ContaoFormBundle\Form\Registry\FormRegistry;
 use Oneup\ContaoFormBundle\Model\FormFieldModel;
 use Oneup\ContaoFormBundle\Model\FormValidatorModel;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -21,7 +21,8 @@ class FormBuilder
         private readonly FormFactoryInterface $formFactory,
         private readonly FormRegistry $formRegistry,
         private readonly ConstraintRegistry $constraintRegistry,
-        private readonly ParameterBagInterface $parameterBag,
+        #[Autowire(param: 'contao.csrf_token_name')]
+        private readonly string $tokenName,
     ) {
     }
 
@@ -30,7 +31,7 @@ class FormBuilder
         $builder = $this->formFactory->createNamedBuilder('oneup_form_' . $id, options: [
             'csrf_field_name' => 'REQUEST_TOKEN',
             'csrf_token_manager' => $this->contaoCsrfTokenManager,
-            'csrf_token_id' => $this->parameterBag->get('contao.csrf_token_name'),
+            'csrf_token_id' => $this->tokenName,
             'translation_domain' => false,
         ]);
 
@@ -81,7 +82,6 @@ class FormBuilder
 
         /** @var FormValidatorModel[] $constraintModels */
         $constraintModels = FormValidatorModel::findBy('pid', $pid, [
-            'published' => true,
             'order' => 'sorting ASC',
         ]);
 
