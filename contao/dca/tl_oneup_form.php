@@ -36,6 +36,11 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
         'operations' => [
             'edit',
             'children',
+            'submissions' => [
+                'primary' => true,
+                'href' => 'table=tl_oneup_form_submission',
+                'icon' => 'article.svg',
+            ],
             'copy',
             'delete',
             'show',
@@ -43,10 +48,16 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
     ],
 
     'palettes' => [
-        '__selector__' => [],
+        '__selector__' => ['storeSubmissions'],
         'default' => '
-            {title_legend},name,jumpTo;
+            {title_legend},name,;
+            {jumpTo_legend},jumpTo;
+            {submission_legend},storeSubmissions;
         ',
+    ],
+
+    'subpalettes' => [
+        'storeSubmissions' => 'submissionExpression',
     ],
 
     'fields' => [
@@ -74,6 +85,27 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
             'sql' => [
                 'type' => Types::STRING,
                 'default' => '',
+            ],
+        ],
+        'storeSubmissions' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'submitOnChange' => true,
+                'doNotCopy' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'submissionExpression' => [
+            'inputType' => 'text',
+            'eval' => [
+                'decodeEntities' => true,
+                'mandatory' => true,
+                'maxlength' => 255,
+                'tl_class' => 'w50',
             ],
         ],
         'jumpTo' => [
