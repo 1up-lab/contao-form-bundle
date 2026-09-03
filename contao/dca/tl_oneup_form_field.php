@@ -100,7 +100,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {title_legend},name,type;
             {publish_legend},published;
         ',
-        'mail' => '
+        'email' => '
             {title_legend},name,type,alias;
             {label_legend},placeholder,label,labelHtml;
             {help_legend},help,helpHtml;
