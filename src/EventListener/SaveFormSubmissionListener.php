@@ -25,7 +25,7 @@ class SaveFormSubmissionListener
             return;
         }
 
-        $data = $event->form->getData();
+        $data = $event->data;
         $name = $this->nameGenerator->generate((string) $formModel->submissionExpression, $data);
 
         $submission = new FormSubmissionModel();

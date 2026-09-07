@@ -1,0 +1,12 @@
+{% if form.vars.visible_steps is defined and form.vars.visible_steps|length > 1 %}
+    <ol class="oneup-form__steps">
+        {% for step in form.vars.visible_steps %}
+            <li class="oneup-form__step{{ step.is_current_step ? ' oneup-form__step--current' }}" {{ step.is_current_step ? 'aria-current="step"' : '' }}>
+                <span class="oneup-form__step-position">{{ step.position }}</span>
+                <span class="oneup-form__step-label">{{ step.label|default(step.name) }}</span>
+            </li>
+        {% endfor %}
+    </ol>
+{% endif %}
+
+{{ form(form) }}

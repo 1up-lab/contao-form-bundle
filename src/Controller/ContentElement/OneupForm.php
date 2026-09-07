@@ -11,6 +11,9 @@ use Contao\CoreBundle\Twig\FragmentTemplate;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
 use Oneup\ContaoFormBundle\Model\FormModel;
 use Oneup\ContaoFormBundle\Service\FormBuilder;
+use Oneup\ContaoFormBundle\Service\FormDataNormalizer;
+use Symfony\Component\Form\Flow\FormFlowInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -20,6 +23,7 @@ class OneupForm extends AbstractContentElementController
 {
     public function __construct(
         private readonly FormBuilder $formBuilder,
+        private readonly FormDataNormalizer $dataNormalizer,
         private readonly EventDispatcherInterface $eventDispatcher,
     ) {
     }
@@ -41,16 +45,36 @@ class OneupForm extends AbstractContentElementController
         $form = $this->formBuilder->build($id);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->eventDispatcher->dispatch($event = new PostSubmitEvent($form, $formModel));
+        if ($this->isCompleted($form)) {
+            $response = $this->postSubmit($form, $formModel);
 
-            if (($response = $event->response) instanceof Response) {
+            if ($response instanceof Response) {
                 return $response;
             }
+        } elseif ($form instanceof FormFlowInterface) {
+            $form = $form->getStepForm();
         }
 
         $template->set('form', $form->createView());
 
         return $template->getResponse();
+    }
+
+    private function isCompleted(FormInterface $form): bool
+    {
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return false;
+        }
+
+        return !$form instanceof FormFlowInterface || $form->isFinished();
+    }
+
+    private function postSubmit(FormInterface $form, FormModel $formModel): ?Response
+    {
+        $event = new PostSubmitEvent($form, $formModel, $this->dataNormalizer->normalize($form));
+
+        $this->eventDispatcher->dispatch($event);
+
+        return $event->response;
     }
 }
