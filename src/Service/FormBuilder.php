@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Oneup\ContaoFormBundle\Service;
 
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
-use Oneup\ContaoFormBundle\Form\Registry\ConstraintRegistry;
-use Oneup\ContaoFormBundle\Form\Registry\FormRegistry;
+use Oneup\ContaoFormBundle\Form\FieldBuilder;
+use Oneup\ContaoFormBundle\Form\Type\ContaoFormFlowType;
 use Oneup\ContaoFormBundle\Model\FormFieldModel;
-use Oneup\ContaoFormBundle\Model\FormValidatorModel;
+use Oneup\ContaoFormBundle\Model\FormModel;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -19,8 +18,7 @@ class FormBuilder
     public function __construct(
         private readonly ContaoCsrfTokenManager $contaoCsrfTokenManager,
         private readonly FormFactoryInterface $formFactory,
-        private readonly FormRegistry $formRegistry,
-        private readonly ConstraintRegistry $constraintRegistry,
+        private readonly FieldBuilder $fieldBuilder,
         #[Autowire(param: 'contao.csrf_token_name')]
         private readonly string $tokenName,
     ) {
@@ -28,79 +26,33 @@ class FormBuilder
 
     public function build(int $id): FormInterface
     {
-        $builder = $this->formFactory->createNamedBuilder('oneup_form_' . $id, options: [
+        $name = 'oneup_form_' . $id;
+
+        if ($this->isMultistep($id)) {
+            return $this->formFactory->createNamed($name, ContaoFormFlowType::class, [], ['form_id' => $id]);
+        }
+
+        $builder = $this->formFactory->createNamedBuilder($name, options: [
             'csrf_field_name' => 'REQUEST_TOKEN',
             'csrf_token_manager' => $this->contaoCsrfTokenManager,
             'csrf_token_id' => $this->tokenName,
             'translation_domain' => false,
         ]);
 
-        $this->buildForm($builder, $id);
+        $this->fieldBuilder->build($builder, $id);
 
         return $builder->getForm();
     }
 
-    private function buildForm(FormBuilderInterface $builder, int $pid, string $ptable = 'tl_oneup_form'): void
+    private function isMultistep(int $id): bool
     {
-        /** @var FormFieldModel[] $fieldModels */
-        $fieldModels = FormFieldModel::findBy(['pid=?', 'ptable=?', 'published=?'], [$pid, $ptable, true], [
-            'order' => 'sorting ASC',
-        ]);
-
-        if (null === $fieldModels) {
-            return;
+        if (!FormModel::findById($id)?->isMultistep) {
+            return false;
         }
 
-        foreach ($fieldModels as $fieldModel) {
-            $row = $fieldModel->row();
-
-            try {
-                $formType = $this->formRegistry->get($row['type']);
-            } catch (\InvalidArgumentException) {
-                continue;
-            }
-
-            $options = $formType->resolveOptions($row);
-
-            if ($formType->isConstrainable()) {
-                $options['constraints'] = $this->getConstraints($row['id']);
-            }
-
-            $builder->add($row['alias'], $formType->getFormType(), $options);
-
-            if ($formType->isNestable()) {
-                $nestedBuilder = $builder->get($row['alias']);
-
-                $this->buildForm($nestedBuilder, $row['id'], 'tl_oneup_form_field');
-            }
-        }
-    }
-
-    private function getConstraints(int $pid): array
-    {
-        $constraints = [];
-
-        /** @var FormValidatorModel[] $constraintModels */
-        $constraintModels = FormValidatorModel::findBy('pid', $pid, [
-            'order' => 'sorting ASC',
-        ]);
-
-        if (null === $constraintModels) {
-            return [];
-        }
-
-        foreach ($constraintModels as $constraintModel) {
-            $row = $constraintModel->row();
-
-            try {
-                $constraintType = $this->constraintRegistry->get($row['type']);
-            } catch (\InvalidArgumentException) {
-                return [];
-            }
-
-            $constraints[] = new ($constraintType->getConstraintType())($constraintType->resolveOptions($row));
-        }
-
-        return $constraints;
+        return FormFieldModel::countBy(
+            ['pid=?', 'ptable=?', 'published=?', 'type=?'],
+            [$id, 'tl_oneup_form', true, 'step'],
+        ) > 0;
     }
 }

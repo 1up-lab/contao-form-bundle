@@ -40,24 +40,58 @@ class FieldAliasGenerator
             return;
         }
 
-        $formId = (int) $record['pid'];
+        $aliases = $this->getCompetingAliases($record);
 
-        $alias = $this->slugGenerator->generate($name, options: ['validChars' => '0-9a-z'], duplicateCheck: function (string $slug) use ($formId): bool {
-            $res = $this->database->createQueryBuilder()
-                ->select('COUNT(1)')
-                ->from('tl_oneup_form_field', 'f')
-                ->andWhere('f.pid = :pid')
-                ->andWhere('f.alias = :slug')
-
-                ->setParameter('slug', $slug)
-                ->setParameter('pid', $formId)
-
-                ->fetchOne()
-            ;
-
-            return $res > 0;
-        });
+        $alias = $this->slugGenerator->generate(
+            $name,
+            options: ['validChars' => '0-9a-z'],
+            duplicateCheck: static fn (string $slug): bool => \in_array($slug, $aliases, true),
+        );
 
         $this->database->update('tl_oneup_form_field', ['alias' => $alias], ['id' => $dc->id]);
+    }
+
+    private function getCompetingAliases(array $record): array
+    {
+        $formId = $this->getRootFormId($record);
+
+        if (null !== $formId && $this->database->fetchOne('SELECT isMultistep FROM tl_oneup_form WHERE id = ?', [$formId])) {
+            return $this->getAliases($formId);
+        }
+
+        return $this->database->fetchFirstColumn('SELECT alias FROM tl_oneup_form_field WHERE pid = ?', [(int) $record['pid']]);
+    }
+
+    private function getRootFormId(array $record): ?int
+    {
+        $pid = (int) $record['pid'];
+        $ptable = (string) ($record['ptable'] ?? 'tl_oneup_form');
+
+        while ('tl_oneup_form_field' === $ptable) {
+            $parent = $this->database->fetchAssociative('SELECT pid, ptable FROM tl_oneup_form_field WHERE id = ?', [$pid]);
+
+            if (false === $parent) {
+                return null;
+            }
+
+            $pid = (int) $parent['pid'];
+            $ptable = (string) $parent['ptable'];
+        }
+
+        return $pid ?: null;
+    }
+
+    private function getAliases(int $pid, string $ptable = 'tl_oneup_form'): array
+    {
+        $aliases = [];
+
+        $rows = $this->database->fetchAllAssociative('SELECT id, alias FROM tl_oneup_form_field WHERE pid = ? AND ptable = ?', [$pid, $ptable]);
+
+        foreach ($rows as $row) {
+            $aliases[] = (string) $row['alias'];
+            $aliases = [...$aliases, ...$this->getAliases((int) $row['id'], 'tl_oneup_form_field')];
+        }
+
+        return $aliases;
     }
 }

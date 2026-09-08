@@ -15,6 +15,7 @@ class PostSubmitEvent
     public function __construct(
         public FormInterface $form,
         public FormModel $formModel,
+        public array $data = [],
     ) {
     }
 }

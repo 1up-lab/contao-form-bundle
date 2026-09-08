@@ -163,6 +163,10 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {expert_legend},required,trim;
             {publish_legend},published;
         ',
+        'step' => '
+            {title_legend},name,type,alias;
+            {publish_legend},published;
+        ',
         'submit' => '
             {title_legend},name,type,alias;
             {label_legend},label;

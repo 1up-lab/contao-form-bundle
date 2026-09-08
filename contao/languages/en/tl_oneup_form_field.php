@@ -65,6 +65,7 @@ $GLOBALS['TL_LANG']['tl_oneup_form_field'] = [
         'range' => 'Range',
         'reset' => 'Reset',
         'search' => 'Search',
+        'step' => 'Step',
         'submit' => 'Submit',
         'tel' => 'Telephone',
         'text' => 'Text',

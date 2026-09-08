@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\EventListener;
 
+use Contao\CoreBundle\Routing\ContentUrlGenerator;
+use Contao\PageModel;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\RouterInterface;
 
 #[AsEventListener(event: PostSubmitEvent::class)]
 class RedirectAfterSubmitListener
 {
     public function __construct(
-        private readonly RouterInterface $router,
+        private readonly ContentUrlGenerator $contentUrlGenerator,
     ) {
     }
 
@@ -25,6 +26,12 @@ class RedirectAfterSubmitListener
             return;
         }
 
-        $event->response = new RedirectResponse($this->router->generate('tl_page.' . $jumpTo));
+        $page = PageModel::findById($jumpTo);
+
+        if (!$page instanceof PageModel) {
+            return;
+        }
+
+        $event->response = new RedirectResponse($this->contentUrlGenerator->generate($page));
     }
 }

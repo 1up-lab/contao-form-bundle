@@ -8,3 +8,12 @@ $GLOBALS['TL_LANG']['CTE'] = [
         'oneup_form' => ['Form*', 'Includes a form.'],
     ],
 ];
+
+$GLOBALS['TL_LANG']['MSC'] = [
+    ...$GLOBALS['TL_LANG']['MSC'],
+    ...[
+        'oneupFormPrevious' => 'Back',
+        'oneupFormNext' => 'Continue',
+        'oneupFormFinish' => 'Submit',
+    ],
+];

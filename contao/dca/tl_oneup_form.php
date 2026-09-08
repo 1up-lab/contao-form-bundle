@@ -51,8 +51,9 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
         '__selector__' => ['storeSubmissions'],
         'default' => '
             {title_legend},name,;
-            {jumpTo_legend},jumpTo;
+            {redirect_legend},jumpTo;
             {submission_legend},storeSubmissions;
+            {multistep_legend},isMultistep;
         ',
     ],
 
@@ -123,6 +124,17 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
             'relation' => [
                 'type' => 'hasOne',
                 'load' => 'lazy',
+            ],
+        ],
+        'isMultistep' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'doNotCopy' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
             ],
         ],
     ],
