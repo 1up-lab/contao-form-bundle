@@ -160,12 +160,20 @@ $GLOBALS['TL_DCA']['tl_oneup_form_constraint'] = [
                 'submitOnChange' => true,
                 'tl_class' => 'clr',
             ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
         ],
         'message' => [
             'inputType' => 'text',
             'eval' => [
                 'mandatory' => true,
                 'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
             ],
         ],
     ],

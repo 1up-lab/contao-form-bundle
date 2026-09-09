@@ -108,6 +108,10 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
                 'maxlength' => 255,
                 'tl_class' => 'w50',
             ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
+            ],
         ],
         'jumpTo' => [
             'inputType' => 'pageTree',
