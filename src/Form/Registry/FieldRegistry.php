@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Form\Registry;
 
-use Oneup\ContaoFormBundle\Form\FormFieldInterface;
+use Oneup\ContaoFormBundle\Form\FieldInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 class FieldRegistry
@@ -15,7 +15,7 @@ class FieldRegistry
     ) {
     }
 
-    public function get(string $name): FormFieldInterface
+    public function get(string $name): FieldInterface
     {
         $types = iterator_to_array($this->types);
 

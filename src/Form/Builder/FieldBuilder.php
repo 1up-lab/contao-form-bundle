@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Oneup\ContaoFormBundle\Form;
+namespace Oneup\ContaoFormBundle\Form\Builder;
 
-use Contao\Model\Collection;
 use Oneup\ContaoFormBundle\Form\Registry\ConstraintRegistry;
 use Oneup\ContaoFormBundle\Form\Registry\FieldRegistry;
-use Oneup\ContaoFormBundle\Model\FieldModel;
 use Oneup\ContaoFormBundle\Model\ConstraintModel;
+use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class FieldBuilder

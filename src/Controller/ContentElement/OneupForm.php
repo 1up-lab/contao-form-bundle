@@ -9,8 +9,8 @@ use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
 use Contao\CoreBundle\Twig\FragmentTemplate;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
+use Oneup\ContaoFormBundle\Form\Builder\FormBuilder;
 use Oneup\ContaoFormBundle\Model\FormModel;
-use Oneup\ContaoFormBundle\Service\FormBuilder;
 use Symfony\Component\Form\Flow\FormFlowInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;

@@ -7,7 +7,7 @@ namespace Oneup\ContaoFormBundle\Form;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\Form\FormTypeInterface;
 
-interface FormFieldInterface
+interface FieldInterface
 {
     /**
      * @return class-string<FormTypeInterface>

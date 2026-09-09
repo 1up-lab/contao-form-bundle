@@ -6,12 +6,12 @@ namespace Oneup\ContaoFormBundle\Form\Field;
 
 use Oneup\ContaoFormBundle\Attribute\AsField;
 use Oneup\ContaoFormBundle\Form\AbstractField;
-use Oneup\ContaoFormBundle\Form\FormFieldInterface;
+use Oneup\ContaoFormBundle\Form\FieldInterface;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 
 #[AsField('color', ColorType::class)]
-class Color extends AbstractField implements FormFieldInterface
+class Color extends AbstractField implements FieldInterface
 {
     public function resolveOptions(FieldModel $model): array
     {

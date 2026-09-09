@@ -6,7 +6,7 @@ namespace Oneup\ContaoFormBundle\Form\Field;
 
 use Oneup\ContaoFormBundle\Attribute\AsField;
 use Oneup\ContaoFormBundle\Form\AbstractField;
-use Oneup\ContaoFormBundle\Form\FormFieldInterface;
+use Oneup\ContaoFormBundle\Form\FieldInterface;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -19,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 #[AsField(name: 'tel', formType: TelType::class)]
 #[AsField(name: 'search', formType: SearchType::class)]
 #[AsField(name: 'textarea', formType: TextareaType::class)]
-class Text extends AbstractField implements FormFieldInterface
+class Text extends AbstractField implements FieldInterface
 {
     public function resolveOptions(FieldModel $model): array
     {

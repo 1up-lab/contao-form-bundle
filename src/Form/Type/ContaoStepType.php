@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Form\Type;
 
-use Oneup\ContaoFormBundle\Form\FieldBuilder;
+use Oneup\ContaoFormBundle\Form\Builder\FieldBuilder;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
