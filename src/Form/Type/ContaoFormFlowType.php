@@ -6,7 +6,7 @@ namespace Oneup\ContaoFormBundle\Form\Type;
 
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Contao\Model\Collection;
-use Oneup\ContaoFormBundle\Model\FormFieldModel;
+use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\Flow\AbstractFlowType;
 use Symfony\Component\Form\Flow\FormFlowBuilderInterface;
@@ -74,7 +74,7 @@ class ContaoFormFlowType extends AbstractFlowType
 
     private function getSteps(int $formId): array
     {
-        $steps = FormFieldModel::findBy(
+        $steps = FieldModel::findBy(
             ['pid=?', 'ptable=?', 'published=?', 'type=?'],
             [$formId, 'tl_oneup_form', true, 'step'],
             ['order' => 'sorting ASC'],

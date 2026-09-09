@@ -6,7 +6,7 @@ namespace Oneup\ContaoFormBundle\Model;
 
 use Contao\Model;
 
-class FormSubmissionModel extends Model
+class SubmissionModel extends Model
 {
     protected static $strTable = 'tl_oneup_form_submission';
 }

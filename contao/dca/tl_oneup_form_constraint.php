@@ -6,7 +6,7 @@ use Contao\DataContainer;
 use Contao\DC_Table;
 use Doctrine\DBAL\Types\Types;
 
-$GLOBALS['TL_DCA']['tl_oneup_form_validator'] = [
+$GLOBALS['TL_DCA']['tl_oneup_form_constraint'] = [
     'config' => [
         'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
@@ -142,7 +142,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_validator'] = [
         ],
         'type' => [
             'inputType' => 'select',
-            'reference' => &$GLOBALS['TL_LANG']['tl_oneup_form_validator']['types'],
+            'reference' => &$GLOBALS['TL_LANG']['tl_oneup_form_constraint']['types'],
             'eval' => [
                 'chosen' => true,
                 'mandatory' => true,

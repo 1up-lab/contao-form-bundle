@@ -6,7 +6,7 @@ namespace Oneup\ContaoFormBundle\Model;
 
 use Contao\Model;
 
-class FormFieldModel extends Model
+class ConstraintModel extends Model
 {
-    protected static $strTable = 'tl_oneup_form_field';
+    protected static $strTable = 'tl_oneup_form_constraint';
 }

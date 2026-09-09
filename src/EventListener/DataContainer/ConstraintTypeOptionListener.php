@@ -6,8 +6,8 @@ namespace Oneup\ContaoFormBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 
-#[AsCallback(table: 'tl_oneup_form_validator', target: 'fields.type.options')]
-class ValidatorTypeOptionListener
+#[AsCallback(table: 'tl_oneup_form_constraint', target: 'fields.type.options')]
+class ConstraintTypeOptionListener
 {
     public function __invoke(): array
     {

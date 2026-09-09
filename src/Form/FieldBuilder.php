@@ -7,8 +7,8 @@ namespace Oneup\ContaoFormBundle\Form;
 use Contao\Model\Collection;
 use Oneup\ContaoFormBundle\Form\Registry\ConstraintRegistry;
 use Oneup\ContaoFormBundle\Form\Registry\FormRegistry;
-use Oneup\ContaoFormBundle\Model\FormFieldModel;
-use Oneup\ContaoFormBundle\Model\FormValidatorModel;
+use Oneup\ContaoFormBundle\Model\FieldModel;
+use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class FieldBuilder
@@ -21,7 +21,7 @@ class FieldBuilder
 
     public function build(FormBuilderInterface $builder, int $pid, string $ptable = 'tl_oneup_form'): void
     {
-        $fieldModels = FormFieldModel::findBy(['pid=?', 'ptable=?', 'published=?'], [$pid, $ptable, true], [
+        $fieldModels = FieldModel::findBy(['pid=?', 'ptable=?', 'published=?'], [$pid, $ptable, true], [
             'order' => 'sorting ASC',
         ]);
 
@@ -62,7 +62,7 @@ class FieldBuilder
     {
         $constraints = [];
 
-        $constraintModels = FormValidatorModel::findBy('pid', $pid, [
+        $constraintModels = ConstraintModel::findBy('pid', $pid, [
             'order' => 'sorting ASC',
         ]);
 

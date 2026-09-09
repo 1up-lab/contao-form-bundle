@@ -7,7 +7,7 @@ namespace Oneup\ContaoFormBundle\Service;
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Oneup\ContaoFormBundle\Form\FieldBuilder;
 use Oneup\ContaoFormBundle\Form\Type\ContaoFormFlowType;
-use Oneup\ContaoFormBundle\Model\FormFieldModel;
+use Oneup\ContaoFormBundle\Model\FieldModel;
 use Oneup\ContaoFormBundle\Model\FormModel;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -50,7 +50,7 @@ class FormBuilder
             return false;
         }
 
-        return FormFieldModel::countBy(
+        return FieldModel::countBy(
             ['pid=?', 'ptable=?', 'published=?', 'type=?'],
             [$id, 'tl_oneup_form', true, 'step'],
         ) > 0;

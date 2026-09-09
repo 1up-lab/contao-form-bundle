@@ -11,18 +11,18 @@ class FormRegistry
 {
     public function __construct(
         #[AutowireIterator(tag: 'oneup_contao_form.field', indexAttribute: 'type')]
-        private readonly iterable $formTypes,
+        private readonly iterable $types,
     ) {
     }
 
     public function get(string $name): FormFieldInterface
     {
-        $formTypes = iterator_to_array($this->formTypes);
+        $types = iterator_to_array($this->types);
 
-        if (!\array_key_exists($name, $formTypes)) {
+        if (!\array_key_exists($name, $types)) {
             throw new \InvalidArgumentException();
         }
 
-        return $formTypes[$name];
+        return $types[$name];
     }
 }

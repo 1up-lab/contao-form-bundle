@@ -12,7 +12,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
         'enableVersioning' => true,
         'dynamicPtable' => true,
         'ptable' => 'tl_oneup_form',
-        'ctable' => ['tl_oneup_form_field', 'tl_oneup_form_validator'],
+        'ctable' => ['tl_oneup_form_field', 'tl_oneup_form_constraint'],
         'sql' => [
             'keys' => [
                 'id' => 'primary',
@@ -42,7 +42,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'children',
             'constraints' => [
                 'primary' => true,
-                'href' => 'table=tl_oneup_form_validator',
+                'href' => 'table=tl_oneup_form_constraint',
                 'icon' => 'diffTemplate.svg',
             ],
             'copy',
