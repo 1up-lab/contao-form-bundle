@@ -28,8 +28,8 @@ class ContaoNavigatorType extends NavigatorFlowType
             ->add('next', NextFlowType::class, [
                 'label' => $this->translator->trans('form.next'),
             ])
-            ->add('submit', FinishFlowType::class, [
-                'label' => $this->translator->trans('form.submit'),
+            ->add('finish', FinishFlowType::class, [
+                'label' => $this->translator->trans('form.finish'),
             ])
         ;
     }
