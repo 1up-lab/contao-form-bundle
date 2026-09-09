@@ -9,7 +9,11 @@ use Contao\Model\Collection;
 
 /**
  * @property int $id
+ * @property int $pid
+ * @property int $tstamp
+ * @property int $sorting
  * @property string $type
+ * @property bool $overwriteMessage
  * @property string $message
  *
  * @method static ConstraintModel|null findById($id, array $opt = array())

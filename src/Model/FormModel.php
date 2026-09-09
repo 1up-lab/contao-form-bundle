@@ -8,10 +8,12 @@ use Contao\Model;
 
 /**
  * @property int $id
- * @property bool $isMultistep
- * @property string $jumpTo
+ * @property int $tstamp
+ * @property string $name
  * @property bool $storeSubmissions
  * @property string $submissionExpression
+ * @property int $jumpTo
+ * @property bool $isMultistep
  *
  * @method static FormModel|null findById($id, array $opt = array())
  */

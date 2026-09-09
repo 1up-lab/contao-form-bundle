@@ -9,18 +9,23 @@ use Contao\Model\Collection;
 
 /**
  * @property int $id
+ * @property int $pid
+ * @property string $ptable
+ * @property int $tstamp
+ * @property int $sorting
  * @property string $name
- * @property string $type
  * @property string $alias
+ * @property string $type
+ * @property string $placeholder
  * @property string $label
- * @property bool $html5
- * @property string $defaultProtocol
- * @property bool $required
  * @property bool $labelHtml
  * @property string $help
  * @property bool $helpHtml
  * @property bool $trim
- * @property string $placeholder
+ * @property bool $required
+ * @property string $defaultProtocol
+ * @property bool $html5
+ * @property bool $published
  *
  * @method static Collection<FieldModel>|null findBy($col, $val, array $opt = array())
  */
