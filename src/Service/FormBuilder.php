@@ -24,12 +24,12 @@ class FormBuilder
     ) {
     }
 
-    public function build(int $id): FormInterface
+    public function build(FormModel $formModel): FormInterface
     {
-        $name = 'oneup_form_' . $id;
+        $name = 'oneup_form_' . $formModel->id;
 
-        if ($this->isMultistep($id)) {
-            return $this->formFactory->createNamed($name, ContaoFormFlowType::class, [], ['form_id' => $id]);
+        if ($formModel->isMultistep) {
+            return $this->formFactory->createNamed($name, ContaoFormFlowType::class, [], ['form_id' => $formModel->id]);
         }
 
         $builder = $this->formFactory->createNamedBuilder($name, options: [
@@ -39,20 +39,8 @@ class FormBuilder
             'translation_domain' => false,
         ]);
 
-        $this->fieldBuilder->build($builder, $id);
+        $this->fieldBuilder->build($builder, $formModel->id);
 
         return $builder->getForm();
-    }
-
-    private function isMultistep(int $id): bool
-    {
-        if (!FormModel::findById($id)?->isMultistep) {
-            return false;
-        }
-
-        return FieldModel::countBy(
-            ['pid=?', 'ptable=?', 'published=?', 'type=?'],
-            [$id, 'tl_oneup_form', true, 'step'],
-        ) > 0;
     }
 }

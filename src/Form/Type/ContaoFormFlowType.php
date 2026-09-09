@@ -7,6 +7,7 @@ namespace Oneup\ContaoFormBundle\Form\Type;
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Contao\Model\Collection;
 use Oneup\ContaoFormBundle\Model\FieldModel;
+use Oneup\ContaoFormBundle\Model\FormModel;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\Flow\AbstractFlowType;
 use Symfony\Component\Form\Flow\FormFlowBuilderInterface;
@@ -25,9 +26,12 @@ class ContaoFormFlowType extends AbstractFlowType
 
     public function buildFormFlow(FormFlowBuilderInterface $builder, array $options): void
     {
+        /** @var FormModel $formModel */
+        $formModel = $options['model'];
+
         $labels = [];
 
-        foreach ($this->getSteps((int) $options['form_id']) as $step) {
+        foreach ($this->getSteps($formModel) as $step) {
             $alias = (string) $step->alias;
 
             if (!$alias) {
@@ -57,10 +61,10 @@ class ContaoFormFlowType extends AbstractFlowType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->define('form_id')
-            ->info('ID of the tl_oneup_form record this flow belongs to')
+            ->define('model')
+            ->info('The FormModel')
             ->required()
-            ->allowedTypes('int')
+            ->allowedTypes(FormModel::class)
         ;
 
         $resolver->setDefaults([
@@ -72,11 +76,11 @@ class ContaoFormFlowType extends AbstractFlowType
         ]);
     }
 
-    private function getSteps(int $formId): array
+    private function getSteps(FormModel $formModel): array
     {
         $steps = FieldModel::findBy(
             ['pid=?', 'ptable=?', 'published=?', 'type=?'],
-            [$formId, 'tl_oneup_form', true, 'step'],
+            [$formModel->id, 'tl_oneup_form', true, 'step'],
             ['order' => 'sorting ASC'],
         );
 

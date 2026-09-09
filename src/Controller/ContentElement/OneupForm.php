@@ -11,7 +11,6 @@ use Contao\CoreBundle\Twig\FragmentTemplate;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
 use Oneup\ContaoFormBundle\Model\FormModel;
 use Oneup\ContaoFormBundle\Service\FormBuilder;
-use Oneup\ContaoFormBundle\Service\FormDataNormalizer;
 use Symfony\Component\Form\Flow\FormFlowInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,18 +22,14 @@ class OneupForm extends AbstractContentElementController
 {
     public function __construct(
         private readonly FormBuilder $formBuilder,
-        private readonly FormDataNormalizer $dataNormalizer,
         private readonly EventDispatcherInterface $eventDispatcher,
     ) {
     }
 
     protected function getResponse(FragmentTemplate $template, ContentModel $model, Request $request): Response
     {
-        $id = (int) $model->oneup_form;
-
-        if (!$id) {
-            return new Response('');
-        }
+        /** @var int|null $id */
+        $id = $model->oneup_form;
 
         $formModel = FormModel::findById($id);
 
@@ -42,14 +37,16 @@ class OneupForm extends AbstractContentElementController
             return new Response('');
         }
 
-        $form = $this->formBuilder->build($id);
+        $form = $this->formBuilder->build($formModel);
         $form->handleRequest($request);
 
         if ($this->isCompleted($form)) {
-            $response = $this->postSubmit($form, $formModel);
+            $event = new PostSubmitEvent($form, $formModel);
 
-            if ($response instanceof Response) {
-                return $response;
+            $this->eventDispatcher->dispatch($event);
+
+            if ($event->response instanceof Response) {
+                return $event->response;
             }
         } elseif ($form instanceof FormFlowInterface) {
             $form = $form->getStepForm();
@@ -67,14 +64,5 @@ class OneupForm extends AbstractContentElementController
         }
 
         return !$form instanceof FormFlowInterface || $form->isFinished();
-    }
-
-    private function postSubmit(FormInterface $form, FormModel $formModel): ?Response
-    {
-        $event = new PostSubmitEvent($form, $formModel, $this->dataNormalizer->normalize($form));
-
-        $this->eventDispatcher->dispatch($event);
-
-        return $event->response;
     }
 }

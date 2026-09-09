@@ -6,7 +6,7 @@ namespace Oneup\ContaoFormBundle\Form;
 
 use Contao\Model\Collection;
 use Oneup\ContaoFormBundle\Form\Registry\ConstraintRegistry;
-use Oneup\ContaoFormBundle\Form\Registry\FormRegistry;
+use Oneup\ContaoFormBundle\Form\Registry\FieldRegistry;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class FieldBuilder
 {
     public function __construct(
-        private readonly FormRegistry $formRegistry,
+        private readonly FieldRegistry $fieldRegistry,
         private readonly ConstraintRegistry $constraintRegistry,
     ) {
     }
@@ -25,35 +25,33 @@ class FieldBuilder
             'order' => 'sorting ASC',
         ]);
 
-        if (!$fieldModels instanceof Collection) {
+        if (null === $fieldModels) {
             return;
         }
 
-        foreach ($fieldModels as $fieldModel) {
-            $row = $fieldModel->row();
-
-            if ('step' === $row['type']) {
+        foreach ($fieldModels as $model) {
+            if ('step' === $model->type) {
                 continue;
             }
 
             try {
-                $formType = $this->formRegistry->get($row['type']);
+                $formType = $this->fieldRegistry->get($model->type);
             } catch (\InvalidArgumentException) {
                 continue;
             }
 
-            $options = $formType->resolveOptions($row);
+            $options = $formType->resolveOptions($model);
 
             if ($formType->isConstrainable()) {
-                $options['constraints'] = $this->getConstraints((int) $row['id']);
+                $options['constraints'] = $this->getConstraints($model->id);
             }
 
-            $builder->add($row['alias'], $formType->getFormType(), $options);
+            $builder->add($model->alias, $formType->getFormType(), $options);
 
             if ($formType->isNestable()) {
-                $nestedBuilder = $builder->get($row['alias']);
+                $nestedBuilder = $builder->get($model->alias);
 
-                $this->build($nestedBuilder, (int) $row['id'], 'tl_oneup_form_field');
+                $this->build($nestedBuilder, $model->id, 'tl_oneup_form_field');
             }
         }
     }
@@ -66,20 +64,18 @@ class FieldBuilder
             'order' => 'sorting ASC',
         ]);
 
-        if (!$constraintModels instanceof Collection) {
+        if (null === $constraintModels) {
             return [];
         }
 
-        foreach ($constraintModels as $constraintModel) {
-            $row = $constraintModel->row();
-
+        foreach ($constraintModels as $model) {
             try {
-                $constraintType = $this->constraintRegistry->get($row['type']);
+                $constraintType = $this->constraintRegistry->get($model->type);
             } catch (\InvalidArgumentException) {
                 continue;
             }
 
-            $constraints[] = new ($constraintType->getConstraintType())($constraintType->resolveOptions($row));
+            $constraints[] = new ($constraintType->getConstraintType())($constraintType->resolveOptions($model));
         }
 
         return $constraints;

@@ -17,11 +17,18 @@ class SubmissionNameGenerator
     public function generate(string $expression, array $data): string
     {
         try {
-            return $this->expressionLanguage->evaluate($expression, [
-                'data' => $data,
-            ]);
+            return $this->cast($this->expressionLanguage->evaluate($expression, ...$data));
         } catch (\RuntimeException|SyntaxError) {
             return '';
         }
+    }
+
+    private function cast(mixed $value): string
+    {
+        return match (true) {
+            is_scalar($value), $value === null, $value instanceof \Stringable => (string) $value,
+
+            default => '',
+        };
     }
 }

@@ -8,7 +8,13 @@ parameters:
 
     reportUnmatchedIgnoredErrors: false
     universalObjectCratesClasses:
+        - Contao\ContentModel
+
     ignoreErrors:
+        -
+            identifier: missingType.iterableValue
+        -
+            identifier: missingType.generics
         -
             identifier: offsetAccess.nonOffsetAccessible
         -

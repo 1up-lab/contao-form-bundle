@@ -6,13 +6,13 @@ namespace Oneup\ContaoFormBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\DataContainer\DataContainerOperation;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
-use Oneup\ContaoFormBundle\Form\Registry\FormRegistry;
+use Oneup\ContaoFormBundle\Form\Registry\FieldRegistry;
 
 #[AsCallback(table: 'tl_oneup_form_field', target: 'list.operations.children.button')]
 class NestableListener
 {
     public function __construct(
-        private readonly FormRegistry $registry,
+        private readonly FieldRegistry $registry,
     ) {
     }
 

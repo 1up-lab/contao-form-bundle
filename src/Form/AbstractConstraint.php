@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Form;
 
-class AbstractConstraint
+use Oneup\ContaoFormBundle\Model\ConstraintModel;
+
+abstract class AbstractConstraint
 {
     protected string $name;
     protected string $constraintType;
@@ -33,11 +35,11 @@ class AbstractConstraint
         return $this;
     }
 
-    public function resolveOptions(array $options): array
+    public function resolveOptions(ConstraintModel $model): array
     {
-        if ($options['message'] ?? null) {
+        if ($model->message) {
             return [
-                'message' => $options['message'],
+                'message' => $model->message,
             ];
         }
 

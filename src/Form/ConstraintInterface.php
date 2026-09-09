@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Form;
 
+use Oneup\ContaoFormBundle\Model\ConstraintModel;
+
 interface ConstraintInterface
 {
     /**
@@ -11,5 +13,5 @@ interface ConstraintInterface
      */
     public function getConstraintType(): string;
 
-    public function resolveOptions(array $row): array;
+    public function resolveOptions(ConstraintModel $model): array;
 }

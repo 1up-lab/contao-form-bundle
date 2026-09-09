@@ -14,7 +14,11 @@ class FormPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        $container->registerAttributeForAutoconfiguration(AsField::class, static function (ChildDefinition $definition, AsField $attribute, \ReflectionClass $reflector) use ($container): void {
+        $container->registerAttributeForAutoconfiguration(AsField::class, static function (ChildDefinition $definition, AsField $attribute, \Reflector $reflector) use ($container): void {
+            if (!$reflector instanceof \ReflectionClass) {
+                return;
+            }
+
             $id = \sprintf('%s.%s', $reflector->getName(), $attribute->name);
 
             $container->register($id, $reflector->getName())
@@ -27,7 +31,11 @@ class FormPass implements CompilerPassInterface
             ;
         });
 
-        $container->registerAttributeForAutoconfiguration(AsConstraint::class, static function (ChildDefinition $definition, AsConstraint $attribute, \ReflectionClass $reflector) use ($container): void {
+        $container->registerAttributeForAutoconfiguration(AsConstraint::class, static function (ChildDefinition $definition, AsConstraint $attribute, \Reflector $reflector) use ($container): void {
+            if (!$reflector instanceof \ReflectionClass) {
+                return;
+            }
+
             $id = \sprintf('%s.%s', $reflector->getName(), $attribute->name);
 
             $container->register($id, $reflector->getName())

@@ -25,14 +25,14 @@ class SaveFormSubmissionListener
             return;
         }
 
-        $data = $event->data;
+        $data = (array) $event->form->getData();
         $name = $this->nameGenerator->generate((string) $formModel->submissionExpression, $data);
 
         $submission = new SubmissionModel();
         $submission->pid = $event->formModel->id;
         $submission->tstamp = time();
         $submission->name = $name;
-        $submission->data = json_encode($data);
+        $submission->data = (string) json_encode($data);
 
         $submission->save();
     }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Form;
 
-class AbstractField
+use Oneup\ContaoFormBundle\Model\FieldModel;
+
+abstract class AbstractField
 {
     protected string $name;
     protected string $formType;
@@ -59,7 +61,7 @@ class AbstractField
         return $this;
     }
 
-    public function resolveOptions(array $row): array
+    public function resolveOptions(FieldModel $model): array
     {
         return [];
     }
