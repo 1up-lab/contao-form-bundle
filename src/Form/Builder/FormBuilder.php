@@ -27,7 +27,7 @@ class FormBuilder
         $name = 'oneup_form_' . $formModel->id;
 
         if ($formModel->isMultistep) {
-            return $this->formFactory->createNamed($name, ContaoFormFlowType::class, [], ['form_id' => $formModel->id]);
+            return $this->formFactory->createNamed($name, ContaoFormFlowType::class, [], ['model' => $formModel]);
         }
 
         $builder = $this->formFactory->createNamedBuilder($name, options: [

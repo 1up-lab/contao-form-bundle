@@ -17,7 +17,7 @@ class SubmissionNameGenerator
     public function generate(string $expression, array $data): string
     {
         try {
-            return $this->cast($this->expressionLanguage->evaluate($expression, ...$data));
+            return $this->cast($this->expressionLanguage->evaluate($expression, ['data' => $data]));
         } catch (\RuntimeException|SyntaxError) {
             return '';
         }

@@ -38,7 +38,7 @@ class ContaoFormFlowType extends AbstractFlowType
                 continue;
             }
 
-            $builder->addStep($alias, ContaoStepType::class, ['field_id' => (int) $step->id]);
+            $builder->addStep($alias, ContaoStepType::class, ['model' => $step]);
 
             $labels[$alias] = (string) $step->name;
         }

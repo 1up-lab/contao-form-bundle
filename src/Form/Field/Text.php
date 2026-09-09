@@ -26,10 +26,10 @@ class Text extends AbstractField implements FieldInterface
         return [
             'required' => $model->required,
             'label' => $model->label ?: $model->name,
-            'label_html' => $model->labelHtml,
+            'label_html' => (bool) $model->labelHtml,
             'help' => $model->help,
-            'help_html' => $model->helpHtml,
-            'trim' => $model->trim,
+            'help_html' => (bool) $model->helpHtml,
+            'trim' => (bool) $model->trim,
             'attr' => [
                 'placeholder' => $model->placeholder,
             ],
