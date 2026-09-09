@@ -1,0 +1,31 @@
+tl_oneup_form_constraint:
+    title_legend: Validierungsregel
+    message_legend: Fehlermeldung
+    type:
+        - Typ
+        - Bitte wählen Sie einen Typ.
+    overwriteMessage:
+        - Eigene Meldung definieren
+        - Die Standard-Fehlermeldung überschreiben.
+    message:
+        - Meldung
+        - Die Fehlermeldung, die angezeigt wird, wenn diese Validierungsregel nicht erfüllt ist.
+    types:
+        basic: Allgemein
+        string: Zeichenkette
+        comparison: Vergleich
+        number: Zahl
+        notBlank: Nicht leer
+        regex: Regex
+        divisibleBy: Teilbar durch
+        equalTo: Gleich
+        greaterThan: Größer als
+        greaterThanOrEqual: Größer als oder gleich
+        lessThan: Kleiner als
+        lessThanOrEqual: Kleiner als oder gleich
+        notEqualTo: Ungleich
+        range: Bereich
+        negative: Negativ
+        negativeOrZero: Negativ oder null
+        positive: Positiv
+        positiveOrZero: Positiv oder null

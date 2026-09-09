@@ -1,0 +1,23 @@
+tl_oneup_form:
+    title_legend: Form settings
+    redirect_legend: Redirect settings
+    submission_legend: Submission settings
+    multistep_legend: Multistep settings
+    submissions:
+        - Submissions
+        - Show all submitted form data for form %s.
+    name:
+        - Name
+        - Internal name for this form, will not be shown in the frontend.
+    jumpTo:
+        - Redirect page
+        - Please choose the page to which visitors will be redirected after submitting the form.
+    storeSubmissions:
+        - Store submission
+        - Please choose if you want to store the data of all form submissions.
+    submissionExpression:
+        - Expression
+        - Expression-Syntax, use <code>data</code> to access the underlying object.
+    isMultistep:
+        - Multistep Form
+        - Choose if this form is a multistep.

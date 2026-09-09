@@ -9,6 +9,7 @@ use Symfony\Component\Form\Flow\Type\NavigatorFlowType;
 use Symfony\Component\Form\Flow\Type\NextFlowType;
 use Symfony\Component\Form\Flow\Type\PreviousFlowType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContaoNavigatorType extends NavigatorFlowType
@@ -22,21 +23,23 @@ class ContaoNavigatorType extends NavigatorFlowType
     {
         $builder
             ->add('previous', PreviousFlowType::class, [
-                'label' => $this->translate('oneupFormPrevious', 'Back'),
+                'label' => $this->translator->trans('form.previous'),
             ])
             ->add('next', NextFlowType::class, [
-                'label' => $this->translate('oneupFormNext', 'Continue'),
+                'label' => $this->translator->trans('form.next'),
             ])
-            ->add('finish', FinishFlowType::class, [
-                'label' => $this->translate('oneupFormFinish', 'Submit'),
+            ->add('submit', FinishFlowType::class, [
+                'label' => $this->translator->trans('form.submit'),
             ])
         ;
     }
 
-    private function translate(string $key, string $fallback): string
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $label = $this->translator->trans('MSC.' . $key, [], 'contao_default');
+        parent::configureOptions($resolver);
 
-        return 'MSC.' . $key === $label ? $fallback : $label;
+        $resolver->setDefaults([
+            'translation_domain' => 'oneup_form_bundle',
+        ]);
     }
 }

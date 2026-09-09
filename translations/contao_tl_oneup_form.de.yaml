@@ -1,0 +1,23 @@
+tl_oneup_form:
+    title_legend: Formular-Einstellungen
+    redirect_legend: Weiterleitungs-Einstellungen
+    submission_legend: Einreichungs-Einstellungen
+    multistep_legend: Multistep-Einstellungen
+    submissions:
+        - Einreichungen
+        - Alle übermittelten Formulardaten des Formulars %s anzeigen.
+    name:
+        - Name
+        - Interner Name für dieses Formular, wird im Frontend nicht angezeigt.
+    jumpTo:
+        - Weiterleitungsseite
+        - Bitte wählen Sie die Seite, zu der Besucher nach dem Absenden des Formulars weitergeleitet werden.
+    storeSubmissions:
+        - Einreichungen speichern
+        - Bitte wählen Sie, ob die Daten aller Formular-Einreichungen gespeichert werden sollen.
+    submissionExpression:
+        - Expression
+        - Expression-Syntax, verwenden Sie <code>data</code>, um auf das zugrunde liegende Objekt zuzugreifen.
+    isMultistep:
+        - Mehrstufiges Formular
+        - Wählen Sie, ob dieses Formular mehrstufig ist.
