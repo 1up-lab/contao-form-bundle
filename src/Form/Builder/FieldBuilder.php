@@ -9,6 +9,7 @@ use Oneup\ContaoFormBundle\Form\Registry\FieldRegistry;
 use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 class FieldBuilder
 {
@@ -47,6 +48,12 @@ class FieldBuilder
 
             $builder->add($model->alias, $formType->getFormType(), $options);
 
+            $data = $formType->resolveData($model);
+
+            if (null !== $data) {
+                $builder->get($model->alias)->setData($data);
+            }
+
             if ($formType->isNestable()) {
                 $nestedBuilder = $builder->get($model->alias);
 
@@ -74,7 +81,11 @@ class FieldBuilder
                 continue;
             }
 
-            $constraints[] = new ($constraintType->getConstraintType())($constraintType->resolveOptions($model));
+            try {
+                $constraints[] = new ($constraintType->getConstraintType())(...$constraintType->resolveOptions($model));
+            } catch (ValidatorException) {
+                continue;
+            }
         }
 
         return $constraints;

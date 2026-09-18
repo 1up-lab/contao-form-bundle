@@ -15,8 +15,16 @@ class Url extends AbstractField implements FieldInterface
 {
     public function resolveOptions(FieldModel $model): array
     {
-        return [
+        $options = [
+            ...parent::resolveOptions($model),
+            'trim' => $model->trim,
             'default_protocol' => $model->defaultProtocol,
         ];
+
+        if ($model->placeholder) {
+            $options['attr']['placeholder'] = $model->placeholder;
+        }
+
+        return $options;
     }
 }

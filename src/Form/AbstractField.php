@@ -63,6 +63,17 @@ abstract class AbstractField
 
     public function resolveOptions(FieldModel $model): array
     {
-        return [];
+        return [
+            'required' => $model->required,
+            'label' => $model->label ?: $model->name,
+            'label_html' => $model->labelHtml,
+            'help' => $model->help,
+            'help_html' => $model->helpHtml,
+        ];
+    }
+
+    public function resolveData(FieldModel $model): mixed
+    {
+        return null;
     }
 }

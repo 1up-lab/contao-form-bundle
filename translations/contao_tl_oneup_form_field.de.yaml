@@ -5,6 +5,7 @@ tl_oneup_form_field:
     expert_legend: Experten-Einstellungen
     publish_legend: Veröffentlichung
     config_legend: Konfiguration
+    options_legend: Optionen
     type:
         - Typ
         - Bitte wählen Sie einen Typ.
@@ -38,6 +39,27 @@ tl_oneup_form_field:
     defaultProtocol:
         - Standard-Protokoll
         - Wenn die URL kein Schema enthält, wird dieses Protokoll verwendet.
+    value:
+        - Wert
+        - Der Wert, der übermittelt wird, wenn dieses Feld aktiviert ist.
+    options:
+        - Optionen
+        - Hier die auswählbaren Optionen eintragen. Bleibt der Wert leer, wird stattdessen das Label übermittelt. Eine als Gruppe markierte Zeile beginnt eine neue Optionsgruppe.
+    expanded:
+        - Ausgeklappt
+        - Die Optionen als Radio-Buttons oder Checkboxen statt als Auswahlmenü ausgeben.
+    multiple:
+        - Mehrfachauswahl
+        - Die Auswahl mehrerer Optionen erlauben.
+    preferredChoices:
+        - Bevorzugte Optionen
+        - Diese Einträge werden am Anfang der Liste ausgegeben, in der hier gewählten Reihenfolge. Sie werden in der Backend-Sprache angezeigt, aber unabhängig davon gespeichert.
+    duplicatePreferredChoices:
+        - Bevorzugte Optionen wiederholen
+        - Die bevorzugten Einträge zusätzlich in der vollständigen Liste darunter belassen, statt sie nur am Anfang auszugeben.
+    alpha3:
+        - Dreibuchstabige Codes verwenden
+        - ISO-3166-1-Alpha-3-Codes statt der zweibuchstabigen Codes übermitteln.
     html5:
         - Format prüfen
         - Wenn aktiviert, muss der Wert dem HTML5-Farbformat entsprechen.

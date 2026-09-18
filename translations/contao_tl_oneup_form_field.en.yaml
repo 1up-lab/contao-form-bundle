@@ -5,6 +5,7 @@ tl_oneup_form_field:
     expert_legend: Expert settings
     publish_legend: Publish settings
     config_legend: Configuration
+    options_legend: Options
     type:
         - Type
         - Please select a type.
@@ -38,6 +39,27 @@ tl_oneup_form_field:
     defaultProtocol:
         - Default Protocol
         - If no scheme is added to the url, use this protocol.
+    value:
+        - Value
+        - The value that is submitted when this field is checked.
+    options:
+        - Options
+        - Enter the selectable options here. Leave the value empty to submit the label instead. Mark a row as a group to start a new option group.
+    expanded:
+        - Expanded
+        - Render the options as radio buttons or checkboxes instead of a drop-down menu.
+    multiple:
+        - Multiple
+        - Allow selecting more than one option.
+    preferredChoices:
+        - Preferred choices
+        - These entries are shown at the top of the list, in the order selected here. They are listed in the backend language, but stored independently of it.
+    duplicatePreferredChoices:
+        - Repeat preferred choices
+        - Also keep the preferred entries in the full list below, instead of showing them only at the top.
+    alpha3:
+        - Use three-letter codes
+        - Submit ISO 3166-1 alpha-3 codes instead of the two-letter ones.
     html5:
         - Check format
         - If set, the value must match the HTML5 color format.

@@ -68,11 +68,20 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         'checkbox' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},label,labelHtml;
+            {help_legend},help,helpHtml;
+            {config_legend},value;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'choice' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {options_legend},options;
+            {config_legend},expanded,multiple;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'color' => '
@@ -82,11 +91,21 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         'country' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {options_legend},preferredChoices,duplicatePreferredChoices;
+            {config_legend},expanded,multiple,alpha3;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'currency' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {options_legend},preferredChoices,duplicatePreferredChoices;
+            {config_legend},expanded,multiple;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'dateInterval' => '
@@ -125,7 +144,12 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         'language' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {options_legend},preferredChoices,duplicatePreferredChoices;
+            {config_legend},expanded,multiple,alpha3;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'money' => '
@@ -145,7 +169,11 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         'radio' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},label,labelHtml;
+            {help_legend},help,helpHtml;
+            {config_legend},value;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'range' => '
@@ -199,7 +227,12 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         'timezone' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {options_legend},preferredChoices,duplicatePreferredChoices;
+            {config_legend},expanded,multiple;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'url' => '
@@ -389,6 +422,82 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'sql' => [
                 'type' => Types::STRING,
                 'default' => 'https://',
+            ],
+        ],
+        'value' => [
+            'inputType' => 'text',
+            'eval' => [
+                'mandatory' => false,
+                'maxlength' => 255,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
+            ],
+        ],
+        'options' => [
+            'inputType' => 'optionWizard',
+            'eval' => [
+                'mandatory' => true,
+                'allowHtml' => true,
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BLOB,
+                'notnull' => false,
+            ],
+        ],
+        'preferredChoices' => [
+            'inputType' => 'select',
+            'eval' => [
+                'multiple' => true,
+                'chosen' => true,
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BLOB,
+                'notnull' => false,
+            ],
+        ],
+        'duplicatePreferredChoices' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50 clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => true,
+            ],
+        ],
+        'expanded' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50 clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'multiple' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'alpha3' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
             ],
         ],
         'html5' => [

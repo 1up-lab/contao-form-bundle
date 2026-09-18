@@ -16,6 +16,7 @@ class Color extends AbstractField implements FieldInterface
     public function resolveOptions(FieldModel $model): array
     {
         return [
+            ...parent::resolveOptions($model),
             'html5' => $model->html5,
         ];
     }

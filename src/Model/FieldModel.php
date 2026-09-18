@@ -24,10 +24,17 @@ use Contao\Model\Collection;
  * @property bool $trim
  * @property bool $required
  * @property string $defaultProtocol
+ * @property string $value
+ * @property string $options
+ * @property bool $expanded
+ * @property bool $multiple
+ * @property bool $alpha3
+ * @property string $preferredChoices
+ * @property bool $duplicatePreferredChoices
  * @property bool $html5
  * @property bool $published
  *
- * @method static Collection<FieldModel>|null findBy($col, $val, array $opt = array())
+ * @method static Collection<FieldModel>|null findBy($col, $val, array $opt = [])
  */
 class FieldModel extends Model
 {

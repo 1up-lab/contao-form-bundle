@@ -7,32 +7,19 @@ namespace Oneup\ContaoFormBundle\Form\Field;
 use Oneup\ContaoFormBundle\Attribute\AsField;
 use Oneup\ContaoFormBundle\Form\AbstractField;
 use Oneup\ContaoFormBundle\Form\FieldInterface;
-use Oneup\ContaoFormBundle\Model\FieldModel;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\LanguageType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\WeekType;
 
-#[AsField(name: 'choice', formType: ChoiceType::class)]
-#[AsField(name: 'checkbox', formType: CheckboxType::class)]
-#[AsField(name: 'country', formType: CountryType::class)]
-#[AsField(name: 'language', formType: LanguageType::class)]
-#[AsField(name: 'radio', formType: RadioType::class)]
-class Choice extends AbstractField implements FieldInterface
+#[AsField(name: 'birthday', formType: BirthdayType::class)]
+#[AsField(name: 'dateInterval', formType: DateIntervalType::class)]
+#[AsField(name: 'dateTime', formType: DateTimeType::class)]
+#[AsField(name: 'date', formType: DateType::class)]
+#[AsField(name: 'time', formType: TimeType::class)]
+#[AsField(name: 'week', formType: WeekType::class)]
+class Date extends AbstractField implements FieldInterface
 {
-    public function resolveOptions(FieldModel $model): array
-    {
-        return [
-            'required' => $model->required,
-            'label' => $model->label ?: $model->name,
-            'label_html' => $model->labelHtml,
-            'help' => $model->help,
-            'help_html' => $model->helpHtml,
-            'trim' => $model->trim,
-            'attr' => [
-                'placeholder' => $model->placeholder,
-            ],
-        ];
-    }
 }
