@@ -20,7 +20,9 @@ parameters:
         -
             message: '#Cannot call method load\(\) on Symfony\\Component\\Config\\Loader\\LoaderInterface\|false#'
             path: %currentWorkingDirectory%/src/ContaoManager/Plugin.php
-
         -
             message: '#Method Oneup\\ContaoBackendSortableListViewsBundle\\ContaoManager\\Plugin::getRouteCollection\(\) should return Symfony\\Component\\Routing\\RouteCollection\|null but returns mixed#'
             path: %currentWorkingDirectory%/src/ContaoManager/Plugin.php
+        -
+            message: '#Cannot cast mixed to .*\.#'
+            path: %currentWorkingDirectory%/src
