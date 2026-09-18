@@ -39,9 +39,12 @@ tl_oneup_form_field:
     defaultProtocol:
         - Standard-Protokoll
         - Wenn die URL kein Schema enthält, wird dieses Protokoll verwendet.
+    checked:
+        - Aktiviert
+        - Wenn gesetzt, ist das Feld beim ersten Aufruf des Formulars aktiviert.
     value:
         - Wert
-        - Der Wert, der übermittelt wird, wenn dieses Feld aktiviert ist.
+        - Der Wert, der mit dem Formular übermittelt wird.
     options:
         - Optionen
         - Hier die auswählbaren Optionen eintragen. Bleibt der Wert leer, wird stattdessen das Label übermittelt. Eine als Gruppe markierte Zeile beginnt eine neue Optionsgruppe.
@@ -61,8 +64,8 @@ tl_oneup_form_field:
         - Dreibuchstabige Codes verwenden
         - ISO-3166-1-Alpha-3-Codes statt der zweibuchstabigen Codes übermitteln.
     html5:
-        - Format prüfen
-        - Wenn aktiviert, muss der Wert dem HTML5-Farbformat entsprechen.
+        - HTML5-Eingabefeld
+        - Wenn aktiviert, wird das Feld als natives HTML5-Eingabefeld ausgegeben und der Wert muss dessen Format entsprechen.
     published:
         - Veröffentlicht
         - Dieses Feld im Frontend ausgeben.

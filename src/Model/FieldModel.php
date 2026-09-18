@@ -31,6 +31,7 @@ use Contao\Model\Collection;
  * @property bool $alpha3
  * @property string $preferredChoices
  * @property bool $duplicatePreferredChoices
+ * @property bool $checked
  * @property bool $html5
  * @property bool $published
  *

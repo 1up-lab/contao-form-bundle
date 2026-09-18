@@ -39,9 +39,12 @@ tl_oneup_form_field:
     defaultProtocol:
         - Default Protocol
         - If no scheme is added to the url, use this protocol.
+    checked:
+        - Checked
+        - If set, the field is checked when the form is first shown.
     value:
         - Value
-        - The value that is submitted when this field is checked.
+        - The value that is submitted with the form.
     options:
         - Options
         - Enter the selectable options here. Leave the value empty to submit the label instead. Mark a row as a group to start a new option group.
@@ -61,8 +64,8 @@ tl_oneup_form_field:
         - Use three-letter codes
         - Submit ISO 3166-1 alpha-3 codes instead of the two-letter ones.
     html5:
-        - Check format
-        - If set, the value must match the HTML5 color format.
+        - HTML5 input
+        - If set, the field is rendered as a native HTML5 input and the value has to match its format.
     published:
         - Published
         - Output this field to the frontend.

@@ -71,7 +71,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {title_legend},name,type,alias;
             {label_legend},label,labelHtml;
             {help_legend},help,helpHtml;
-            {config_legend},value;
+            {config_legend},checked;
             {expert_legend},required;
             {publish_legend},published;
         ',
@@ -137,10 +137,14 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
         ',
         'hidden' => '
             {title_legend},name,type;
+            {config_legend},value;
             {publish_legend},published;
         ',
         'integer' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'language' => '
@@ -157,7 +161,11 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         'number' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {config_legend},html5;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'password' => '
@@ -165,14 +173,18 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {publish_legend},published;
         ',
         'percent' => '
-            {title_legend},name,type;
+            {title_legend},name,type,alias;
+            {label_legend},placeholder,label,labelHtml;
+            {help_legend},help,helpHtml;
+            {config_legend},html5;
+            {expert_legend},required;
             {publish_legend},published;
         ',
         'radio' => '
             {title_legend},name,type,alias;
             {label_legend},label,labelHtml;
             {help_legend},help,helpHtml;
-            {config_legend},value;
+            {config_legend},checked;
             {expert_legend},required;
             {publish_legend},published;
         ',
@@ -422,6 +434,16 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'sql' => [
                 'type' => Types::STRING,
                 'default' => 'https://',
+            ],
+        ],
+        'checked' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
             ],
         ],
         'value' => [

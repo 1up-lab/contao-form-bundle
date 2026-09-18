@@ -22,4 +22,9 @@ class Checkbox extends AbstractField implements FieldInterface
             'value' => $model->value ?: '1',
         ];
     }
+
+    public function resolveData(FieldModel $model): mixed
+    {
+        return $model->checked ? true : null;
+    }
 }
