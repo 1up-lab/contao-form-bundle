@@ -45,44 +45,92 @@ $GLOBALS['TL_DCA']['tl_oneup_form_constraint'] = [
         '__selector__' => ['type', 'overwriteMessage'],
         'default' => 'type',
 
+        'blank' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
         'notBlank' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'isTrue' => '
             {title_legend},type;
             {message_legend},overwriteMessage;
         ',
         'regex' => '
             {title_legend},type;
+            {option_legend},pattern,matchPattern;
+            {message_legend},overwriteMessage;
+        ',
+        'cssColor' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'email' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'length' => '
+            {title_legend},type;
+            {option_legend},min,max;
+            {message_legend},overwriteMessage;
+        ',
+        'noSuspiciousCharacters' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'passwordStrength' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'url' => '
+            {title_legend},type;
+            {option_legend},requireTopLevelDomain;
+            {message_legend},overwriteMessage;
+        ',
+        'wordCount' => '
+            {title_legend},type;
+            {option_legend},min,max;
             {message_legend},overwriteMessage;
         ',
         'divisibleBy' => '
             {title_legend},type;
+            {option_legend},value;
             {message_legend},overwriteMessage;
         ',
         'equalTo' => '
             {title_legend},type;
+            {option_legend},value;
             {message_legend},overwriteMessage;
         ',
         'greaterThan' => '
             {title_legend},type;
+            {option_legend},value;
             {message_legend},overwriteMessage;
         ',
         'greaterThanOrEqual' => '
             {title_legend},type;
+            {option_legend},value;
             {message_legend},overwriteMessage;
         ',
         'lessThan' => '
             {title_legend},type;
+            {option_legend},value;
             {message_legend},overwriteMessage;
         ',
         'lessThanOrEqual' => '
             {title_legend},type;
+            {option_legend},value;
             {message_legend},overwriteMessage;
         ',
         'notEqualTo' => '
             {title_legend},type;
+            {option_legend},value;
             {message_legend},overwriteMessage;
         ',
         'range' => '
             {title_legend},type;
+            {option_legend},min,max;
             {message_legend},overwriteMessage;
         ',
         'negative' => '
@@ -99,6 +147,32 @@ $GLOBALS['TL_DCA']['tl_oneup_form_constraint'] = [
         ',
         'positiveOrZero' => '
             {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'date' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'dateTime' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'time' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'country' => '
+            {title_legend},type;
+            {message_legend},overwriteMessage;
+        ',
+        'file' => '
+            {title_legend},type;
+            {option_legend},maxSize,extensions;
+            {message_legend},overwriteMessage;
+        ',
+        'image' => '
+            {title_legend},type;
+            {option_legend},maxSize,extensions,minWidth,maxWidth,minHeight,maxHeight;
             {message_legend},overwriteMessage;
         ',
     ],
@@ -174,6 +248,137 @@ $GLOBALS['TL_DCA']['tl_oneup_form_constraint'] = [
             'sql' => [
                 'type' => Types::STRING,
                 'default' => '',
+            ],
+        ],
+        'value' => [
+            'inputType' => 'text',
+            'eval' => [
+                'mandatory' => true,
+                'maxlength' => 255,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
+            ],
+        ],
+        'min' => [
+            'inputType' => 'text',
+            'eval' => [
+                'rgxp' => 'digit',
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::INTEGER,
+                'notnull' => false,
+            ],
+        ],
+        'max' => [
+            'inputType' => 'text',
+            'eval' => [
+                'rgxp' => 'digit',
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::INTEGER,
+                'notnull' => false,
+            ],
+        ],
+        'pattern' => [
+            'inputType' => 'text',
+            'eval' => [
+                'mandatory' => true,
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
+            ],
+        ],
+        'matchPattern' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => true,
+            ],
+        ],
+        'requireTopLevelDomain' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => true,
+            ],
+        ],
+        'maxSize' => [
+            'inputType' => 'text',
+            'eval' => [
+                'maxlength' => 16,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
+            ],
+        ],
+        'extensions' => [
+            'inputType' => 'text',
+            'eval' => [
+                'maxlength' => 255,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
+            ],
+        ],
+        'minWidth' => [
+            'inputType' => 'text',
+            'eval' => [
+                'rgxp' => 'natural',
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::INTEGER,
+                'notnull' => false,
+            ],
+        ],
+        'maxWidth' => [
+            'inputType' => 'text',
+            'eval' => [
+                'rgxp' => 'natural',
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::INTEGER,
+                'notnull' => false,
+            ],
+        ],
+        'minHeight' => [
+            'inputType' => 'text',
+            'eval' => [
+                'rgxp' => 'natural',
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::INTEGER,
+                'notnull' => false,
+            ],
+        ],
+        'maxHeight' => [
+            'inputType' => 'text',
+            'eval' => [
+                'rgxp' => 'natural',
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::INTEGER,
+                'notnull' => false,
             ],
         ],
     ],

@@ -10,6 +10,7 @@ abstract class AbstractConstraint
 {
     protected string $name;
     protected string $constraintType;
+    protected array $messageOptions = ['message'];
 
     public function getName(): string
     {
@@ -37,10 +38,8 @@ abstract class AbstractConstraint
 
     public function resolveOptions(ConstraintModel $model): array
     {
-        if ($model->message) {
-            return [
-                'message' => $model->message,
-            ];
+        if ($model->overwriteMessage && $model->message) {
+            return array_fill_keys($this->messageOptions, $model->message);
         }
 
         return [];

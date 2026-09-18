@@ -1,5 +1,6 @@
 tl_oneup_form_constraint:
     title_legend: Validierungsregel
+    option_legend: Optionen
     message_legend: Fehlermeldung
     type:
         - Typ
@@ -10,13 +11,57 @@ tl_oneup_form_constraint:
     message:
         - Meldung
         - Die Fehlermeldung, die angezeigt wird, wenn diese Validierungsregel nicht erfüllt ist.
+    value:
+        - Wert
+        - Der Wert, mit dem die Eingabe verglichen wird.
+    min:
+        - Minimum
+        - Leer lassen, um nur das Maximum zu prüfen.
+    max:
+        - Maximum
+        - Leer lassen, um nur das Minimum zu prüfen.
+    pattern:
+        - Muster
+        - Der reguläre Ausdruck inklusive Trennzeichen, z. B. /^[a-z]+$/.
+    matchPattern:
+        - Eingabe muss dem Muster entsprechen
+        - Deaktivieren, um zu verlangen, dass die Eingabe dem Muster nicht entspricht.
+    requireTopLevelDomain:
+        - Top-Level-Domain verlangen
+        - Deaktivieren, um auch URLs wie https://localhost zu akzeptieren.
+    maxSize:
+        - Maximale Dateigröße
+        - z. B. 2M oder 500k. Leer lassen, um das PHP-Upload-Limit zu verwenden.
+    extensions:
+        - Erlaubte Dateiendungen
+        - Kommagetrennte Liste von Dateiendungen, z. B. pdf, docx.
+    minWidth:
+        - Minimale Breite
+        - Die minimale Bildbreite in Pixeln.
+    maxWidth:
+        - Maximale Breite
+        - Die maximale Bildbreite in Pixeln.
+    minHeight:
+        - Minimale Höhe
+        - Die minimale Bildhöhe in Pixeln.
+    maxHeight:
+        - Maximale Höhe
+        - Die maximale Bildhöhe in Pixeln.
     types:
         basic: Allgemein
-        string: Zeichenkette
-        comparison: Vergleich
-        number: Zahl
+        blank: Leer
         notBlank: Nicht leer
+        isTrue: Ist wahr
+        string: Zeichenkette
         regex: Regex
+        cssColor: CSS-Farbe
+        email: E-Mail
+        length: Länge
+        noSuspiciousCharacters: Keine verdächtigen Zeichen
+        passwordStrength: Passwortstärke
+        url: URL
+        wordCount: Wortanzahl
+        comparison: Vergleich
         divisibleBy: Teilbar durch
         equalTo: Gleich
         greaterThan: Größer als
@@ -24,8 +69,16 @@ tl_oneup_form_constraint:
         lessThan: Kleiner als
         lessThanOrEqual: Kleiner als oder gleich
         notEqualTo: Ungleich
+        number: Zahl
         range: Bereich
         negative: Negativ
         negativeOrZero: Negativ oder null
         positive: Positiv
         positiveOrZero: Positiv oder null
+        date: Datum
+        dateTime: Datum und Uhrzeit
+        time: Uhrzeit
+        choice: Auswahl
+        country: Land
+        file: Datei
+        image: Bild

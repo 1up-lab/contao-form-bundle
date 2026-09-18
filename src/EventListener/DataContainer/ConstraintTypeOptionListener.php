@@ -13,10 +13,19 @@ class ConstraintTypeOptionListener
     {
         return [
             'basic' => [
+                'blank',
                 'notBlank',
+                'isTrue',
             ],
             'string' => [
                 'regex',
+                'cssColor',
+                'email',
+                'length',
+                'noSuspiciousCharacters',
+                'passwordStrength',
+                'url',
+                'wordCount',
             ],
             'comparison' => [
                 'divisibleBy',
@@ -33,6 +42,18 @@ class ConstraintTypeOptionListener
                 'negativeOrZero',
                 'positive',
                 'positiveOrZero',
+            ],
+            'date' => [
+                'date',
+                'dateTime',
+                'time',
+            ],
+            'choice' => [
+                'country',
+            ],
+            'file' => [
+                'file',
+                'image',
             ],
         ];
     }
