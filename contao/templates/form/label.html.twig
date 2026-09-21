@@ -1,0 +1,42 @@
+{#
+    This component outputs the label of a field, including the indicator that
+    marks the field as mandatory. Setting "label" to false hides it entirely.
+
+        <label for="ctrl_1" class="form-label form-label--required">
+          Email<span class="form-label__required" aria-hidden="true">*</span>
+        </label>
+
+    If no label was set, the name of the field is humanized and used instead.
+
+    Mandatory variables:
+        @var string name
+        @var bool required
+
+    Optional variables:
+        @var string id
+        @var string|false label
+        @var string|false translation_domain
+        @var array label_attr
+        @var \Contao\CoreBundle\String\HtmlAttributes label_attributes
+#}
+
+{% if label is not same as(false) %}
+    {%- set label = label is empty ? name|humanize : label -%}
+
+    {% set label_attributes = attrs()
+        .setIfExists('for', id|default)
+        .addClass('form-label')
+        .addClass('form-label--required', required)
+        .mergeWith(label_attr|default)
+        .mergeWith(label_attributes|default)
+    %}
+
+    <label{% block label_attributes %}{{ label_attributes }}{% endblock %}>
+        {%- block label_text -%}
+            {{ translation_domain is same as(false) ? label : label|trans(label_translation_parameters|default({}), translation_domain) }}
+        {%- endblock -%}
+        {%- block label_required -%}
+            {% if required %}<span class="form-label__required" aria-hidden="true">*</span>{% endif %}
+        {%- endblock -%}
+    </label>
+{% endif %}

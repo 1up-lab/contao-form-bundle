@@ -1,0 +1,84 @@
+{#
+    This component outputs a select element, including its option groups, its
+    preferred options and the empty option that Symfony adds to fields that are
+    not required.
+
+        <select id="ctrl_1" name="country">
+          <option value="">-</option>
+          <optgroup label="Europe">
+            <option value="DE">Germany</option>
+          </optgroup>
+        </select>
+
+    A single select without an empty option always submits a value, so the
+    required attribute is dropped in that case.
+
+    Mandatory variables:
+        @var string id
+        @var string full_name
+        @var bool required
+        @var array choices
+
+    Optional variables:
+        @var array preferred_choices
+        @var string placeholder
+        @var bool multiple
+        @var string separator
+        @var array attr
+        @var \Contao\CoreBundle\String\HtmlAttributes select_attributes
+#}
+
+{% macro options(choices, value, choice_translation_domain, selectable) %}
+    {%- for group_label, choice in choices -%}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}">
+                {#- -#}
+                {{- _self.options(choice, value, choice_translation_domain, selectable) -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if selectable and choice is selectedchoice(value) %} selected{% endif %}{% if choice.attr|default({}) is not empty %}{{ attrs(choice.attr) }}{% endif %}>
+                {{- choice_translation_domain is same as(false) ? choice.label : choice.label|trans(choice.labelTranslationParameters|default({}), choice_translation_domain) -}}
+            </option>
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}
+
+{# A single select without an empty option always has a value, so "required" is dropped #}
+{% set is_required = required
+    and (placeholder is not defined or placeholder is none)
+    and not placeholder_in_choices|default(false)
+    and not multiple|default(false)
+    and (attr.size is not defined or attr.size <= 1)
+    ? false : required
+%}
+
+{% set select_attributes = attrs()
+    .set('id', id)
+    .set('name', full_name)
+    .set('required', is_required)
+    .set('disabled', disabled|default(false))
+    .set('multiple', multiple|default(false))
+    .mergeWith(attr|default)
+    .mergeWith(select_attributes|default)
+%}
+
+<select{% block select_attributes %}{{ select_attributes }}{% endblock %}>
+    {%- block select_placeholder -%}
+        {%- if placeholder is defined and placeholder is not none -%}
+            <option value=""{% if is_required and value is empty %} selected{% endif %}>
+                {{- placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) -}}
+            </option>
+        {%- endif -%}
+    {%- endblock -%}
+
+    {%- block select_preferred -%}
+        {%- if preferred_choices|default([])|length > 0 -%}
+            {{- _self.options(preferred_choices, value, choice_translation_domain|default(null), not (duplicate_preferred_choices is defined ? duplicate_preferred_choices : true)) -}}
+            {% if separator is defined and separator is not none %}<option disabled>{{ separator }}</option>{% endif %}
+        {%- endif -%}
+    {%- endblock -%}
+
+    {%- block select_options -%}
+        {{- _self.options(choices, value, choice_translation_domain|default(null), true) -}}
+    {%- endblock -%}
+</select>

@@ -1,0 +1,32 @@
+{#
+    This component outputs the help text of a field. The id is the one that
+    Symfony references from the aria-describedby attribute of the field, so it
+    must not be changed on its own.
+
+        <p id="ctrl_1_help" class="form-help">As printed on your passport</p>
+
+    Setting "help_html" to true will output the help text raw and therefore
+    needs to be trusted.
+
+    Mandatory variables:
+        @var string id
+
+    Optional variables:
+        @var string help
+        @var bool help_html
+        @var array help_attr
+        @var \Contao\CoreBundle\String\HtmlAttributes help_attributes
+#}
+
+{% if help is not empty %}
+    {% set help_attributes = attrs()
+        .set('id', "#{id}_help")
+        .addClass('form-help')
+        .mergeWith(help_attr|default)
+        .mergeWith(help_attributes|default)
+    %}
+
+    <p{% block help_attributes %}{{ help_attributes }}{% endblock %}>
+        {%- block help_text %}{{ help_html|default(false) ? help|raw : help }}{% endblock -%}
+    </p>
+{% endif %}

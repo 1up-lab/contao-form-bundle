@@ -1,0 +1,41 @@
+{#
+    This component outputs a date interval as one labelled control per unit.
+    Which units exist depends on the "with_years", "with_months" and further
+    options of the field.
+
+        <div class="form-row__interval">
+          <span><select id="ctrl_1_years" …>…</select> <label …>years</label></span>
+        </div>
+
+    The "form" variable holds one child per enabled unit, plus an "invert"
+    child if the field allows negative intervals.
+
+    Mandatory variables:
+        @var string id
+        @var \Symfony\Component\Form\FormView form
+
+    Optional variables:
+        @var \Contao\CoreBundle\String\HtmlAttributes interval_attributes
+#}
+
+{% set interval_attributes = attrs()
+    .set('id', id)
+    .addClass('form-row__interval')
+    .mergeWith(interval_attributes|default)
+%}
+
+<div{% block interval_attributes %}{{ interval_attributes }}{% endblock %}>
+    {%- for unit in ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'] -%}
+        {% if form[unit] is defined %}
+            {%- block interval_unit -%}
+                <span>{{ form_widget(form[unit]) }} {{ form_label(form[unit]) }}</span>
+            {%- endblock -%}
+        {% endif %}
+    {%- endfor -%}
+
+    {%- if form.invert is defined -%}
+        {%- block interval_invert -%}
+            <span>{{ form_widget(form.invert) }} {{ form_label(form.invert) }}</span>
+        {%- endblock -%}
+    {%- endif -%}
+</div>

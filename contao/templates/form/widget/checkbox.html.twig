@@ -1,0 +1,35 @@
+{#
+    This component outputs a single checkbox. The radio template extends this
+    one and only changes the "checkbox_type" block.
+
+        <input type="checkbox" id="ctrl_1" name="terms" value="1" checked>
+
+    Mandatory variables:
+        @var string id
+        @var string full_name
+        @var bool required
+        @var bool checked
+
+    Optional variables:
+        @var string value
+        @var array attr
+        @var \Contao\CoreBundle\String\HtmlAttributes checkbox_attributes
+#}
+
+{% set checkbox_type %}{% block checkbox_type %}checkbox{% endblock %}{% endset %}
+
+{% set checkbox_attributes = attrs()
+    .set('type', checkbox_type)
+    .set('id', id)
+    .set('name', full_name)
+    .set('required', required)
+    .set('disabled', disabled|default(false))
+    .set('checked', checked|default(false))
+    .setIfExists('value', value|default)
+    .mergeWith(attr|default)
+    .mergeWith(checkbox_attributes|default)
+%}
+
+{%- block checkbox_before %}{% endblock -%}
+<input{% block checkbox_attributes %}{{ checkbox_attributes }}{% endblock %}>
+{%- block checkbox_after %}{% endblock -%}

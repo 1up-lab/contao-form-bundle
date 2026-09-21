@@ -1,0 +1,17 @@
+{#
+    This component outputs a money field, which is a plain input wrapped in the
+    currency pattern that Symfony derives from the locale and from the
+    "currency" option of the field.
+
+        € <input type="text" id="ctrl_1" name="price">
+
+    The pattern contains a "{{ widget }}" placeholder that is replaced with the
+    rendered input element.
+
+    Mandatory variables:
+        @var string money_pattern
+#}
+
+{% set input = include('@Contao/form/widget/input.html.twig', {type: 'text'}) %}
+
+{% block money_pattern %}{{ money_pattern|replace({'{{ widget }}': input})|raw }}{% endblock %}

@@ -1,0 +1,36 @@
+{#
+    This component outputs a single input element. It is the fallback for every
+    simple field type, such as text, email, tel, url, search, password, color,
+    range, week, date, time and datetime. Each of those has a template of its
+    own that extends this one and only sets the "input_type" block.
+
+        <input type="email" id="ctrl_1" name="email" value="me@example.com">
+
+    Mandatory variables:
+        @var string id
+        @var string full_name
+        @var bool required
+
+    Optional variables:
+        @var string type
+        @var string value
+        @var array attr
+        @var \Contao\CoreBundle\String\HtmlAttributes input_attributes
+#}
+
+{% set input_type %}{% block input_type %}{{ type|default('text') }}{% endblock %}{% endset %}
+
+{% set input_attributes = attrs()
+    .set('type', input_type)
+    .set('id', id)
+    .set('name', full_name)
+    .set('required', required)
+    .set('disabled', disabled|default(false))
+    .setIfExists('value', value|default)
+    .mergeWith(attr|default)
+    .mergeWith(input_attributes|default)
+%}
+
+{%- block input_before %}{% endblock -%}
+<input{% block input_attributes %}{{ input_attributes }}{% endblock %}>
+{%- block input_after %}{% endblock -%}

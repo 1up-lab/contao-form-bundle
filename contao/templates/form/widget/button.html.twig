@@ -1,0 +1,37 @@
+{#
+    This component outputs a button. The submit and reset templates extend this
+    one and only change the "button_type" block.
+
+        <button type="submit" id="ctrl_1" name="send">Send</button>
+
+    If no label was set, the name of the button is humanized and used instead.
+
+    Mandatory variables:
+        @var string id
+        @var string full_name
+        @var string name
+
+    Optional variables:
+        @var string|false label
+        @var string|false translation_domain
+        @var array attr
+        @var \Contao\CoreBundle\String\HtmlAttributes button_attributes
+#}
+
+{% set button_type %}{% block button_type %}{{ type|default('button') }}{% endblock %}{% endset %}
+
+{% set button_attributes = attrs()
+    .set('type', button_type)
+    .set('id', id)
+    .set('name', full_name)
+    .set('disabled', disabled|default(false))
+    .mergeWith(attr|default)
+    .mergeWith(button_attributes|default)
+%}
+
+<button{% block button_attributes %}{{ button_attributes }}{% endblock %}>
+    {%- block button_label -%}
+        {%- set label = label is empty ? name|humanize : label -%}
+        {{ label is same as(false) ? '' : (translation_domain is same as(false) ? label : label|trans(label_translation_parameters|default({}), translation_domain)) }}
+    {%- endblock -%}
+</button>

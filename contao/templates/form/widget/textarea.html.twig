@@ -1,0 +1,28 @@
+{#
+    This component outputs a textarea element.
+
+        <textarea id="ctrl_1" name="message">Lorem ipsum</textarea>
+
+    Mandatory variables:
+        @var string id
+        @var string full_name
+        @var bool required
+        @var string value
+
+    Optional variables:
+        @var array attr
+        @var \Contao\CoreBundle\String\HtmlAttributes textarea_attributes
+#}
+
+{% set textarea_attributes = attrs()
+    .set('id', id)
+    .set('name', full_name)
+    .set('required', required)
+    .set('disabled', disabled|default(false))
+    .mergeWith(attr|default)
+    .mergeWith(textarea_attributes|default)
+%}
+
+{%- block textarea_before %}{% endblock -%}
+<textarea{% block textarea_attributes %}{{ textarea_attributes }}{% endblock %}>{{ value }}</textarea>
+{%- block textarea_after %}{% endblock -%}

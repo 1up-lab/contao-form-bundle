@@ -1,0 +1,57 @@
+{#
+    This is the Symfony form theme of this bundle and the only template that is
+    registered via {% form_theme %}. It contains no markup of its own. Every
+    block below maps one of Symfony's block names onto one of our templates, so
+    that each part of a form can be adjusted on its own.
+
+    Symfony picks a block by walking the field's "block_prefixes" from the most
+    specific name to the least specific one, for example on an email field:
+
+        _f_email_widget  ->  email_widget  ->  text_widget  ->  form_widget
+
+    Widgets are not listed one by one. The "widget_dispatch" block derives the
+    template from the field type, so adding a type means adding the template
+    "widget/<type>.html.twig" and nothing else. A type without its own template
+    falls back to "widget/input.html.twig".
+    To change a single part, override the template it points to instead of this
+    file. Overriding "widget/email.html.twig" affects every email field,
+    overriding "row.html.twig" affects the wrapper of every field.
+#}
+
+{% use 'form_div_layout.html.twig' %}
+
+{% block field_type %}{{ block_prefixes|slice(-2, 1)|first }}{% endblock %}
+
+{% block widget_dispatch %}
+    {{- include([
+        '@Contao/form/widget/' ~ block('field_type') ~ '.html.twig',
+        '@Contao/form/widget/input.html.twig',
+    ]) -}}
+{% endblock %}
+
+{% block button_dispatch %}
+    {{- include([
+        '@Contao/form/widget/' ~ block('field_type') ~ '.html.twig',
+        '@Contao/form/widget/button.html.twig',
+    ]) -}}
+{% endblock %}
+
+{% block form_row_render %}{{ include('@Contao/form/row.html.twig') }}{% endblock %}
+{% block checkbox_row %}{{ include('@Contao/form/row_checkbox.html.twig') }}{% endblock %}
+{% block radio_row %}{{ include('@Contao/form/row_checkbox.html.twig') }}{% endblock %}
+{% block button_row %}{{ include('@Contao/form/row_button.html.twig') }}{% endblock %}
+{% block choice_row %}{{ expanded ? include('@Contao/form/row_fieldset.html.twig') : block('form_row') }}{% endblock %}
+
+{% block form_label %}{{ include('@Contao/form/label.html.twig') }}{% endblock %}
+{% block form_errors %}{{ include('@Contao/form/errors.html.twig') }}{% endblock %}
+{% block form_help %}{{ include('@Contao/form/help.html.twig') }}{% endblock %}
+
+{% block form_widget_simple %}{{ block('widget_dispatch') }}{% endblock %}
+{% block textarea_widget %}{{ block('widget_dispatch') }}{% endblock %}
+{% block checkbox_widget %}{{ block('widget_dispatch') }}{% endblock %}
+{% block radio_widget %}{{ block('widget_dispatch') }}{% endblock %}
+{% block button_widget %}{{ block('button_dispatch') }}{% endblock %}
+{% block money_widget %}{{ include('@Contao/form/widget/money.html.twig') }}{% endblock %}
+{% block dateinterval_widget %}{{ widget == 'single_text' ? block('widget_dispatch') : include('@Contao/form/widget/dateinterval.html.twig') }}{% endblock %}
+{% block choice_widget_collapsed %}{{ include('@Contao/form/widget/select.html.twig') }}{% endblock %}
+{% block choice_widget_expanded %}{{ include('@Contao/form/widget/choice_expanded.html.twig') }}{% endblock %}

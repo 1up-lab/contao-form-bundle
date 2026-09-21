@@ -1,0 +1,38 @@
+{#
+    This component outputs the wrapper of fields that group several controls,
+    where the label becomes a legend. It is used for expanded choice fields as
+    well as for groups and steps.
+
+        <fieldset class="form-row form-row--choice">
+          <legend>Your interests</legend>
+          <div class="form-row__options">…</div>
+        </fieldset>
+
+    Mandatory variables:
+        @var \Symfony\Component\Form\FormView form
+        @var array block_prefixes
+
+    Optional variables:
+        @var string|false label
+        @var array row_attr
+        @var \Contao\CoreBundle\String\HtmlAttributes row_attributes
+#}
+
+{# The field's own type is the entry before Symfony's unique per-field prefix #}
+{% set field_type = block_prefixes|slice(-2, 1)|first|replace({_: '-'}) %}
+
+{% set row_attributes = attrs()
+    .addClass('form-row')
+    .addClass("form-row--#{field_type}")
+    .mergeWith(row_attr|default)
+    .mergeWith(row_attributes|default)
+%}
+
+<fieldset{% block row_attributes %}{{ row_attributes }}{% endblock %}>
+    {%- block row_legend -%}
+        {% if label is not same as(false) and label is not empty %}<legend>{{ label }}</legend>{% endif %}
+    {%- endblock -%}
+    {%- block row_errors %}{{ form_errors(form) }}{% endblock -%}
+    {%- block row_widget %}{{ form_widget(form) }}{% endblock -%}
+    {%- block row_help %}{{ form_help(form) }}{% endblock -%}
+</fieldset>

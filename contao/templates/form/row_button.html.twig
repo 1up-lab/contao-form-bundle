@@ -1,0 +1,30 @@
+{#
+    This component outputs the wrapper of a button. Buttons carry no label,
+    help text or errors of their own.
+
+        <div class="form-row form-row--submit">
+          <button type="submit" …>Send</button>
+        </div>
+
+    Mandatory variables:
+        @var \Symfony\Component\Form\FormView form
+        @var array block_prefixes
+
+    Optional variables:
+        @var array row_attr
+        @var \Contao\CoreBundle\String\HtmlAttributes row_attributes
+#}
+
+{# The field's own type is the entry before Symfony's unique per-field prefix #}
+{% set field_type = block_prefixes|slice(-2, 1)|first|replace({_: '-'}) %}
+
+{% set row_attributes = attrs()
+    .addClass('form-row')
+    .addClass("form-row--#{field_type}")
+    .mergeWith(row_attr|default)
+    .mergeWith(row_attributes|default)
+%}
+
+<div{% block row_attributes %}{{ row_attributes }}{% endblock %}>
+    {%- block row_widget %}{{ form_widget(form) }}{% endblock -%}
+</div>

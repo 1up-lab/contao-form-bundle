@@ -1,0 +1,26 @@
+{#
+    This component outputs the validation errors of a single field. Every item
+    carries the id that Symfony references from the aria-describedby attribute
+    of the field, so the ids must not be changed on their own.
+
+        <ul class="form-errors">
+          <li id="ctrl_1_error1">This value is not valid.</li>
+        </ul>
+
+    Mandatory variables:
+        @var string id
+        @var \Symfony\Component\Form\FormErrorIterator errors
+
+    Optional variables:
+        @var \Contao\CoreBundle\String\HtmlAttributes errors_attributes
+#}
+
+{% if errors|length > 0 %}
+    {% set errors_attributes = attrs().addClass('form-errors').mergeWith(errors_attributes|default) %}
+
+    <ul{% block errors_attributes %}{{ errors_attributes }}{% endblock %}>
+        {%- for error in errors -%}
+            <li id="{{ id }}_error{{ loop.index }}">{% block error_message %}{{ error.message }}{% endblock %}</li>
+        {%- endfor -%}
+    </ul>
+{% endif %}

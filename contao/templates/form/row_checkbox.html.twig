@@ -1,0 +1,36 @@
+{#
+    This component outputs the wrapper of a single checkbox or radio button.
+    The label follows the input instead of preceding it, so that it can be
+    clicked to toggle the control.
+
+        <div class="form-row form-row--checkbox">
+          <span><input type="checkbox" …> <label …>…</label></span>
+        </div>
+
+    Mandatory variables:
+        @var \Symfony\Component\Form\FormView form
+        @var array block_prefixes
+
+    Optional variables:
+        @var array row_attr
+        @var array widget_attr
+        @var \Contao\CoreBundle\String\HtmlAttributes row_attributes
+#}
+
+{# The field's own type is the entry before Symfony's unique per-field prefix #}
+{% set field_type = block_prefixes|slice(-2, 1)|first|replace({_: '-'}) %}
+
+{% set row_attributes = attrs()
+    .addClass('form-row')
+    .addClass("form-row--#{field_type}")
+    .mergeWith(row_attr|default)
+    .mergeWith(row_attributes|default)
+%}
+
+<div{% block row_attributes %}{{ row_attributes }}{% endblock %}>
+    {%- block row_errors %}{{ form_errors(form) }}{% endblock -%}
+    {%- block row_inner -%}
+        <span>{{ form_widget(form, widget_attr|default({})) }} {{ form_label(form) }}</span>
+    {%- endblock -%}
+    {%- block row_help %}{{ form_help(form) }}{% endblock -%}
+</div>

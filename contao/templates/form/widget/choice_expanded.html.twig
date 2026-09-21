@@ -1,0 +1,29 @@
+{#
+    This component outputs the options of an expanded choice field, which are
+    the radio buttons or checkboxes that are rendered inside the fieldset of
+    "row_fieldset.html.twig".
+
+        <div class="form-row__options">
+          <span><input type="checkbox" …> <label …>Option A</label></span>
+        </div>
+
+    Iterating over "form" yields one child per option, each of which is a
+    checkbox or a radio button depending on the "multiple" option.
+
+    Mandatory variables:
+        @var \Symfony\Component\Form\FormView form
+
+    Optional variables:
+        @var string|false choice_translation_domain
+        @var \Contao\CoreBundle\String\HtmlAttributes options_attributes
+#}
+
+{% set options_attributes = attrs().addClass('form-row__options').mergeWith(options_attributes|default) %}
+
+<div{% block options_attributes %}{{ options_attributes }}{% endblock %}>
+    {%- for child in form -%}
+        {%- block option -%}
+            <span>{{ form_widget(child) }} {{ form_label(child, null, {translation_domain: choice_translation_domain|default(null)}) }}</span>
+        {%- endblock -%}
+    {%- endfor -%}
+</div>
