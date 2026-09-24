@@ -53,6 +53,10 @@ class SendViaEmailListener
             $email->from($from);
         }
 
+        if ($formModel->mailerTransport) {
+            $email->getHeaders()->addTextHeader('X-Transport', $formModel->mailerTransport);
+        }
+
         $this->mailer->send($email);
     }
 

@@ -15,6 +15,7 @@ use Contao\Model;
  * @property int $jumpTo
  * @property bool $isMultistep
  * @property bool $sendViaEmail
+ * @property string $mailerTransport
  * @property string $recipient
  * @property string $subject
  * @property string $emailTemplate

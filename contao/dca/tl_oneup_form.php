@@ -60,7 +60,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
 
     'subpalettes' => [
         'storeSubmissions' => 'submissionExpression',
-        'sendViaEmail' => 'recipient,subject,emailTemplate',
+        'sendViaEmail' => 'mailerTransport,recipient,subject,emailTemplate',
     ],
 
     'fields' => [
@@ -151,6 +151,17 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
             'sql' => [
                 'type' => Types::BOOLEAN,
                 'default' => false,
+            ],
+        ],
+        'mailerTransport' => [
+            'inputType' => 'select',
+            'eval' => [
+                'includeBlankOption' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'default' => '',
             ],
         ],
         'recipient' => [

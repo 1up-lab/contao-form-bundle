@@ -25,6 +25,9 @@ tl_oneup_form:
     sendViaEmail:
         - Send via email
         - Send the submitted data by email.
+    mailerTransport:
+        - Mailer transport
+        - Choose the transport this email is sent with.
     recipient:
         - Recipient address
         - Separate multiple addresses with a comma.
