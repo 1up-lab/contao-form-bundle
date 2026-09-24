@@ -3,6 +3,7 @@ tl_oneup_form:
     redirect_legend: Redirect settings
     submission_legend: Submission settings
     multistep_legend: Multistep settings
+    email_legend: Email settings
     submissions:
         - Submissions
         - Show all submitted form data for form %s.
@@ -21,3 +22,12 @@ tl_oneup_form:
     isMultistep:
         - Multistep Form
         - Choose if this form is a multistep.
+    sendViaEmail:
+        - Send via email
+        - Send the submitted data by email.
+    recipient:
+        - Recipient address
+        - Separate multiple addresses with a comma.
+    subject:
+        - Subject
+        - Subject of the email.

@@ -48,17 +48,19 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
     ],
 
     'palettes' => [
-        '__selector__' => ['storeSubmissions'],
+        '__selector__' => ['storeSubmissions', 'sendViaEmail'],
         'default' => '
             {title_legend},name,;
             {redirect_legend},jumpTo;
             {submission_legend},storeSubmissions;
             {multistep_legend},isMultistep;
+            {email_legend},sendViaEmail;
         ',
     ],
 
     'subpalettes' => [
         'storeSubmissions' => 'submissionExpression',
+        'sendViaEmail' => 'recipient,subject',
     ],
 
     'fields' => [
@@ -139,6 +141,44 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
             'sql' => [
                 'type' => Types::BOOLEAN,
                 'default' => false,
+            ],
+        ],
+        'sendViaEmail' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'submitOnChange' => true,
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'recipient' => [
+            'inputType' => 'text',
+            'eval' => [
+                'mandatory' => true,
+                'maxlength' => 1022,
+                'rgxp' => 'emails',
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'length' => 1022,
+                'default' => '',
+            ],
+        ],
+        'subject' => [
+            'inputType' => 'text',
+            'eval' => [
+                'mandatory' => true,
+                'maxlength' => 255,
+                'decodeEntities' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'length' => 255,
+                'default' => '',
             ],
         ],
     ],

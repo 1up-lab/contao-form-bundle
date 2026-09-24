@@ -3,6 +3,7 @@ tl_oneup_form:
     redirect_legend: Weiterleitungs-Einstellungen
     submission_legend: Einreichungs-Einstellungen
     multistep_legend: Multistep-Einstellungen
+    email_legend: E-Mail-Einstellungen
     submissions:
         - Einreichungen
         - Alle übermittelten Formulardaten des Formulars %s anzeigen.
@@ -21,3 +22,12 @@ tl_oneup_form:
     isMultistep:
         - Mehrstufiges Formular
         - Wählen Sie, ob dieses Formular mehrstufig ist.
+    sendViaEmail:
+        - Per E-Mail senden
+        - Die übermittelten Daten per E-Mail senden.
+    recipient:
+        - Empfängeradresse
+        - Mehrere Adressen mit Komma trennen.
+    subject:
+        - Betreff
+        - Betreff der E-Mail.

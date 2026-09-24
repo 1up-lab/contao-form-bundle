@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|default('en') }}">
+<head>
+    <meta charset="utf-8">
+    <title>{{ form.name }}</title>
+</head>
+<body>
+{% block body %}
+    {% block heading %}
+        <h1>{{ form.name }}</h1>
+    {% endblock %}
+
+    {% block fields %}
+        <table role="presentation" cellpadding="4" cellspacing="0">
+            <tbody>
+            {% for value in values %}
+                <tr>
+                    <th align="left" valign="top">{{ value.label }}</th>
+                    <td valign="top">{{ value.text|nl2br }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+{% endblock %}
+</body>
+</html>

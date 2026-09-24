@@ -14,6 +14,9 @@ use Contao\Model;
  * @property string $submissionExpression
  * @property int $jumpTo
  * @property bool $isMultistep
+ * @property bool $sendViaEmail
+ * @property string $recipient
+ * @property string $subject
  *
  * @method static FormModel|null findById($id, array $opt = array())
  */
