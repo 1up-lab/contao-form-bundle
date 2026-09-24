@@ -17,6 +17,7 @@ use Contao\Model;
  * @property bool $sendViaEmail
  * @property string $recipient
  * @property string $subject
+ * @property string $emailTemplate
  *
  * @method static FormModel|null findById($id, array $opt = array())
  */

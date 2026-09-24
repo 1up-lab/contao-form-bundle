@@ -31,3 +31,6 @@ tl_oneup_form:
     subject:
         - Betreff
         - Betreff der E-Mail.
+    emailTemplate:
+        - E-Mail Template
+        - Wählen Sie ein E-Mail Template aus.

@@ -42,7 +42,7 @@ class SendViaEmailListener
         $email = (new TemplatedEmail())
             ->to(...$recipients)
             ->subject($formModel->subject)
-            ->htmlTemplate('@Contao/form/email.html.twig')
+            ->htmlTemplate($this->getTemplate($formModel))
             ->context([
                 'form' => $formModel,
                 'values' => $this->getValues($event->form),
@@ -54,6 +54,11 @@ class SendViaEmailListener
         }
 
         $this->mailer->send($email);
+    }
+
+    private function getTemplate(FormModel $formModel): string
+    {
+        return '@Contao/' . ($formModel->emailTemplate ?: 'form/email') . '.html.twig';
     }
 
     private function getRecipients(FormModel $formModel): array

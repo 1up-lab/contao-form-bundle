@@ -31,3 +31,6 @@ tl_oneup_form:
     subject:
         - Subject
         - Subject of the email.
+    emailTemplate:
+        - Email template
+        - Choose an email template.
