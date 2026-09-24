@@ -1,0 +1,11 @@
+{% block body %}
+{% block heading %}
+{{ form.name }}
+{% endblock %}
+
+{% block fields %}
+{% for value in values %}
+{{ value.label }}: {{ value.text }}
+{% endfor %}
+{% endblock %}
+{% endblock %}

@@ -43,6 +43,7 @@ class SendViaEmailListener
             ->to(...$recipients)
             ->subject($formModel->subject)
             ->htmlTemplate($this->getTemplate($formModel))
+            ->textTemplate('@Contao/form/email_text.txt.twig')
             ->context([
                 'form' => $formModel,
                 'values' => $this->getValues($event->form),

@@ -196,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
             'inputType' => 'select',
             'eval' => [
                 'chosen' => true,
-                'tl_class' => 'w50 clr',
+                'tl_class' => 'w50',
             ],
             'sql' => [
                 'type' => Types::STRING,
