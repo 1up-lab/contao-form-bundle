@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Contao\DataContainer;
 use Contao\DC_Table;
 use Doctrine\DBAL\Types\Types;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 $GLOBALS['TL_DCA']['tl_oneup_form_submission'] = [
     'config' => [
@@ -82,6 +81,6 @@ $GLOBALS['TL_DCA']['tl_oneup_form_submission'] = [
             'sql' => [
                 'type' => Types::JSON,
             ],
-        ]
+        ],
     ],
 ];

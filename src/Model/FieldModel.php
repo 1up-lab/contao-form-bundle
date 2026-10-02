@@ -40,6 +40,10 @@ use Contao\Model\Collection;
  * @property bool $useHomeDir
  * @property bool $doNotOverwrite
  * @property bool $addBackendLink
+ * @property string $altchaAuto
+ * @property bool $altchaHideLogo
+ * @property bool $altchaHideFooter
+ * @property bool $altchaFloating
  * @property bool $published
  *
  * @method static Collection<FieldModel>|null findBy($col, $val, array $opt = [])

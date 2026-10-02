@@ -260,6 +260,11 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {title_legend},name,type;
             {publish_legend},published;
         ',
+        'altcha' => '
+            {title_legend},name,type;
+            {config_legend,altchaAuto,altchaHideLogo,altchaHideFooter,altchaFloating;
+            {publish_legend},published;
+        ',
     ],
 
     'subpalettes' => [
@@ -531,6 +536,49 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'inputType' => 'checkbox',
             'eval' => [
                 'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'altchaAuto' => [
+            'inputType' => 'select',
+            'options' => [
+                'onfocus', 'onsubmit',
+            ],
+            'eval' => [
+                'includeBlankOption' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::STRING,
+                'length' => 12,
+                'default' => '',
+            ],
+        ],
+        'altchaFloating' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w16',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'altchaHideLogo' => [
+            'inputType' => 'checkbox',
+            'eval' => ['tl_class' => 'w16'],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'altchaHideFooter' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w16',
             ],
             'sql' => [
                 'type' => Types::BOOLEAN,

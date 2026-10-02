@@ -62,6 +62,7 @@ class FieldTypeOptionListener
                 'percent',
             ],
             'others' => [
+                'altcha',
                 'color',
                 'file',
                 'group',

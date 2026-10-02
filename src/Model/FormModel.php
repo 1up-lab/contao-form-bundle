@@ -7,14 +7,14 @@ namespace Oneup\ContaoFormBundle\Model;
 use Contao\Model;
 
 /**
- * @property int $id
- * @property int $tstamp
+ * @property int    $id
+ * @property int    $tstamp
  * @property string $name
- * @property bool $storeSubmissions
+ * @property bool   $storeSubmissions
  * @property string $submissionExpression
- * @property int $jumpTo
- * @property bool $isMultistep
- * @property bool $sendViaEmail
+ * @property int    $jumpTo
+ * @property bool   $isMultistep
+ * @property bool   $sendViaEmail
  * @property string $mailerTransport
  * @property string $recipient
  * @property string $subject

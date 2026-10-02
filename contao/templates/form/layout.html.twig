@@ -55,3 +55,4 @@
 {% block dateinterval_widget %}{{ widget == 'single_text' ? block('widget_dispatch') : include('@Contao/form/widget/dateinterval.html.twig') }}{% endblock %}
 {% block choice_widget_collapsed %}{{ include('@Contao/form/widget/select.html.twig') }}{% endblock %}
 {% block choice_widget_expanded %}{{ include('@Contao/form/widget/choice_expanded.html.twig') }}{% endblock %}
+{% block altcha_widget %}{{ block('widget_dispatch') }}{% endblock %}

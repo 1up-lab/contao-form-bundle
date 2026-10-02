@@ -87,6 +87,18 @@ tl_oneup_form_field:
     addBackendLink:
         - Backend-Link in E-Mail
         - Einen Link zum Ordner der gespeicherten Datei in der Dateiverwaltung des Backends in die E-Mail einfügen.
+    altchaAuto:
+        - Automatische Überprüfung
+        - Automatische Überprüfung ohne Benutzerinteraktion.
+    altchaHideLogo:
+        - Logo ausblenden
+        - Das ALTCHA-Logo ausblenden.
+    altchaHideFooter:
+        - Fußzeile ausblenden
+        - Die Fußzeile ausblenden (ALTCHA-Link).
+    altchaFloating:
+        - Schwebender Modus
+        - Aktiviert die schwebende Benutzeroberfläche.
     published:
         - Veröffentlicht
         - Dieses Feld im Frontend ausgeben.
