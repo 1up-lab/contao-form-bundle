@@ -33,6 +33,13 @@ use Contao\Model\Collection;
  * @property bool $duplicatePreferredChoices
  * @property bool $checked
  * @property bool $html5
+ * @property bool $multipleFiles
+ * @property bool $attachToEmail
+ * @property bool $storeFile
+ * @property string|null $uploadFolder
+ * @property bool $useHomeDir
+ * @property bool $doNotOverwrite
+ * @property bool $addBackendLink
  * @property bool $published
  *
  * @method static Collection<FieldModel>|null findBy($col, $val, array $opt = [])

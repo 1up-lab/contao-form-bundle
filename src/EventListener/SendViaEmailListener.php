@@ -6,6 +6,7 @@ namespace Oneup\ContaoFormBundle\EventListener;
 
 use Contao\StringUtil;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
+use Oneup\ContaoFormBundle\File\StoredFiles;
 use Oneup\ContaoFormBundle\Form\Type\ContaoStepType;
 use Oneup\ContaoFormBundle\Model\FormModel;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 
-#[AsEventListener(event: PostSubmitEvent::class, priority: 50)]
+#[AsEventListener(event: PostSubmitEvent::class)]
 class SendViaEmailListener
 {
     public function __construct(
@@ -46,9 +47,13 @@ class SendViaEmailListener
             ->textTemplate('@Contao/form/email_text.txt.twig')
             ->context([
                 'form' => $formModel,
-                'values' => $this->getValues($event->form),
+                'values' => $this->getValues($event->form, $event->storedFiles),
             ])
         ;
+
+        foreach ($event->storedFiles->getAttachments() as $file) {
+            $email->attachFromPath($file->pathname, $file->name);
+        }
 
         if ($from = $this->getFrom()) {
             $email->from($from);
@@ -82,18 +87,18 @@ class SendViaEmailListener
         return new Address($email, (string) ($GLOBALS['TL_ADMIN_NAME'] ?? ''));
     }
 
-    private function getValues(FormInterface $form): array
+    private function getValues(FormInterface $form, StoredFiles $storedFiles): array
     {
         $values = [];
 
         foreach ($form as $child) {
-            $values = [...$values, ...$this->getChildValues($child)];
+            $values = [...$values, ...$this->getChildValues($child, $storedFiles)];
         }
 
         return $values;
     }
 
-    private function getChildValues(FormInterface $child): array
+    private function getChildValues(FormInterface $child, StoredFiles $storedFiles): array
     {
         if ($child instanceof Button) {
             return [];
@@ -102,15 +107,38 @@ class SendViaEmailListener
         $innerType = $child->getConfig()->getType()->getInnerType();
 
         if ($innerType instanceof ContaoStepType || $innerType instanceof FormType) {
-            return $this->getValues($child);
+            return $this->getValues($child, $storedFiles);
         }
 
         return [
             [
                 'label' => (string) ($child->getConfig()->getOption('label') ?: $child->getName()),
                 'text' => $this->formatValue($child->getData()),
+                'links' => $this->getFileLinks($child->getData(), $storedFiles),
             ],
         ];
+    }
+
+    private function getFileLinks(mixed $value, StoredFiles $storedFiles): array
+    {
+        $links = [];
+
+        foreach (\is_array($value) ? $value : [$value] as $upload) {
+            if (!$upload instanceof UploadedFile) {
+                continue;
+            }
+
+            $file = $storedFiles->get($upload);
+
+            if (null !== $file?->link) {
+                $links[] = [
+                    'name' => $file->name,
+                    'url' => $file->link,
+                ];
+            }
+        }
+
+        return $links;
     }
 
     private function formatValue(mixed $value): string

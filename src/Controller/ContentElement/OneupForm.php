@@ -11,6 +11,7 @@ use Contao\CoreBundle\Twig\FragmentTemplate;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
 use Oneup\ContaoFormBundle\Form\Builder\FormBuilder;
 use Oneup\ContaoFormBundle\Model\FormModel;
+use Oneup\ContaoFormBundle\Service\UploadedFileStorage;
 use Symfony\Component\Form\Flow\FormFlowInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,7 @@ class OneupForm extends AbstractContentElementController
     public function __construct(
         private readonly FormBuilder $formBuilder,
         private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly UploadedFileStorage $fileStorage,
     ) {
     }
 
@@ -41,7 +43,8 @@ class OneupForm extends AbstractContentElementController
         $form->handleRequest($request);
 
         if ($this->isCompleted($form)) {
-            $event = new PostSubmitEvent($form, $formModel);
+            $storedFiles = $this->fileStorage->store($formModel, (array) $form->getData());
+            $event = new PostSubmitEvent($form, $formModel, $storedFiles);
 
             $this->eventDispatcher->dispatch($event);
 

@@ -43,7 +43,7 @@ class FieldBuilder
             $options = $formType->resolveOptions($model);
 
             if ($formType->isConstrainable()) {
-                $options['constraints'] = $this->getConstraints($model->id);
+                $options['constraints'] = $formType->resolveConstraints($model, $this->getConstraints($model->id));
             }
 
             $builder->add($model->alias, $formType->getFormType(), $options);

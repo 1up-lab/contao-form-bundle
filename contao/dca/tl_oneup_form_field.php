@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
     ],
 
     'palettes' => [
-        '__selector__' => ['type'],
+        '__selector__' => ['type', 'storeFile'],
         // You need every field in the default palette, otherwise they will not be persisted to the database
         'default' => 'type,name,',
 
@@ -129,6 +129,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
         ',
         'file' => '
             {title_legend},name,type;
+            {config_legend},multipleFiles,attachToEmail,storeFile;
             {publish_legend},published;
         ',
         'group' => '
@@ -259,6 +260,10 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {title_legend},name,type;
             {publish_legend},published;
         ',
+    ],
+
+    'subpalettes' => [
+        'storeFile' => 'uploadFolder,useHomeDir,doNotOverwrite,addBackendLink',
     ],
 
     'fields' => [
@@ -526,6 +531,78 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             'inputType' => 'checkbox',
             'eval' => [
                 'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'multipleFiles' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'attachToEmail' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'storeFile' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'submitOnChange' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'uploadFolder' => [
+            'inputType' => 'fileTree',
+            'eval' => [
+                'fieldType' => 'radio',
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BINARY,
+                'notnull' => false,
+            ],
+        ],
+        'useHomeDir' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'doNotOverwrite' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'addBackendLink' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'tl_class' => 'w50',
             ],
             'sql' => [
                 'type' => Types::BOOLEAN,

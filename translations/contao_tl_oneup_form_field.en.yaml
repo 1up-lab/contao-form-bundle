@@ -66,6 +66,27 @@ tl_oneup_form_field:
     html5:
         - HTML5 input
         - If set, the field is rendered as a native HTML5 input and the value has to match its format.
+    multipleFiles:
+        - Multiple files
+        - Allow to upload more than one file.
+    attachToEmail:
+        - Attach to email
+        - Attach the uploaded files to the email.
+    storeFile:
+        - Store uploaded files
+        - Move the uploaded files to a folder on the server.
+    uploadFolder:
+        - Target folder
+        - Please select the target folder from the files directory.
+    useHomeDir:
+        - Use home directory
+        - Store the file in the home directory if there is an authenticated member.
+    doNotOverwrite:
+        - Preserve existing files
+        - Add a numeric suffix to the new file if the file name already exists.
+    addBackendLink:
+        - Backend link in email
+        - Add a link to the folder of the stored file in the back end file manager to the email.
     published:
         - Published
         - Output this field to the frontend.
@@ -91,7 +112,7 @@ tl_oneup_form_field:
         dateTime: Date and Time
         date: Date
         email: E-Mail
-        file: File
+        file: File-Upload
         group: Group
         hidden: Hidden
         integer: Integer

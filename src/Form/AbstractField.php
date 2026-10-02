@@ -76,4 +76,9 @@ abstract class AbstractField
     {
         return null;
     }
+
+    public function resolveConstraints(FieldModel $model, array $constraints): array
+    {
+        return $constraints;
+    }
 }

@@ -6,6 +6,9 @@
 {% block fields %}
 {% for value in values %}
 {{ value.label }}: {{ value.text }}
+{% for link in value.links %}
+{{ link.name }}: {{ link.url }}
+{% endfor %}
 {% endfor %}
 {% endblock %}
 {% endblock %}

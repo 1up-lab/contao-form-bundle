@@ -66,6 +66,27 @@ tl_oneup_form_field:
     html5:
         - HTML5-Eingabefeld
         - Wenn aktiviert, wird das Feld als natives HTML5-Eingabefeld ausgegeben und der Wert muss dessen Format entsprechen.
+    multipleFiles:
+        - Mehrere Dateien
+        - Das Hochladen mehrerer Dateien erlauben.
+    attachToEmail:
+        - An E-Mail anhängen
+        - Die hochgeladenen Dateien an die E-Mail anhängen.
+    storeFile:
+        - Hochgeladene Dateien speichern
+        - Die hochgeladenen Dateien in einem Ordner auf dem Server speichern.
+    uploadFolder:
+        - Zielverzeichnis
+        - Bitte wählen Sie das Zielverzeichnis aus der Dateiübersicht.
+    useHomeDir:
+        - Home-Verzeichnis verwenden
+        - Die Datei im Home-Verzeichnis speichern, wenn sich ein Mitglied angemeldet hat.
+    doNotOverwrite:
+        - Bestehende Dateien erhalten
+        - Der neuen Datei ein numerisches Suffix hinzufügen, wenn der Dateiname bereits existiert.
+    addBackendLink:
+        - Backend-Link in E-Mail
+        - Einen Link zum Ordner der gespeicherten Datei in der Dateiverwaltung des Backends in die E-Mail einfügen.
     published:
         - Veröffentlicht
         - Dieses Feld im Frontend ausgeben.
@@ -91,7 +112,7 @@ tl_oneup_form_field:
         dateTime: Datum und Zeit
         date: Datum
         email: E-Mail
-        file: Datei
+        file: Datei-Upload
         group: Gruppe
         hidden: Verstecktes Feld
         integer: Ganzzahl

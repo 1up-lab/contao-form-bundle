@@ -18,6 +18,8 @@ interface FieldInterface
 
     public function resolveData(FieldModel $model): mixed;
 
+    public function resolveConstraints(FieldModel $model, array $constraints): array;
+
     public function isConstrainable(): bool;
 
     public function isNestable(): bool;
