@@ -29,9 +29,11 @@
     .mergeWith(button_attributes|default)
 %}
 
-<button{% block button_attributes %}{{ button_attributes }}{% endblock %}>
-    {%- block button_label -%}
-        {%- set label = label is empty ? name|humanize : label -%}
-        {{ label is same as(false) ? '' : (translation_domain is same as(false) ? label : label|trans(label_translation_parameters|default({}), translation_domain)) }}
-    {%- endblock -%}
-</button>
+{%- block button %}
+    <button{% block button_attributes %}{{ button_attributes }}{% endblock %}>
+        {%- block button_label -%}
+            {%- set label = label is empty ? name|humanize : label -%}
+            {{ label is same as(false) ? '' : (translation_domain is same as(false) ? label : label|trans(label_translation_parameters|default({}), translation_domain)) }}
+        {%- endblock -%}
+    </button>
+{%- endblock %}

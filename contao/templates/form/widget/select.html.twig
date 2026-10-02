@@ -62,23 +62,25 @@
     .mergeWith(select_attributes|default)
 %}
 
-<select{% block select_attributes %}{{ select_attributes }}{% endblock %}>
-    {%- block select_placeholder -%}
-        {%- if placeholder is defined and placeholder is not none -%}
-            <option value=""{% if is_required and value is empty %} selected{% endif %}>
-                {{- placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) -}}
-            </option>
-        {%- endif -%}
-    {%- endblock -%}
+{%- block select %}
+    <select{% block select_attributes %}{{ select_attributes }}{% endblock %}>
+        {%- block select_placeholder -%}
+            {%- if placeholder is defined and placeholder is not none -%}
+                <option value=""{% if is_required and value is empty %} selected{% endif %}>
+                    {{- placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) -}}
+                </option>
+            {%- endif -%}
+        {%- endblock -%}
 
-    {%- block select_preferred -%}
-        {%- if preferred_choices|default([])|length > 0 -%}
-            {{- _self.options(preferred_choices, value, choice_translation_domain|default(null), not (duplicate_preferred_choices is defined ? duplicate_preferred_choices : true)) -}}
-            {% if separator is defined and separator is not none %}<option disabled>{{ separator }}</option>{% endif %}
-        {%- endif -%}
-    {%- endblock -%}
+        {%- block select_preferred -%}
+            {%- if preferred_choices|default([])|length > 0 -%}
+                {{- _self.options(preferred_choices, value, choice_translation_domain|default(null), not (duplicate_preferred_choices is defined ? duplicate_preferred_choices : true)) -}}
+                {% if separator is defined and separator is not none %}<option disabled>{{ separator }}</option>{% endif %}
+            {%- endif -%}
+        {%- endblock -%}
 
-    {%- block select_options -%}
-        {{- _self.options(choices, value, choice_translation_domain|default(null), true) -}}
-    {%- endblock -%}
-</select>
+        {%- block select_options -%}
+            {{- _self.options(choices, value, choice_translation_domain|default(null), true) -}}
+        {%- endblock -%}
+    </select>
+{%- endblock %}

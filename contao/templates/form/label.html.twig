@@ -31,12 +31,14 @@
         .mergeWith(label_attributes|default)
     %}
 
-    <label{% block label_attributes %}{{ label_attributes }}{% endblock %}>
-        {%- block label_text -%}
-            {{ translation_domain is same as(false) ? label : label|trans(label_translation_parameters|default({}), translation_domain) }}
-        {%- endblock -%}
-        {%- block label_required -%}
-            {% if required %}<span class="form-label__required" aria-hidden="true">*</span>{% endif %}
-        {%- endblock -%}
-    </label>
+    {%- block label %}
+        <label{% block label_attributes %}{{ label_attributes }}{% endblock %}>
+            {%- block label_text -%}
+                {{ translation_domain is same as(false) ? label : label|trans(label_translation_parameters|default({}), translation_domain) }}
+            {%- endblock -%}
+            {%- block label_required -%}
+                {% if required %}<span class="form-label__required" aria-hidden="true">*</span>{% endif %}
+            {%- endblock -%}
+        </label>
+    {%- endblock %}
 {% endif %}

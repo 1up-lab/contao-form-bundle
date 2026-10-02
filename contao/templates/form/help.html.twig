@@ -26,7 +26,9 @@
         .mergeWith(help_attributes|default)
     %}
 
-    <p{% block help_attributes %}{{ help_attributes }}{% endblock %}>
-        {%- block help_text %}{{ help_html|default(false) ? help|raw : help }}{% endblock -%}
-    </p>
+    {%- block help %}
+        <p{% block help_attributes %}{{ help_attributes }}{% endblock %}>
+            {%- block help_text %}{{ help_html|default(false) ? help|raw : help }}{% endblock -%}
+        </p>
+    {%- endblock %}
 {% endif %}

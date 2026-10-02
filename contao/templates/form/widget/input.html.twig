@@ -31,6 +31,6 @@
     .mergeWith(input_attributes|default)
 %}
 
-{%- block input_before %}{% endblock -%}
-<input{% block input_attributes %}{{ input_attributes }}{% endblock %}>
-{%- block input_after %}{% endblock -%}
+{%- block input %}
+    <input{% block input_attributes %}{{ input_attributes }}{% endblock %}>
+{%- endblock %}

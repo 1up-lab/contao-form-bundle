@@ -18,9 +18,11 @@
 {% if errors|length > 0 %}
     {% set errors_attributes = attrs().addClass('form-errors').mergeWith(errors_attributes|default) %}
 
-    <ul{% block errors_attributes %}{{ errors_attributes }}{% endblock %}>
-        {%- for error in errors -%}
-            <li id="{{ id }}_error{{ loop.index }}">{% block error_message %}{{ error.message }}{% endblock %}</li>
-        {%- endfor -%}
-    </ul>
+    {%- block errors %}
+        <ul{% block errors_attributes %}{{ errors_attributes }}{% endblock %}>
+            {%- for error in errors -%}
+                <li id="{{ id }}_error{{ loop.index }}">{% block error_message %}{{ error.message }}{% endblock %}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endblock %}
 {% endif %}

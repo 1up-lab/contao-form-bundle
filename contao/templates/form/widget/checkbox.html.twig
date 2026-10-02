@@ -30,6 +30,6 @@
     .mergeWith(checkbox_attributes|default)
 %}
 
-{%- block checkbox_before %}{% endblock -%}
-<input{% block checkbox_attributes %}{{ checkbox_attributes }}{% endblock %}>
-{%- block checkbox_after %}{% endblock -%}
+{%- block checkbox %}
+    <input{% block checkbox_attributes %}{{ checkbox_attributes }}{% endblock %}>
+{%- endblock %}

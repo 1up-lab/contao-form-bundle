@@ -23,6 +23,6 @@
     .mergeWith(textarea_attributes|default)
 %}
 
-{%- block textarea_before %}{% endblock -%}
-<textarea{% block textarea_attributes %}{{ textarea_attributes }}{% endblock %}>{{ value }}</textarea>
-{%- block textarea_after %}{% endblock -%}
+{%- block textarea %}
+    <textarea{% block textarea_attributes %}{{ textarea_attributes }}{% endblock %}>{{ value }}</textarea>
+{%- endblock %}
