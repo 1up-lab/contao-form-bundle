@@ -26,7 +26,7 @@ class SubmissionNameGenerator
     private function cast(mixed $value): string
     {
         return match (true) {
-            is_scalar($value), $value === null, $value instanceof \Stringable => (string) $value,
+            \is_scalar($value), null === $value, $value instanceof \Stringable => (string) $value,
 
             default => '',
         };

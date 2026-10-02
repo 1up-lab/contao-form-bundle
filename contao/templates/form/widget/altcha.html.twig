@@ -1,0 +1,18 @@
+{% use '@Contao/component/_stylesheet.html.twig' %}
+
+{% if canUseAltcha %}
+    {% add 'altcha' to stylesheets %}
+        {% with {file: asset('css/altcha.min.css', 'contao-components/altcha')} %}{{ block('stylesheet_component') }}{% endwith %}
+    {% endadd %}
+
+    {% add 'altcha' to body %}
+        <script src="{{ asset('js/altcha.min.js', 'contao-components/altcha') }}" type="module"></script>
+    {% endadd %}
+
+    <altcha-widget{{ attrs()
+        .set('workerurl', asset('js/worker.js', 'contao-components/altcha'))
+        .mergeWith(altchaAttributes)
+    }}></altcha-widget>
+{% else %}
+    <p class="error">{{ 'ERR.altchaInsecureConnection'|trans }}</p>
+{% endif %}

@@ -8,32 +8,36 @@ use Contao\Model;
 use Contao\Model\Collection;
 
 /**
- * @property int $id
- * @property int $pid
+ * @property int    $id
+ * @property int    $pid
  * @property string $ptable
- * @property int $tstamp
- * @property int $sorting
+ * @property int    $tstamp
+ * @property int    $sorting
  * @property string $name
  * @property string $alias
  * @property string $type
  * @property string $placeholder
  * @property string $label
- * @property bool $labelHtml
+ * @property bool   $labelHtml
  * @property string $help
- * @property bool $helpHtml
- * @property bool $trim
- * @property bool $required
+ * @property bool   $helpHtml
+ * @property bool   $trim
+ * @property bool   $required
  * @property string $defaultProtocol
  * @property string $value
  * @property string $options
- * @property bool $expanded
- * @property bool $multiple
- * @property bool $alpha3
+ * @property bool   $expanded
+ * @property bool   $multiple
+ * @property bool   $alpha3
  * @property string $preferredChoices
- * @property bool $duplicatePreferredChoices
- * @property bool $checked
- * @property bool $html5
- * @property bool $published
+ * @property bool   $duplicatePreferredChoices
+ * @property bool   $checked
+ * @property bool   $html5
+ * @property string $altchaAuto
+ * @property bool   $altchaHideLogo
+ * @property bool   $altchaHideFooter
+ * @property bool   $altchaFloating
+ * @property bool   $published
  *
  * @method static Collection<FieldModel>|null findBy($col, $val, array $opt = [])
  */

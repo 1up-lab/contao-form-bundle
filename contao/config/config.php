@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Oneup\ContaoFormBundle\Model\FormModel;
-use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Oneup\ContaoFormBundle\Model\SubmissionModel;
 
 $GLOBALS['BE_MOD']['content']['oneup_form'] = [

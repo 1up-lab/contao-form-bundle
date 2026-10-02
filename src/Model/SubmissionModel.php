@@ -7,9 +7,9 @@ namespace Oneup\ContaoFormBundle\Model;
 use Contao\Model;
 
 /**
- * @property int $id
- * @property int $pid
- * @property int $tstamp
+ * @property int    $id
+ * @property int    $pid
+ * @property int    $tstamp
  * @property string $name
  * @property string $data
  */

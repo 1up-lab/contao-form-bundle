@@ -66,6 +66,18 @@ tl_oneup_form_field:
     html5:
         - HTML5-Eingabefeld
         - Wenn aktiviert, wird das Feld als natives HTML5-Eingabefeld ausgegeben und der Wert muss dessen Format entsprechen.
+    altchaAuto:
+        - Automatische Überprüfung
+        - Automatische Überprüfung ohne Benutzerinteraktion.
+    altchaHideLogo:
+        - Logo ausblenden
+        - Das ALTCHA-Logo ausblenden.
+    altchaHideFooter:
+        - Fußzeile ausblenden
+        - Die Fußzeile ausblenden (ALTCHA-Link).
+    altchaFloating:
+        - Schwebender Modus
+        - Aktiviert die schwebende Benutzeroberfläche.
     published:
         - Veröffentlicht
         - Dieses Feld im Frontend ausgeben.
