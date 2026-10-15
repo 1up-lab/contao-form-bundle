@@ -325,6 +325,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
         'alias' => [
             'inputType' => 'text',
             'eval' => [
+                'doNotCopy' => true,
                 'tl_class' => 'w50',
             ],
             'sql' => [
