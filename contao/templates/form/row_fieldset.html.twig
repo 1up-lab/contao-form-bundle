@@ -6,6 +6,7 @@
         <fieldset class="form-row form-row--choice">
           <legend>Your interests</legend>
           <div class="form-row__options">…</div>
+          <ul class="form-errors">…</ul>
         </fieldset>
 
     Mandatory variables:
@@ -32,7 +33,7 @@
     {%- block row_legend -%}
         {% if label is not same as(false) and label is not empty %}<legend>{{ label }}</legend>{% endif %}
     {%- endblock -%}
-    {%- block row_errors %}{{ form_errors(form) }}{% endblock -%}
     {%- block row_widget %}{{ form_widget(form) }}{% endblock -%}
+    {%- block row_errors %}{{ form_errors(form) }}{% endblock -%}
     {%- block row_help %}{{ form_help(form) }}{% endblock -%}
 </fieldset>

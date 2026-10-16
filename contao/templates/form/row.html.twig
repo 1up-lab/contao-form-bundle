@@ -4,8 +4,8 @@
 
         <div class="form-row form-row--email">
           <label …>…</label>
-          <ul class="form-errors">…</ul>
           <input …>
+          <ul class="form-errors">…</ul>
           <p class="form-help">…</p>
         </div>
 
@@ -35,7 +35,7 @@
 
 <div{% block row_attributes %}{{ row_attributes }}{% endblock %}>
     {%- block row_label %}{{ form_label(form) }}{% endblock -%}
-    {%- block row_errors %}{{ form_errors(form) }}{% endblock -%}
     {%- block row_widget %}{{ form_widget(form, widget_attr|default({})) }}{% endblock -%}
+    {%- block row_errors %}{{ form_errors(form) }}{% endblock -%}
     {%- block row_help %}{{ form_help(form) }}{% endblock -%}
 </div>
