@@ -50,6 +50,6 @@ class Altcha extends AbstractField implements FieldInterface
             'verified' => $GLOBALS['TL_LANG']['MSC']['altchaVerified'],
             'verifying' => $GLOBALS['TL_LANG']['MSC']['altchaVerifying'],
             'waitAlert' => $GLOBALS['TL_LANG']['MSC']['altchaWaitAlert'],
-        ]));
+        ], \JSON_THROW_ON_ERROR));
     }
 }

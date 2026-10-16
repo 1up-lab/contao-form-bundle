@@ -46,6 +46,9 @@ class File extends AbstractField implements FieldInterface
         return $constraints;
     }
 
+    /**
+     * @return positive-int|null
+     */
     private function getMaxFileSize(): ?int
     {
         $maxFileSize = Config::get('maxFileSize');

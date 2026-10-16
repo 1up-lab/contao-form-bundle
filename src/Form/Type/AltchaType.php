@@ -25,6 +25,9 @@ class AltchaType extends AbstractType
     ) {
     }
 
+    /**
+     * @param array{maxnumber: int, challengeurl: string|null, strings: string, auto: string, hidelogo: bool, hidefooter: bool, floating: bool} $options
+     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $attributes = new HtmlAttributes();
@@ -52,7 +55,7 @@ class AltchaType extends AbstractType
                 new Callback(function (mixed $value, ExecutionContextInterface $context): void {
                     if (!\is_string($value) || '' === $value || !$this->altcha->validate($value)) {
                         $context
-                            ->buildViolation($GLOBALS['TL_LANG']['ERR']['altchaVerificationFailed'])
+                            ->buildViolation((string) ($GLOBALS['TL_LANG']['ERR']['altchaVerificationFailed'] ?? ''))
                             ->addViolation();
                     }
                 }),
@@ -72,6 +75,10 @@ class AltchaType extends AbstractType
         $resolver->setAllowedTypes('challengeurl', ['null', 'string']);
         $resolver->setAllowedTypes('maxnumber', ['int']);
         $resolver->setAllowedTypes('strings', ['string']);
+        $resolver->setAllowedTypes('auto', ['string']);
+        $resolver->setAllowedTypes('hidelogo', ['bool']);
+        $resolver->setAllowedTypes('hidefooter', ['bool']);
+        $resolver->setAllowedTypes('floating', ['bool']);
     }
 
     public function getParent(): string

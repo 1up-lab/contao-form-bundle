@@ -48,6 +48,9 @@ class UploadedFileStorage
     {
         $fields = FieldModel::findBy(['pid=?', 'ptable=?', 'published=?'], [$pid, $ptable, true]);
 
+        if (null === $fields) {
+            return;
+        }
 
         foreach ($fields as $field) {
             $value = $data[$field->alias] ?? null;
