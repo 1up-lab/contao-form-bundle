@@ -6,6 +6,7 @@ namespace Oneup\ContaoFormBundle\DependencyInjection\Compiler;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Attribute\AsField;
+use Oneup\ContaoFormBundle\Form\FieldGroup;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -20,6 +21,7 @@ class FormPass implements CompilerPassInterface
             }
 
             $id = \sprintf('%s.%s', $reflector->getName(), $attribute->name);
+            $group = $attribute->group instanceof FieldGroup ? $attribute->group->value : $attribute->group;
 
             $container->register($id, $reflector->getName())
                 ->setAutowired(true)
@@ -28,6 +30,7 @@ class FormPass implements CompilerPassInterface
                 ->addMethodCall('setFormType', [$attribute->formType])
                 ->addMethodCall('setConstrainable', [$attribute->constrainable])
                 ->addMethodCall('setNestable', [$attribute->nestable])
+                ->addMethodCall('setGroup', [$group])
             ;
         });
 

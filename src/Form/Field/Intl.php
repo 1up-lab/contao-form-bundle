@@ -7,6 +7,7 @@ namespace Oneup\ContaoFormBundle\Form\Field;
 use Contao\StringUtil;
 use Oneup\ContaoFormBundle\Attribute\AsField;
 use Oneup\ContaoFormBundle\Form\AbstractField;
+use Oneup\ContaoFormBundle\Form\FieldGroup;
 use Oneup\ContaoFormBundle\Form\FieldInterface;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -17,10 +18,10 @@ use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Intl\Languages;
 
-#[AsField(name: 'country', formType: CountryType::class)]
-#[AsField(name: 'language', formType: LanguageType::class)]
-#[AsField(name: 'currency', formType: CurrencyType::class)]
-#[AsField(name: 'timezone', formType: TimezoneType::class)]
+#[AsField(name: 'country', formType: CountryType::class, group: FieldGroup::Choices)]
+#[AsField(name: 'language', formType: LanguageType::class, group: FieldGroup::Choices)]
+#[AsField(name: 'currency', formType: CurrencyType::class, group: FieldGroup::Moneys)]
+#[AsField(name: 'timezone', formType: TimezoneType::class, group: FieldGroup::Dates)]
 class Intl extends AbstractField implements FieldInterface
 {
     public function resolveOptions(FieldModel $model): array

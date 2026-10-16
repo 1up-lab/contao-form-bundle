@@ -7,70 +7,41 @@ namespace Oneup\ContaoFormBundle\EventListener\DataContainer;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Contao\DataContainer;
 use Doctrine\DBAL\Connection;
+use Oneup\ContaoFormBundle\Form\FieldGroup;
+use Oneup\ContaoFormBundle\Form\Registry\FieldRegistry;
 
 #[AsCallback(table: 'tl_oneup_form_field', target: 'fields.type.options')]
 class FieldTypeOptionListener
 {
     public function __construct(
         private readonly Connection $database,
+        private readonly FieldRegistry $fieldRegistry,
     ) {
     }
 
     public function __invoke(?DataContainer $dc = null): array
     {
-        if ($this->isMultistepRoot($dc)) {
-            return ['step'];
+        $groups = array_map(static fn (FieldGroup $group): string => $group->value, FieldGroup::cases());
+        $options = array_fill_keys($groups, []);
+        $fields = $this->fieldRegistry->all();
+
+        foreach ($fields as $name => $field) {
+            $options[$field->getGroup()][] = $name;
         }
 
-        return [
-            'texts' => [
-                'email',
-                'search',
-                'text',
-                'textarea',
-                'tel',
-                'url',
-            ],
-            'buttons' => [
-                'button',
-                'reset',
-                'submit',
-            ],
-            'choices' => [
-                'checkbox',
-                'choice',
-                'country',
-                'language',
-                'radio',
-            ],
-            'dates' => [
-                'birthday',
-                'dateInterval',
-                'dateTime',
-                'date',
-                'timezone',
-                'time',
-                'week',
-            ],
-            'moneys' => [
-                'currency',
-                'money',
-            ],
-            'numbers' => [
-                'integer',
-                'number',
-                'percent',
-            ],
-            'others' => [
-                'altcha',
-                'color',
-                'file',
-                'group',
-                'hidden',
-                'password',
-                'range',
-            ],
-        ];
+        $options = array_map(static function (array $names): array {
+            sort($names);
+
+            return $names;
+        }, $options);
+
+        if ($this->isMultistepRoot($dc)) {
+            return $options[FieldGroup::Steps->value];
+        }
+
+        unset($options[FieldGroup::Steps->value]);
+
+        return array_filter($options);
     }
 
     private function isMultistepRoot(?DataContainer $dataContainer): bool

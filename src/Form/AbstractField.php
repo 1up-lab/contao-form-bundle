@@ -12,6 +12,7 @@ abstract class AbstractField
     protected string $formType;
     protected bool $constrainable;
     protected bool $nestable;
+    protected string $group = 'others';
 
     public function getName(): string
     {
@@ -57,6 +58,18 @@ abstract class AbstractField
     public function setNestable(bool $nestable): self
     {
         $this->nestable = $nestable;
+
+        return $this;
+    }
+
+    public function getGroup(): string
+    {
+        return $this->group;
+    }
+
+    public function setGroup(string $group): self
+    {
+        $this->group = $group;
 
         return $this;
     }

@@ -23,4 +23,6 @@ interface FieldInterface
     public function isConstrainable(): bool;
 
     public function isNestable(): bool;
+
+    public function getGroup(): string;
 }

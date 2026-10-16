@@ -7,11 +7,12 @@ namespace Oneup\ContaoFormBundle\Form\Field;
 use Contao\StringUtil;
 use Oneup\ContaoFormBundle\Attribute\AsField;
 use Oneup\ContaoFormBundle\Form\AbstractField;
+use Oneup\ContaoFormBundle\Form\FieldGroup;
 use Oneup\ContaoFormBundle\Form\FieldInterface;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-#[AsField(name: 'choice', formType: ChoiceType::class)]
+#[AsField(name: 'choice', formType: ChoiceType::class, group: FieldGroup::Choices)]
 class Choice extends AbstractField implements FieldInterface
 {
     public function resolveOptions(FieldModel $model): array

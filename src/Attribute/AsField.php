@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Attribute;
 
+use Oneup\ContaoFormBundle\Form\FieldGroup;
+
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
 class AsField
 {
@@ -12,6 +14,7 @@ class AsField
         public string $formType,
         public bool $constrainable = true,
         public bool $nestable = false,
+        public FieldGroup|string $group = FieldGroup::Others,
     ) {
     }
 }

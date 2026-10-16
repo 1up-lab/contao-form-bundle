@@ -25,4 +25,9 @@ class FieldRegistry
 
         return $types[$name];
     }
+
+    public function all(): array
+    {
+        return iterator_to_array($this->types);
+    }
 }
