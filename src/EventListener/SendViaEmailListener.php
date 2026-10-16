@@ -12,6 +12,7 @@ use Oneup\ContaoFormBundle\Model\FormModel;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Form\Button;
+use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -113,10 +114,35 @@ class SendViaEmailListener
         return [
             [
                 'label' => (string) ($child->getConfig()->getOption('label') ?: $child->getName()),
-                'text' => $this->formatValue($child->getData()),
+                'text' => $this->formatValue($this->getDisplayData($child)),
                 'links' => $this->getFileLinks($child->getData(), $storedFiles),
             ],
         ];
+    }
+
+    private function getDisplayData(FormInterface $child): mixed
+    {
+        $choiceList = $child->getConfig()->getAttribute('choice_list');
+
+        if (!$choiceList instanceof ChoiceListInterface) {
+            return $child->getData();
+        }
+
+        $labels = $choiceList->getOriginalKeys();
+
+        $label = static function (mixed $value) use ($labels): string {
+            $value = \is_string($value) ? $value : '';
+
+            return (string) ($labels[$value] ?? $value);
+        };
+
+        $values = $child->getViewData();
+
+        if (!\is_array($values)) {
+            return null === $values || '' === $values ? null : $label($values);
+        }
+
+        return array_map($label, $values);
     }
 
     private function getFileLinks(mixed $value, StoredFiles $storedFiles): array
