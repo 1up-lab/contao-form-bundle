@@ -6,6 +6,8 @@ namespace Oneup\ContaoFormBundle\Form\Builder;
 
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Oneup\ContaoFormBundle\Form\Type\ContaoFormFlowType;
+use Oneup\ContaoFormBundle\Form\Type\ContaoStepType;
+use Oneup\ContaoFormBundle\Model\FieldModel;
 use Oneup\ContaoFormBundle\Model\FormModel;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -40,5 +42,27 @@ class FormBuilder
         $this->fieldBuilder->build($builder, $formModel->id);
 
         return $builder->getForm();
+    }
+
+    public function buildAllSteps(FormModel $formModel, array $data): FormInterface
+    {
+        $builder = $this->formFactory->createNamedBuilder('oneup_form_' . $formModel->id, options: [
+            'csrf_protection' => false,
+            'translation_domain' => false,
+        ]);
+
+        $steps = FieldModel::findPublishedStepsByForm($formModel->id);
+
+        foreach ($steps as $step) {
+            $alias = (string) $step->alias;
+
+            if (!$alias) {
+                continue;
+            }
+
+            $builder->add($alias, ContaoStepType::class, ['model' => $step]);
+        }
+
+        return $builder->getForm()->setData($data);
     }
 }

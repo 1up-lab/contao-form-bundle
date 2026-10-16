@@ -7,6 +7,7 @@ namespace Oneup\ContaoFormBundle\EventListener;
 use Contao\StringUtil;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
 use Oneup\ContaoFormBundle\File\StoredFiles;
+use Oneup\ContaoFormBundle\Form\Builder\FormBuilder;
 use Oneup\ContaoFormBundle\Form\Type\ContaoStepType;
 use Oneup\ContaoFormBundle\Model\FormModel;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -14,6 +15,7 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Form\Button;
 use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Flow\FormFlowInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Mailer\MailerInterface;
@@ -24,6 +26,7 @@ class SendViaEmailListener
 {
     public function __construct(
         private readonly MailerInterface $mailer,
+        private readonly FormBuilder $formBuilder,
     ) {
     }
 
@@ -48,7 +51,7 @@ class SendViaEmailListener
             ->textTemplate('@Contao/form/email_text.txt.twig')
             ->context([
                 'form' => $formModel,
-                'values' => $this->getValues($event->form, $event->storedFiles),
+                'values' => $this->getValues($this->getSubmittedForm($event), $event->storedFiles),
             ])
         ;
 
@@ -65,6 +68,15 @@ class SendViaEmailListener
         }
 
         $this->mailer->send($email);
+    }
+
+    private function getSubmittedForm(PostSubmitEvent $event): FormInterface
+    {
+        if (!$event->form instanceof FormFlowInterface) {
+            return $event->form;
+        }
+
+        return $this->formBuilder->buildAllSteps($event->formModel, (array) $event->form->getData());
     }
 
     private function getTemplate(FormModel $formModel): string

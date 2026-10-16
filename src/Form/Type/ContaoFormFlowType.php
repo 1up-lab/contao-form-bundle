@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oneup\ContaoFormBundle\Form\Type;
 
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
-use Contao\Model\Collection;
+use Oneup\ContaoFormBundle\Form\Flow\UploadedFileDataStorage;
 use Oneup\ContaoFormBundle\Model\FieldModel;
 use Oneup\ContaoFormBundle\Model\FormModel;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -21,6 +21,8 @@ class ContaoFormFlowType extends AbstractFlowType
         private readonly ContaoCsrfTokenManager $contaoCsrfTokenManager,
         #[Autowire(param: 'contao.csrf_token_name')]
         private readonly string $tokenName,
+        #[Autowire('%kernel.project_dir%/system/tmp')]
+        private readonly string $tempDir,
     ) {
     }
 
@@ -28,10 +30,11 @@ class ContaoFormFlowType extends AbstractFlowType
     {
         /** @var FormModel $formModel */
         $formModel = $options['model'];
+        $steps = FieldModel::findPublishedStepsByForm($formModel->id);
 
         $labels = [];
 
-        foreach ($this->getSteps($formModel) as $step) {
+        foreach ($steps as $step) {
             $alias = (string) $step->alias;
 
             if (!$alias) {
@@ -43,6 +46,7 @@ class ContaoFormFlowType extends AbstractFlowType
             $labels[$alias] = (string) $step->name;
         }
 
+        $builder->setDataStorage(new UploadedFileDataStorage($builder->getDataStorage(), $this->tempDir));
         $builder->setAttribute('step_labels', $labels);
         $builder->add('navigator', ContaoNavigatorType::class);
     }
@@ -74,16 +78,5 @@ class ContaoFormFlowType extends AbstractFlowType
             'csrf_token_manager' => $this->contaoCsrfTokenManager,
             'csrf_token_id' => $this->tokenName,
         ]);
-    }
-
-    private function getSteps(FormModel $formModel): array
-    {
-        $steps = FieldModel::findBy(
-            ['pid=?', 'ptable=?', 'published=?', 'type=?'],
-            [$formModel->id, 'tl_oneup_form', true, 'step'],
-            ['order' => 'sorting ASC'],
-        );
-
-        return $steps instanceof Collection ? $steps->getModels() : [];
     }
 }

@@ -51,4 +51,15 @@ use Contao\Model\Collection;
 class FieldModel extends Model
 {
     protected static $strTable = 'tl_oneup_form_field';
+
+    public static function findPublishedStepsByForm(int $formId): array
+    {
+        $steps = static::findBy(
+            ['pid=?', 'ptable=?', 'published=?', 'type=?'],
+            [$formId, 'tl_oneup_form', true, 'step'],
+            ['order' => 'sorting ASC'],
+        );
+
+        return $steps instanceof Collection ? array_values($steps->getModels()) : [];
+    }
 }

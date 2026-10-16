@@ -36,7 +36,9 @@
     ]) -}}
 {% endblock %}
 
-{% block form_row_render %}{{ include('@Contao/form/row.html.twig') }}{% endblock %}
+{% block form_row_render %}{{ include(compound ? '@Contao/form/row_fieldset.html.twig' : '@Contao/form/row.html.twig') }}{% endblock %}
+{% block contao_step_row %}{{ include('@Contao/form/row.html.twig') }}{% endblock %}
+{% block contao_navigator_row %}{{ include('@Contao/form/row.html.twig') }}{% endblock %}
 {% block checkbox_row %}{{ include('@Contao/form/row_checkbox.html.twig') }}{% endblock %}
 {% block radio_row %}{{ include('@Contao/form/row_checkbox.html.twig') }}{% endblock %}
 {% block button_row %}{{ include('@Contao/form/row_button.html.twig') }}{% endblock %}

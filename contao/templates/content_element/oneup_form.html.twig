@@ -1,14 +1,18 @@
-{% form_theme form '@Contao/form/layout.html.twig' %}
+{% extends '@Contao/content_element/_base.html.twig' %}
 
-{% if form.vars.visible_steps is defined and form.vars.visible_steps|length > 1 %}
-    <ol class="form__steps">
-        {% for step in form.vars.visible_steps %}
-            <li class="form__step{{ step.is_current_step ? ' form__step--current' }}" {{ step.is_current_step ? 'aria-current="step"' : '' }}>
-                <span class="form__step-position">{{ step.position }}</span>
-                <span class="form__step-label">{{ step.label|default(step.name) }}</span>
-            </li>
-        {% endfor %}
-    </ol>
-{% endif %}
+{% block content %}
+    {% form_theme form '@Contao/form/layout.html.twig' %}
 
-{{ form(form) }}
+    {% if form.vars.visible_steps is defined and form.vars.visible_steps|length > 1 %}
+        <ol class="form__steps">
+            {% for step in form.vars.visible_steps %}
+                <li class="form__step{{ step.is_current_step ? ' form__step--current' }}" {{ step.is_current_step ? 'aria-current="step"' : '' }}>
+                    <span class="form__step-position">{{ step.position }}</span>
+                    <span class="form__step-label">{{ step.label|default(step.name) }}</span>
+                </li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+
+    {{ form(form) }}
+{% endblock %}
