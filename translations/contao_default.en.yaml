@@ -1,4 +1,4 @@
 CTE:
     oneup_form:
-        - Form*
+        - Form
         - Includes a form.
