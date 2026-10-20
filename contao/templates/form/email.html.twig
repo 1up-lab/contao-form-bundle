@@ -1,3 +1,38 @@
+{#
+    This template outputs the HTML version of the notification email. The
+    "values" variable holds the submitted fields. Steps and groups are entries
+    with a "label" and their fields as "children", fields have a "label", their
+    formatted "text" and the "links" to their stored files.
+
+    Mandatory variables:
+        @var \Oneup\ContaoFormBundle\Model\FormModel form
+        @var array values
+#}
+
+{% macro rows(values, level) %}
+    {% for value in values %}
+        {% if value.children is defined %}
+            <tr>
+                <th colspan="2" align="left"><h{{ min(level, 6) }}>{{ value.label }}</h{{ min(level, 6) }}></th>
+            </tr>
+            {{ _self.rows(value.children, level + 1) }}
+        {% else %}
+            <tr>
+                <th align="left" valign="top">{{ value.label }}</th>
+                <td valign="top">
+                    {% if value.links %}
+                        {% for link in value.links %}
+                            <a href="{{ link.url }}">{{ link.name }}</a>{% if not loop.last %}<br>{% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {{ value.text|nl2br }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
 <!DOCTYPE html>
 <html lang="{{ app.request.locale|default('en') }}">
 <head>
@@ -13,20 +48,7 @@
     {% block fields %}
         <table role="presentation" cellpadding="4" cellspacing="0">
             <tbody>
-            {% for value in values %}
-                <tr>
-                    <th align="left" valign="top">{{ value.label }}</th>
-                    <td valign="top">
-                        {% if value.links %}
-                            {% for link in value.links %}
-                                <a href="{{ link.url }}">{{ link.name }}</a>{% if not loop.last %}<br>{% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {{ value.text|nl2br }}
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
+                {{ _self.rows(values, 2) }}
             </tbody>
         </table>
     {% endblock %}

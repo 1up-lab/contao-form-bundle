@@ -1,14 +1,23 @@
+{% macro values(values) %}
+{% for value in values %}
+{% if value.children is defined %}
+
+{{ value.label|upper }}
+{{ _self.values(value.children) }}
+{%- else %}
+{{ value.label }}: {{ value.text }}
+{% for link in value.links %}
+{{ link.name }}: {{ link.url }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endmacro %}
 {% block body %}
 {% block heading %}
 {{ form.name }}
 {% endblock %}
 
 {% block fields %}
-{% for value in values %}
-{{ value.label }}: {{ value.text }}
-{% for link in value.links %}
-{{ link.name }}: {{ link.url }}
-{% endfor %}
-{% endfor %}
+{{ _self.values(values) }}
 {% endblock %}
 {% endblock %}

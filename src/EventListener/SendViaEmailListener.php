@@ -111,21 +111,31 @@ class SendViaEmailListener
         return $values;
     }
 
+    /**
+     * Steps and groups are returned with their fields as children, fields with
+     * their formatted value and the links to their stored files.
+     */
     private function getChildValues(FormInterface $child, StoredFiles $storedFiles): array
     {
         if ($child instanceof Button) {
             return [];
         }
 
+        $label = (string) ($child->getConfig()->getOption('label') ?: $child->getName());
         $innerType = $child->getConfig()->getType()->getInnerType();
 
         if ($innerType instanceof ContaoStepType || $innerType instanceof FormType) {
-            return $this->getValues($child, $storedFiles);
+            return [
+                [
+                    'label' => $label,
+                    'children' => $this->getValues($child, $storedFiles),
+                ],
+            ];
         }
 
         return [
             [
-                'label' => (string) ($child->getConfig()->getOption('label') ?: $child->getName()),
+                'label' => $label,
                 'text' => $this->formatValue($this->getDisplayData($child)),
                 'links' => $this->getFileLinks($child->getData(), $storedFiles),
             ],

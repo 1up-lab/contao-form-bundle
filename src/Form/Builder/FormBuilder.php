@@ -60,7 +60,7 @@ class FormBuilder
                 continue;
             }
 
-            $builder->add($alias, ContaoStepType::class, ['model' => $step]);
+            $builder->add($alias, ContaoStepType::class, ['model' => $step, 'label' => (string) $step->name]);
         }
 
         return $builder->getForm()->setData($data);
