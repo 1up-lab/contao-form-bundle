@@ -1,6 +1,6 @@
 CTE:
     oneup_form:
-        - Formular
-        - Ein Formular hinzufügen.
+        - 'Formular'
+        - 'Ein Formular hinzufügen.'
 ERR:
     invalidSubmissionTitle: 'Der Titel der Einreichung kann nicht verarbeitet werden: %s'

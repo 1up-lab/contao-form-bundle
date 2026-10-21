@@ -1,4 +1,4 @@
 tl_content:
     oneup_form:
-        - Form
-        - Select a form.
+        - 'Form'
+        - 'Select a form.'

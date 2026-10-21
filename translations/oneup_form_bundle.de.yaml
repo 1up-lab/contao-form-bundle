@@ -1,4 +1,4 @@
 form:
-    previous: Zurück
-    next: Weiter
-    finish: Senden
+    previous: 'Zurück'
+    next: 'Weiter'
+    finish: 'Senden'

@@ -1,39 +1,39 @@
 tl_oneup_form:
-    title_legend: Form settings
-    redirect_legend: Redirect settings
-    submission_legend: Submission settings
-    multistep_legend: Multistep settings
-    email_legend: Email settings
+    title_legend: 'Form settings'
+    redirect_legend: 'Redirect settings'
+    submission_legend: 'Submission settings'
+    multistep_legend: 'Multistep settings'
+    email_legend: 'Email settings'
     submissions:
-        - Submissions
-        - Show all submitted form data for form %s.
+        - 'Submissions'
+        - 'Show all submitted form data for form %s.'
     name:
-        - Name
-        - Internal name for this form, will not be shown in the frontend.
+        - 'Name'
+        - 'Internal name for this form, will not be shown in the frontend.'
     jumpTo:
-        - Redirect page
-        - Please choose the page to which visitors will be redirected after submitting the form.
+        - 'Redirect page'
+        - 'Please choose the page to which visitors will be redirected after submitting the form.'
     storeSubmissions:
-        - Store submission
-        - Please choose if you want to store the data of all form submissions.
+        - 'Store submission'
+        - 'Please choose if you want to store the data of all form submissions.'
     submissionTitle:
-        - Submission label
+        - 'Submission label'
         - 'Shown next to the date in the list of submissions. Use the field aliases as simple tokens, e.g. <code>##name## ##email##</code>. Changes apply to all submissions, fields a submission does not contain stay empty.'
     isMultistep:
-        - Multistep Form
-        - Choose if this form is a multistep.
+        - 'Multistep Form'
+        - 'Choose if this form is a multistep.'
     sendViaEmail:
-        - Send via email
-        - Send the submitted data by email.
+        - 'Send via email'
+        - 'Send the submitted data by email.'
     mailerTransport:
-        - Mailer transport
-        - Choose the transport this email is sent with.
+        - 'Mailer transport'
+        - 'Choose the transport this email is sent with.'
     recipient:
-        - Recipient address
-        - Separate multiple addresses with a comma.
+        - 'Recipient address'
+        - 'Separate multiple addresses with a comma.'
     subject:
-        - Subject
-        - Subject of the email.
+        - 'Subject'
+        - 'Subject of the email.'
     emailTemplate:
-        - Email template
-        - Choose an email template.
+        - 'Email template'
+        - 'Choose an email template.'

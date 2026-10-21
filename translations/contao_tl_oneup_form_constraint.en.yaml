@@ -1,84 +1,84 @@
 tl_oneup_form_constraint:
-    title_legend: Constraint
-    option_legend: Options
-    message_legend: Error Message
+    title_legend: 'Constraint'
+    option_legend: 'Options'
+    message_legend: 'Error Message'
     type:
-        - Type
-        - Please select a type.
+        - 'Type'
+        - 'Please select a type.'
     overwriteMessage:
-        - Define custom message
-        - Overwrite the default error message.
+        - 'Define custom message'
+        - 'Overwrite the default error message.'
     message:
-        - Message
-        - The error message that is displayed if this constraint fails to validate.
+        - 'Message'
+        - 'The error message that is displayed if this constraint fails to validate.'
     value:
-        - Value
-        - The value the submitted input is compared against.
+        - 'Value'
+        - 'The value the submitted input is compared against.'
     min:
-        - Minimum
-        - Leave empty to only check the maximum.
+        - 'Minimum'
+        - 'Leave empty to only check the maximum.'
     max:
-        - Maximum
-        - Leave empty to only check the minimum.
+        - 'Maximum'
+        - 'Leave empty to only check the minimum.'
     pattern:
-        - Pattern
-        - The regular expression including its delimiters, e.g. /^[a-z]+$/.
+        - 'Pattern'
+        - 'The regular expression including its delimiters, e.g. /^[a-z]+$/.'
     matchPattern:
-        - Input must match the pattern
-        - Disable to require that the input does not match the pattern.
+        - 'Input must match the pattern'
+        - 'Disable to require that the input does not match the pattern.'
     requireTopLevelDomain:
-        - Require a top-level domain
-        - Disable to also accept URLs such as https://localhost.
+        - 'Require a top-level domain'
+        - 'Disable to also accept URLs such as https://localhost.'
     maxSize:
-        - Maximum file size
-        - e.g. 2M or 500k. Leave empty to use the PHP upload limit.
+        - 'Maximum file size'
+        - 'e.g. 2M or 500k. Leave empty to use the PHP upload limit.'
     extensions:
-        - Allowed extensions
-        - Comma-separated list of file extensions, e.g. pdf, docx.
+        - 'Allowed extensions'
+        - 'Comma-separated list of file extensions, e.g. pdf, docx.'
     minWidth:
-        - Minimum width
-        - The minimum image width in pixels.
+        - 'Minimum width'
+        - 'The minimum image width in pixels.'
     maxWidth:
-        - Maximum width
-        - The maximum image width in pixels.
+        - 'Maximum width'
+        - 'The maximum image width in pixels.'
     minHeight:
-        - Minimum height
-        - The minimum image height in pixels.
+        - 'Minimum height'
+        - 'The minimum image height in pixels.'
     maxHeight:
-        - Maximum height
-        - The maximum image height in pixels.
+        - 'Maximum height'
+        - 'The maximum image height in pixels.'
     types:
-        basic: Basic
-        blank: Blank
-        notBlank: Not Blank
-        isTrue: Is true
-        string: String
-        regex: Regex
-        cssColor: CSS color
-        email: E-mail
-        length: Length
-        noSuspiciousCharacters: No suspicious characters
-        passwordStrength: Password strength
-        url: URL
-        wordCount: Word count
-        comparison: Comparison
-        divisibleBy: Divisible by
-        equalTo: Equal to
-        greaterThan: Greater than
-        greaterThanOrEqual: Greater than or equal
-        lessThan: Less than
-        lessThanOrEqual: Less than or equal
-        notEqualTo: Not equal to
-        number: Number
-        range: Range
-        negative: Negative
-        negativeOrZero: Negative or zero
-        positive: Positive
-        positiveOrZero: Positive or zero
-        date: Date
-        dateTime: Date and time
-        time: Time
-        choice: Choice
-        country: Country
-        file: File
-        image: Image
+        basic: 'Basic'
+        blank: 'Blank'
+        notBlank: 'Not Blank'
+        isTrue: 'Is true'
+        string: 'String'
+        regex: 'Regex'
+        cssColor: 'CSS color'
+        email: 'E-mail'
+        length: 'Length'
+        noSuspiciousCharacters: 'No suspicious characters'
+        passwordStrength: 'Password strength'
+        url: 'URL'
+        wordCount: 'Word count'
+        comparison: 'Comparison'
+        divisibleBy: 'Divisible by'
+        equalTo: 'Equal to'
+        greaterThan: 'Greater than'
+        greaterThanOrEqual: 'Greater than or equal'
+        lessThan: 'Less than'
+        lessThanOrEqual: 'Less than or equal'
+        notEqualTo: 'Not equal to'
+        number: 'Number'
+        range: 'Range'
+        negative: 'Negative'
+        negativeOrZero: 'Negative or zero'
+        positive: 'Positive'
+        positiveOrZero: 'Positive or zero'
+        date: 'Date'
+        dateTime: 'Date and time'
+        time: 'Time'
+        choice: 'Choice'
+        country: 'Country'
+        file: 'File'
+        image: 'Image'

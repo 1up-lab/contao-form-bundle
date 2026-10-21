@@ -1,148 +1,148 @@
 tl_oneup_form_field:
-    title_legend: Formularfeld
-    label_legend: Label und Platzhalter
-    help_legend: Hilfetext
-    expert_legend: Experten-Einstellungen
-    publish_legend: Veröffentlichung
-    config_legend: Konfiguration
-    options_legend: Optionen
+    title_legend: 'Formularfeld'
+    label_legend: 'Label und Platzhalter'
+    help_legend: 'Hilfetext'
+    expert_legend: 'Experten-Einstellungen'
+    publish_legend: 'Veröffentlichung'
+    config_legend: 'Konfiguration'
+    options_legend: 'Optionen'
     type:
-        - Typ
-        - Bitte wählen Sie einen Typ.
+        - 'Typ'
+        - 'Bitte wählen Sie einen Typ.'
     name:
-        - Name
-        - Interner Name für dieses Feld, wird im Frontend nicht angezeigt.
+        - 'Name'
+        - 'Interner Name für dieses Feld, wird im Frontend nicht angezeigt.'
     alias:
-        - Alias
-        - Interne Repräsentation dieses Feldes. Wird automatisch generiert.
+        - 'Alias'
+        - 'Interne Repräsentation dieses Feldes. Wird automatisch generiert.'
     required:
-        - Pflichtfeld
-        - Im Frontend wird ein * angezeigt, das dieses Feld als Pflichtfeld kennzeichnet.
+        - 'Pflichtfeld'
+        - 'Im Frontend wird ein * angezeigt, das dieses Feld als Pflichtfeld kennzeichnet.'
     trim:
-        - Leerzeichen entfernen
-        - Wenn aktiviert, werden Leerzeichen am Anfang und am Ende des übermittelten Wertes entfernt.
+        - 'Leerzeichen entfernen'
+        - 'Wenn aktiviert, werden Leerzeichen am Anfang und am Ende des übermittelten Wertes entfernt.'
     placeholder:
-        - Platzhalter
-        - Das placeholder-Attribut legt den Text fest, der in einem Formularfeld angezeigt wird, solange dieses keinen Wert hat.
+        - 'Platzhalter'
+        - 'Das placeholder-Attribut legt den Text fest, der in einem Formularfeld angezeigt wird, solange dieses keinen Wert hat.'
     label:
-        - Label
-        - Das Label dient als Bezeichnung für ein Element in der Benutzeroberfläche.
+        - 'Label'
+        - 'Das Label dient als Bezeichnung für ein Element in der Benutzeroberfläche.'
     labelHtml:
-        - HTML in der Beschriftung verwenden
-        - Ersetzt das Textfeld der Beschriftung durch einen Rich-Text-Editor, sodass Sie HTML-Elemente wie Links einfügen können.
+        - 'HTML in der Beschriftung verwenden'
+        - 'Ersetzt das Textfeld der Beschriftung durch einen Rich-Text-Editor, sodass Sie HTML-Elemente wie Links einfügen können.'
     help:
-        - Hilfetext
-        - Der Hilfetext wird unterhalb des zugehörigen Formularfeldes angezeigt.
+        - 'Hilfetext'
+        - 'Der Hilfetext wird unterhalb des zugehörigen Formularfeldes angezeigt.'
     helpHtml:
-        - HTML im Hilfetext verwenden
-        - Ersetzt das Textfeld des Hilfetextes durch einen Rich-Text-Editor, sodass Sie HTML-Elemente wie Links einfügen können.
+        - 'HTML im Hilfetext verwenden'
+        - 'Ersetzt das Textfeld des Hilfetextes durch einen Rich-Text-Editor, sodass Sie HTML-Elemente wie Links einfügen können.'
     defaultProtocol:
-        - Standard-Protokoll
-        - Wenn die URL kein Schema enthält, wird dieses Protokoll verwendet.
+        - 'Standard-Protokoll'
+        - 'Wenn die URL kein Schema enthält, wird dieses Protokoll verwendet.'
     checked:
-        - Aktiviert
-        - Wenn gesetzt, ist das Feld beim ersten Aufruf des Formulars aktiviert.
+        - 'Aktiviert'
+        - 'Wenn gesetzt, ist das Feld beim ersten Aufruf des Formulars aktiviert.'
     value:
-        - Wert
-        - Der Wert, der mit dem Formular übermittelt wird.
+        - 'Wert'
+        - 'Der Wert, der mit dem Formular übermittelt wird.'
     options:
-        - Optionen
-        - Hier die auswählbaren Optionen eintragen. Bleibt der Wert leer, wird stattdessen das Label übermittelt. Eine als Gruppe markierte Zeile beginnt eine neue Optionsgruppe.
+        - 'Optionen'
+        - 'Hier die auswählbaren Optionen eintragen. Bleibt der Wert leer, wird stattdessen das Label übermittelt. Eine als Gruppe markierte Zeile beginnt eine neue Optionsgruppe.'
     expanded:
-        - Ausgeklappt
-        - Die Optionen als Radio-Buttons oder Checkboxen statt als Auswahlmenü ausgeben.
+        - 'Ausgeklappt'
+        - 'Die Optionen als Radio-Buttons oder Checkboxen statt als Auswahlmenü ausgeben.'
     multiple:
-        - Mehrfachauswahl
-        - Die Auswahl mehrerer Optionen erlauben.
+        - 'Mehrfachauswahl'
+        - 'Die Auswahl mehrerer Optionen erlauben.'
     preferredChoices:
-        - Bevorzugte Optionen
-        - Diese Einträge werden am Anfang der Liste ausgegeben, in der hier gewählten Reihenfolge. Sie werden in der Backend-Sprache angezeigt, aber unabhängig davon gespeichert.
+        - 'Bevorzugte Optionen'
+        - 'Diese Einträge werden am Anfang der Liste ausgegeben, in der hier gewählten Reihenfolge. Sie werden in der Backend-Sprache angezeigt, aber unabhängig davon gespeichert.'
     duplicatePreferredChoices:
-        - Bevorzugte Optionen wiederholen
-        - Die bevorzugten Einträge zusätzlich in der vollständigen Liste darunter belassen, statt sie nur am Anfang auszugeben.
+        - 'Bevorzugte Optionen wiederholen'
+        - 'Die bevorzugten Einträge zusätzlich in der vollständigen Liste darunter belassen, statt sie nur am Anfang auszugeben.'
     alpha3:
-        - Dreibuchstabige Codes verwenden
-        - ISO-3166-1-Alpha-3-Codes statt der zweibuchstabigen Codes übermitteln.
+        - 'Dreibuchstabige Codes verwenden'
+        - 'ISO-3166-1-Alpha-3-Codes statt der zweibuchstabigen Codes übermitteln.'
     html5:
-        - HTML5-Eingabefeld
-        - Wenn aktiviert, wird das Feld als natives HTML5-Eingabefeld ausgegeben und der Wert muss dessen Format entsprechen.
+        - 'HTML5-Eingabefeld'
+        - 'Wenn aktiviert, wird das Feld als natives HTML5-Eingabefeld ausgegeben und der Wert muss dessen Format entsprechen.'
     multipleFiles:
-        - Mehrere Dateien
-        - Das Hochladen mehrerer Dateien erlauben.
+        - 'Mehrere Dateien'
+        - 'Das Hochladen mehrerer Dateien erlauben.'
     attachToEmail:
-        - An E-Mail anhängen
-        - Die hochgeladenen Dateien an die E-Mail anhängen.
+        - 'An E-Mail anhängen'
+        - 'Die hochgeladenen Dateien an die E-Mail anhängen.'
     storeFile:
-        - Hochgeladene Dateien speichern
-        - Die hochgeladenen Dateien in einem Ordner auf dem Server speichern.
+        - 'Hochgeladene Dateien speichern'
+        - 'Die hochgeladenen Dateien in einem Ordner auf dem Server speichern.'
     uploadFolder:
-        - Zielverzeichnis
-        - Bitte wählen Sie das Zielverzeichnis aus der Dateiübersicht.
+        - 'Zielverzeichnis'
+        - 'Bitte wählen Sie das Zielverzeichnis aus der Dateiübersicht.'
     useHomeDir:
-        - Home-Verzeichnis verwenden
-        - Die Datei im Home-Verzeichnis speichern, wenn sich ein Mitglied angemeldet hat.
+        - 'Home-Verzeichnis verwenden'
+        - 'Die Datei im Home-Verzeichnis speichern, wenn sich ein Mitglied angemeldet hat.'
     doNotOverwrite:
-        - Bestehende Dateien erhalten
-        - Der neuen Datei ein numerisches Suffix hinzufügen, wenn der Dateiname bereits existiert.
+        - 'Bestehende Dateien erhalten'
+        - 'Der neuen Datei ein numerisches Suffix hinzufügen, wenn der Dateiname bereits existiert.'
     addBackendLink:
-        - Backend-Link in E-Mail
-        - Einen Link zum Ordner der gespeicherten Datei in der Dateiverwaltung des Backends in die E-Mail einfügen.
+        - 'Backend-Link in E-Mail'
+        - 'Einen Link zum Ordner der gespeicherten Datei in der Dateiverwaltung des Backends in die E-Mail einfügen.'
     altchaAuto:
-        - Automatische Überprüfung
-        - Automatische Überprüfung ohne Benutzerinteraktion.
+        - 'Automatische Überprüfung'
+        - 'Automatische Überprüfung ohne Benutzerinteraktion.'
     altchaHideLogo:
-        - Logo ausblenden
-        - Das ALTCHA-Logo ausblenden.
+        - 'Logo ausblenden'
+        - 'Das ALTCHA-Logo ausblenden.'
     altchaHideFooter:
-        - Fußzeile ausblenden
-        - Die Fußzeile ausblenden (ALTCHA-Link).
+        - 'Fußzeile ausblenden'
+        - 'Die Fußzeile ausblenden (ALTCHA-Link).'
     altchaFloating:
-        - Schwebender Modus
-        - Aktiviert die schwebende Benutzeroberfläche.
+        - 'Schwebender Modus'
+        - 'Aktiviert die schwebende Benutzeroberfläche.'
     published:
-        - Veröffentlicht
-        - Dieses Feld im Frontend ausgeben.
+        - 'Veröffentlicht'
+        - 'Dieses Feld im Frontend ausgeben.'
     constraints:
-        - Validierungsregeln
-        - Die Validierungsregeln von %s bearbeiten.
+        - 'Validierungsregeln'
+        - 'Die Validierungsregeln von %s bearbeiten.'
     types:
-        texts: Textfelder
-        buttons: Buttons
-        choices: Auswahlfelder
-        dates: Datum und Zeit
-        moneys: Geldbeträge
-        numbers: Zahlen
-        others: Weitere Felder
-        birthday: Geburtsdatum
-        button: Button
-        checkbox: Checkbox
-        choice: Auswahl
-        color: Farbe
-        country: Land
-        currency: Währung
-        dateInterval: Zeitintervall
-        dateTime: Datum und Zeit
-        date: Datum
-        email: E-Mail
-        file: Datei-Upload
-        group: Gruppe
-        hidden: Verstecktes Feld
-        integer: Ganzzahl
-        language: Sprache
-        money: Geldbetrag
-        number: Zahl
-        password: Passwort
-        percent: Prozent
-        radio: Radio-Button
-        range: Bereich
-        reset: Zurücksetzen
-        search: Suche
-        step: Schritt
-        submit: Senden
-        tel: Telefon
-        text: Text
-        textarea: Textbereich
-        time: Zeit
-        timezone: Zeitzone
-        url: URL
-        week: Woche
+        texts: 'Textfelder'
+        buttons: 'Buttons'
+        choices: 'Auswahlfelder'
+        dates: 'Datum und Zeit'
+        moneys: 'Geldbeträge'
+        numbers: 'Zahlen'
+        others: 'Weitere Felder'
+        birthday: 'Geburtsdatum'
+        button: 'Button'
+        checkbox: 'Checkbox'
+        choice: 'Auswahl'
+        color: 'Farbe'
+        country: 'Land'
+        currency: 'Währung'
+        dateInterval: 'Zeitintervall'
+        dateTime: 'Datum und Zeit'
+        date: 'Datum'
+        email: 'E-Mail'
+        file: 'Datei-Upload'
+        group: 'Gruppe'
+        hidden: 'Verstecktes Feld'
+        integer: 'Ganzzahl'
+        language: 'Sprache'
+        money: 'Geldbetrag'
+        number: 'Zahl'
+        password: 'Passwort'
+        percent: 'Prozent'
+        radio: 'Radio-Button'
+        range: 'Bereich'
+        reset: 'Zurücksetzen'
+        search: 'Suche'
+        step: 'Schritt'
+        submit: 'Senden'
+        tel: 'Telefon'
+        text: 'Text'
+        textarea: 'Textbereich'
+        time: 'Zeit'
+        timezone: 'Zeitzone'
+        url: 'URL'
+        week: 'Woche'

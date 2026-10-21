@@ -1,4 +1,4 @@
 form:
-    previous: Previous
-    next: Next
-    finish: Submit
+    previous: 'Previous'
+    next: 'Next'
+    finish: 'Submit'

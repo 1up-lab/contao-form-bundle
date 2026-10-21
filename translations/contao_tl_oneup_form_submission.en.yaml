@@ -1,7 +1,7 @@
 tl_oneup_form_submission:
     tstamp:
-        - Submitted on
-        - Date and time of the submission.
+        - 'Submitted on'
+        - 'Date and time of the submission.'
     data:
-        - Data
-        - The submitted form data.
+        - 'Data'
+        - 'The submitted form data.'

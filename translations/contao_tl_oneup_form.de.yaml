@@ -1,39 +1,39 @@
 tl_oneup_form:
-    title_legend: Formular-Einstellungen
-    redirect_legend: Weiterleitungs-Einstellungen
-    submission_legend: Einreichungs-Einstellungen
-    multistep_legend: Multistep-Einstellungen
-    email_legend: E-Mail-Einstellungen
+    title_legend: 'Formular-Einstellungen'
+    redirect_legend: 'Weiterleitungs-Einstellungen'
+    submission_legend: 'Einreichungs-Einstellungen'
+    multistep_legend: 'Multistep-Einstellungen'
+    email_legend: 'E-Mail-Einstellungen'
     submissions:
-        - Einreichungen
-        - Alle übermittelten Formulardaten des Formulars %s anzeigen.
+        - 'Einreichungen'
+        - 'Alle übermittelten Formulardaten des Formulars %s anzeigen.'
     name:
-        - Name
-        - Interner Name für dieses Formular, wird im Frontend nicht angezeigt.
+        - 'Name'
+        - 'Interner Name für dieses Formular, wird im Frontend nicht angezeigt.'
     jumpTo:
-        - Weiterleitungsseite
-        - Bitte wählen Sie die Seite, zu der Besucher nach dem Absenden des Formulars weitergeleitet werden.
+        - 'Weiterleitungsseite'
+        - 'Bitte wählen Sie die Seite, zu der Besucher nach dem Absenden des Formulars weitergeleitet werden.'
     storeSubmissions:
-        - Einreichungen speichern
-        - Bitte wählen Sie, ob die Daten aller Formular-Einreichungen gespeichert werden sollen.
+        - 'Einreichungen speichern'
+        - 'Bitte wählen Sie, ob die Daten aller Formular-Einreichungen gespeichert werden sollen.'
     submissionTitle:
-        - Bezeichnung der Einreichungen
+        - 'Bezeichnung der Einreichungen'
         - 'Wird in der Liste der Einreichungen neben dem Datum angezeigt. Verwenden Sie die Feld-Aliase als Simple Tokens, z. B. <code>##name## ##email##</code>. Änderungen gelten für alle Einreichungen, Felder, die eine Einreichung nicht enthält, bleiben leer.'
     isMultistep:
-        - Mehrstufiges Formular
-        - Wählen Sie, ob dieses Formular mehrstufig ist.
+        - 'Mehrstufiges Formular'
+        - 'Wählen Sie, ob dieses Formular mehrstufig ist.'
     sendViaEmail:
-        - Per E-Mail senden
-        - Die übermittelten Daten per E-Mail senden.
+        - 'Per E-Mail senden'
+        - 'Die übermittelten Daten per E-Mail senden.'
     mailerTransport:
-        - Mailer-Transport
-        - Wählen Sie den Transport, über den diese E-Mail versendet wird.
+        - 'Mailer-Transport'
+        - 'Wählen Sie den Transport, über den diese E-Mail versendet wird.'
     recipient:
-        - Empfängeradresse
-        - Mehrere Adressen mit Komma trennen.
+        - 'Empfängeradresse'
+        - 'Mehrere Adressen mit Komma trennen.'
     subject:
-        - Betreff
-        - Betreff der E-Mail.
+        - 'Betreff'
+        - 'Betreff der E-Mail.'
     emailTemplate:
-        - E-Mail Template
-        - Wählen Sie ein E-Mail Template aus.
+        - 'E-Mail Template'
+        - 'Wählen Sie ein E-Mail Template aus.'
