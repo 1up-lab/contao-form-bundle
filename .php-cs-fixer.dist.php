@@ -49,6 +49,7 @@ return $config
         'ordered_imports' => true,
         'php_unit_strict' => true,
         'phpdoc_add_missing_param_annotation' => true,
+        'phpdoc_align' => ['align' => 'left'],
         'phpdoc_order' => true,
         'phpdoc_types_order' => [
             'null_adjustment' => 'always_last',

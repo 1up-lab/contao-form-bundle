@@ -144,8 +144,8 @@ class UploadedFileStorage
 
     private function getUniqueName(string $folder, string $name): string
     {
-        $filename = pathinfo($name, PATHINFO_FILENAME);
-        $extension = pathinfo($name, PATHINFO_EXTENSION);
+        $filename = pathinfo($name, \PATHINFO_FILENAME);
+        $extension = pathinfo($name, \PATHINFO_EXTENSION);
         $suffix = '' !== $extension ? '.' . $extension : '';
 
         $candidate = $name;

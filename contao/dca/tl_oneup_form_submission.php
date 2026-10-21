@@ -32,9 +32,9 @@ $GLOBALS['TL_DCA']['tl_oneup_form_submission'] = [
             'panelLayout' => 'filter;sort,search,limit',
         ],
         'label' => [
-            'fields' => ['tstamp', 'name'],
+            'fields' => ['tstamp'],
             'showColumns' => false,
-            'format' => '<small style="color:#aaa;">[%s]</small> %s',
+            'format' => '<small style="color:#aaa;">[%s]</small>',
         ],
         'global_operations' => [
             'all',
@@ -71,13 +71,10 @@ $GLOBALS['TL_DCA']['tl_oneup_form_submission'] = [
                 'default' => 0,
             ],
         ],
-        'name' => [
-            'sql' => [
-                'type' => Types::STRING,
-                'default' => '',
-            ],
-        ],
         'data' => [
+            'eval' => [
+                'doNotShow' => true,
+            ],
             'sql' => [
                 'type' => Types::JSON,
             ],

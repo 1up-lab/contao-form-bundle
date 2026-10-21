@@ -7,20 +7,20 @@ namespace Oneup\ContaoFormBundle\Model;
 use Contao\Model;
 
 /**
- * @property int    $id
- * @property int    $tstamp
+ * @property int $id
+ * @property int $tstamp
  * @property string $name
- * @property bool   $storeSubmissions
- * @property string $submissionExpression
- * @property int    $jumpTo
- * @property bool   $isMultistep
- * @property bool   $sendViaEmail
+ * @property bool $storeSubmissions
+ * @property string $submissionTitle
+ * @property int $jumpTo
+ * @property bool $isMultistep
+ * @property bool $sendViaEmail
  * @property string $mailerTransport
  * @property string $recipient
  * @property string $subject
  * @property string $emailTemplate
  *
- * @method static FormModel|null findById($id, array $opt = array())
+ * @method static FormModel|null findById($id, array $opt = [])
  */
 class FormModel extends Model
 {

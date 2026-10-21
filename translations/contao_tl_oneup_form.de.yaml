@@ -16,9 +16,9 @@ tl_oneup_form:
     storeSubmissions:
         - Einreichungen speichern
         - Bitte wählen Sie, ob die Daten aller Formular-Einreichungen gespeichert werden sollen.
-    submissionExpression:
-        - Expression
-        - Expression-Syntax, verwenden Sie <code>data</code>, um auf das zugrunde liegende Objekt zuzugreifen.
+    submissionTitle:
+        - Bezeichnung der Einreichungen
+        - 'Wird in der Liste der Einreichungen neben dem Datum angezeigt. Verwenden Sie die Feld-Aliase als Simple Tokens, z. B. <code>##name## ##email##</code>. Änderungen gelten für alle Einreichungen, Felder, die eine Einreichung nicht enthält, bleiben leer.'
     isMultistep:
         - Mehrstufiges Formular
         - Wählen Sie, ob dieses Formular mehrstufig ist.

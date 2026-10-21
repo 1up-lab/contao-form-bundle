@@ -16,9 +16,9 @@ tl_oneup_form:
     storeSubmissions:
         - Store submission
         - Please choose if you want to store the data of all form submissions.
-    submissionExpression:
-        - Expression
-        - Expression-Syntax, use <code>data</code> to access the underlying object.
+    submissionTitle:
+        - Submission label
+        - 'Shown next to the date in the list of submissions. Use the field aliases as simple tokens, e.g. <code>##name## ##email##</code>. Changes apply to all submissions, fields a submission does not contain stay empty.'
     isMultistep:
         - Multistep Form
         - Choose if this form is a multistep.

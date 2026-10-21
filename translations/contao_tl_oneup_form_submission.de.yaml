@@ -1,0 +1,7 @@
+tl_oneup_form_submission:
+    tstamp:
+        - Eingegangen am
+        - Datum und Uhrzeit der Einreichung.
+    data:
+        - Daten
+        - Die übermittelten Formulardaten.

@@ -59,7 +59,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
     ],
 
     'subpalettes' => [
-        'storeSubmissions' => 'submissionExpression',
+        'storeSubmissions' => 'submissionTitle',
         'sendViaEmail' => 'mailerTransport,recipient,subject,emailTemplate',
     ],
 
@@ -102,11 +102,10 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
                 'default' => false,
             ],
         ],
-        'submissionExpression' => [
+        'submissionTitle' => [
             'inputType' => 'text',
             'eval' => [
                 'decodeEntities' => true,
-                'mandatory' => true,
                 'maxlength' => 255,
                 'tl_class' => 'w50',
             ],

@@ -6,18 +6,10 @@ namespace Oneup\ContaoFormBundle\EventListener;
 
 use Contao\StringUtil;
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
-use Oneup\ContaoFormBundle\File\StoredFiles;
-use Oneup\ContaoFormBundle\Form\Builder\FormBuilder;
-use Oneup\ContaoFormBundle\Form\Type\ContaoStepType;
 use Oneup\ContaoFormBundle\Model\FormModel;
+use Oneup\ContaoFormBundle\Service\SubmissionValues;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-use Symfony\Component\Form\Button;
-use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Flow\FormFlowInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 
@@ -26,7 +18,7 @@ class SendViaEmailListener
 {
     public function __construct(
         private readonly MailerInterface $mailer,
-        private readonly FormBuilder $formBuilder,
+        private readonly SubmissionValues $submissionValues,
     ) {
     }
 
@@ -51,7 +43,7 @@ class SendViaEmailListener
             ->textTemplate('@Contao/form/email_text.txt.twig')
             ->context([
                 'form' => $formModel,
-                'values' => $this->getValues($this->getSubmittedForm($event), $event->storedFiles),
+                'values' => $this->submissionValues->fromEvent($event),
             ])
         ;
 
@@ -68,15 +60,6 @@ class SendViaEmailListener
         }
 
         $this->mailer->send($email);
-    }
-
-    private function getSubmittedForm(PostSubmitEvent $event): FormInterface
-    {
-        if (!$event->form instanceof FormFlowInterface) {
-            return $event->form;
-        }
-
-        return $this->formBuilder->buildAllSteps($event->formModel, (array) $event->form->getData());
     }
 
     private function getTemplate(FormModel $formModel): string
@@ -98,113 +81,5 @@ class SendViaEmailListener
         }
 
         return new Address($email, (string) ($GLOBALS['TL_ADMIN_NAME'] ?? ''));
-    }
-
-    private function getValues(FormInterface $form, StoredFiles $storedFiles): array
-    {
-        $values = [];
-
-        foreach ($form as $child) {
-            $values = [...$values, ...$this->getChildValues($child, $storedFiles)];
-        }
-
-        return $values;
-    }
-
-    /**
-     * Steps and groups are returned with their fields as children, fields with
-     * their formatted value and the links to their stored files.
-     */
-    private function getChildValues(FormInterface $child, StoredFiles $storedFiles): array
-    {
-        if ($child instanceof Button) {
-            return [];
-        }
-
-        $label = (string) ($child->getConfig()->getOption('label') ?: $child->getName());
-        $innerType = $child->getConfig()->getType()->getInnerType();
-
-        if ($innerType instanceof ContaoStepType || $innerType instanceof FormType) {
-            return [
-                [
-                    'label' => $label,
-                    'children' => $this->getValues($child, $storedFiles),
-                ],
-            ];
-        }
-
-        return [
-            [
-                'label' => $label,
-                'text' => $this->formatValue($this->getDisplayData($child)),
-                'links' => $this->getFileLinks($child->getData(), $storedFiles),
-            ],
-        ];
-    }
-
-    private function getDisplayData(FormInterface $child): mixed
-    {
-        $choiceList = $child->getConfig()->getAttribute('choice_list');
-
-        if (!$choiceList instanceof ChoiceListInterface) {
-            return $child->getData();
-        }
-
-        $labels = $choiceList->getOriginalKeys();
-
-        $label = static function (mixed $value) use ($labels): string {
-            $value = \is_string($value) ? $value : '';
-
-            return (string) ($labels[$value] ?? $value);
-        };
-
-        $values = $child->getViewData();
-
-        if (!\is_array($values)) {
-            return null === $values || '' === $values ? null : $label($values);
-        }
-
-        return array_map($label, $values);
-    }
-
-    private function getFileLinks(mixed $value, StoredFiles $storedFiles): array
-    {
-        $links = [];
-
-        foreach (\is_array($value) ? $value : [$value] as $upload) {
-            if (!$upload instanceof UploadedFile) {
-                continue;
-            }
-
-            $file = $storedFiles->get($upload);
-
-            if (null !== $file?->link) {
-                $links[] = [
-                    'name' => $file->name,
-                    'url' => $file->link,
-                ];
-            }
-        }
-
-        return $links;
-    }
-
-    private function formatValue(mixed $value): string
-    {
-        return match (true) {
-            $value instanceof UploadedFile => $value->getClientOriginalName(),
-            $value instanceof \DateTimeInterface => $value->format('Y-m-d H:i'),
-            \is_bool($value) => $value ? '1' : '',
-            \is_array($value) => $this->formatList($value),
-            \is_object($value) => '',
-            default => (string) $value,
-        };
-    }
-
-    private function formatList(array $values): string
-    {
-        $items = array_map($this->formatValue(...), $values);
-
-        return implode(', ', array_filter($items, static fn (string $item): bool => '' !== $item));
     }
 }

@@ -2,3 +2,5 @@ CTE:
     oneup_form:
         - Form
         - Includes a form.
+ERR:
+    invalidSubmissionTitle: 'The submission title cannot be parsed: %s'
