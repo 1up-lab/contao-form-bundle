@@ -4,45 +4,32 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Service;
 
-use Contao\CoreBundle\String\SimpleTokenParser;
 use Contao\StringUtil;
+use Oneup\ContaoFormBundle\ExpressionLanguage\SubmissionTitleLanguage;
+use Oneup\ContaoFormBundle\File\StoredFiles;
 
 class SubmissionTitle
 {
     public function __construct(
-        private readonly SimpleTokenParser $tokenParser,
+        private readonly SubmissionTitleLanguage $expressionLanguage,
+        private readonly ValueFormatter $valueFormatter,
     ) {
     }
 
-    public function generate(string $title, array $values): string
+    public function generate(string $expression, array $data, StoredFiles $storedFiles): string
     {
-        $tokens = $this->flatten($values);
-
-        try {
-            $title = $this->tokenParser->parse($title, $tokens);
-        } catch (\RuntimeException|\InvalidArgumentException) {
+        if ('' === trim($expression)) {
             return '';
         }
 
-        $title = (string) preg_replace('/##[^=!<>\s]+?##/', '', $title);
-
-        return StringUtil::specialchars(trim($title));
-    }
-
-    private function flatten(array $values): array
-    {
-        $fields = [];
-
-        foreach ($values as $value) {
-            if (isset($value['children'])) {
-                $fields = [...$fields, ...$this->flatten($value['children'])];
-
-                continue;
-            }
-
-            $fields[$value['name']] = $value['text'];
+        try {
+            $title = $this->expressionLanguage->evaluate($expression, [
+                'data' => new \ArrayObject($data, \ArrayObject::ARRAY_AS_PROPS),
+            ]);
+        } catch (\Throwable) {
+            return '';
         }
 
-        return $fields;
+        return StringUtil::specialchars(trim($this->valueFormatter->format($title, $storedFiles)));
     }
 }

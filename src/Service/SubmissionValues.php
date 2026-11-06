@@ -28,6 +28,11 @@ class SubmissionValues
         return $this->getValues($this->getSubmittedForm($event), $event->storedFiles);
     }
 
+    public function dataFromEvent(PostSubmitEvent $event): array
+    {
+        return $this->getData($this->getSubmittedForm($event));
+    }
+
     private function getSubmittedForm(PostSubmitEvent $event): FormInterface
     {
         if (!$event->form instanceof FormFlowInterface) {
@@ -59,9 +64,7 @@ class SubmissionValues
             'label' => (string) ($child->getConfig()->getOption('label') ?: $child->getName()),
         ];
 
-        $innerType = $child->getConfig()->getType()->getInnerType();
-
-        if ($innerType instanceof ContaoStepType || $innerType instanceof FormType) {
+        if ($this->hasChildren($child)) {
             return [...$value, 'children' => $this->getValues($child, $storedFiles)];
         }
 
@@ -70,6 +73,34 @@ class SubmissionValues
             'text' => $this->valueFormatter->format($this->getDisplayData($child), $storedFiles),
             'links' => $this->getFileLinks($child->getData(), $storedFiles),
         ];
+    }
+
+    private function getData(FormInterface $form): array
+    {
+        $data = [];
+
+        foreach ($form as $child) {
+            if ($child instanceof Button) {
+                continue;
+            }
+
+            if ($this->hasChildren($child)) {
+                $data = [...$data, ...$this->getData($child)];
+
+                continue;
+            }
+
+            $data[$child->getName()] = $this->getDisplayData($child);
+        }
+
+        return $data;
+    }
+
+    private function hasChildren(FormInterface $child): bool
+    {
+        $innerType = $child->getConfig()->getType()->getInnerType();
+
+        return $innerType instanceof ContaoStepType || $innerType instanceof FormType;
     }
 
     private function getDisplayData(FormInterface $child): mixed

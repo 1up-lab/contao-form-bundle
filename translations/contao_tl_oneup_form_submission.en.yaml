@@ -2,6 +2,9 @@ tl_oneup_form_submission:
     tstamp:
         - 'Submitted on'
         - 'Date and time of the submission.'
+    title:
+        - 'Label'
+        - 'Generated from the submission label of the form when the form was submitted.'
     data:
         - 'Data'
         - 'The submitted form data.'

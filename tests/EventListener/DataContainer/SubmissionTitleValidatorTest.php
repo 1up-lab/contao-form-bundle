@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Tests\EventListener\DataContainer;
 
-use Contao\CoreBundle\String\SimpleTokenParser;
 use Oneup\ContaoFormBundle\EventListener\DataContainer\SubmissionTitleValidator;
+use Oneup\ContaoFormBundle\ExpressionLanguage\SubmissionTitleLanguage;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SubmissionTitleValidatorTest extends TestCase
@@ -23,26 +22,29 @@ class SubmissionTitleValidatorTest extends TestCase
     public static function validTitleProvider(): iterable
     {
         yield 'empty' => [''];
-        yield 'tokens' => ['##name## ##email##'];
-        yield 'unknown token' => ['##emial##'];
-        yield 'condition' => ['{if company != ""}##company## – {endif}##name##'];
+        yield 'fields' => ['data["name"] ~ " " ~ data["e-mail"]'];
+        yield 'property access' => ['data.name ~ " " ~ data["e-mail"]'];
+        yield 'condition' => ['(data["company"] ? data["company"] ~ " – " : "") ~ data["name"]'];
+        yield 'comparison' => ['data.age < 18 ? "minor" : "adult"'];
     }
 
     /**
      * @dataProvider invalidTitleProvider
      */
-    public function testRejectsInvalidTitles(string $title): void
+    public function testRejectsInvalidTitles(string $title, string $message): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('ERR.invalidSubmissionTitle');
+        $this->expectExceptionMessage($message);
 
         $this->createValidator()($title);
     }
 
     public static function invalidTitleProvider(): iterable
     {
-        yield 'unclosed condition' => ['{if company != ""}##company##'];
-        yield 'invalid expression' => ['{if company ==}##company##{endif}'];
+        yield 'field without data' => ['name', 'Variable "name" is not valid'];
+        yield 'unknown function' => ['upper(data["name"])', 'The function "upper" does not exist'];
+        yield 'syntax error' => ['data["name"] ~', 'Unexpected token "end of expression"'];
+        yield 'simple token' => ['##name##', 'Unexpected character "#"'];
     }
 
     private function createValidator(): SubmissionTitleValidator
@@ -50,9 +52,9 @@ class SubmissionTitleValidatorTest extends TestCase
         $translator = $this->createMock(TranslatorInterface::class);
         $translator
             ->method('trans')
-            ->willReturnArgument(0)
+            ->willReturnCallback(static fn (string $id, array $parameters): string => $id . ': ' . implode(' ', $parameters))
         ;
 
-        return new SubmissionTitleValidator(new SimpleTokenParser(new ExpressionLanguage()), $translator);
+        return new SubmissionTitleValidator(new SubmissionTitleLanguage(), $translator);
     }
 }

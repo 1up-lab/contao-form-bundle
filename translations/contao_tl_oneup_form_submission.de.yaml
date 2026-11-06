@@ -2,6 +2,9 @@ tl_oneup_form_submission:
     tstamp:
         - 'Eingegangen am'
         - 'Datum und Uhrzeit der Einreichung.'
+    title:
+        - 'Bezeichnung'
+        - 'Beim Absenden aus der Bezeichnung der Einreichungen des Formulars erzeugt.'
     data:
         - 'Daten'
         - 'Die übermittelten Formulardaten.'

@@ -6,6 +6,7 @@ namespace Oneup\ContaoFormBundle\EventListener;
 
 use Oneup\ContaoFormBundle\Event\PostSubmitEvent;
 use Oneup\ContaoFormBundle\Model\SubmissionModel;
+use Oneup\ContaoFormBundle\Service\SubmissionTitle;
 use Oneup\ContaoFormBundle\Service\SubmissionValues;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
@@ -14,6 +15,7 @@ class SaveFormSubmissionListener
 {
     public function __construct(
         private readonly SubmissionValues $submissionValues,
+        private readonly SubmissionTitle $submissionTitle,
     ) {
     }
 
@@ -25,9 +27,12 @@ class SaveFormSubmissionListener
             return;
         }
 
+        $data = $this->submissionValues->dataFromEvent($event);
+
         $submission = new SubmissionModel();
         $submission->pid = $formModel->id;
         $submission->tstamp = time();
+        $submission->title = $this->submissionTitle->generate((string) $formModel->submissionTitle, $data, $event->storedFiles);
         $submission->data = (string) json_encode($this->submissionValues->fromEvent($event));
 
         $submission->save();

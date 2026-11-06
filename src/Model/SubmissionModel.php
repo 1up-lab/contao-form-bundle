@@ -10,6 +10,7 @@ use Contao\Model;
  * @property int $id
  * @property int $pid
  * @property int $tstamp
+ * @property string $title
  * @property string $data
  */
 class SubmissionModel extends Model

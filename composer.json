@@ -29,6 +29,7 @@
         "contao/manager-plugin": "^2.3",
         "symfony/config": "^7.4",
         "symfony/dependency-injection": "^7.4",
+        "symfony/expression-language": "^7.4",
         "symfony/http-kernel": "^7.4",
         "symfony/form": "^7.4",
         "symfony/options-resolver": "^7.4",

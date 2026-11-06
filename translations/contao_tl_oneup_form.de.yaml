@@ -18,7 +18,7 @@ tl_oneup_form:
         - 'Bitte wählen Sie, ob die Daten aller Formular-Einreichungen gespeichert werden sollen.'
     submissionTitle:
         - 'Bezeichnung der Einreichungen'
-        - 'Wird in der Liste der Einreichungen neben dem Datum angezeigt. Verwenden Sie die Feld-Aliase als Simple Tokens, z. B. <code>##name## ##email##</code>. Änderungen gelten für alle Einreichungen, Felder, die eine Einreichung nicht enthält, bleiben leer.'
+        - 'Wird in der Liste der Einreichungen neben dem Datum angezeigt. Verwenden Sie die Feld-Aliase mit <code>data</code>, z. B. <code>data.firstname ~ " " ~ data.lastname ~ " · " ~ data["e-mail"]</code>. Aliase mit Bindestrich schreiben Sie in eckigen Klammern. Felder, die eine Einreichung nicht enthält, sind leer. Änderungen gelten nur für neue Einreichungen.'
     isMultistep:
         - 'Mehrstufiges Formular'
         - 'Wählen Sie, ob dieses Formular mehrstufig ist.'

@@ -3,4 +3,4 @@ CTE:
         - 'Formular'
         - 'Ein Formular hinzufügen.'
 ERR:
-    invalidSubmissionTitle: 'Der Titel der Einreichung kann nicht verarbeitet werden: %s'
+    invalidSubmissionTitle: 'Die Bezeichnung der Einreichungen ist ungültig: %s'

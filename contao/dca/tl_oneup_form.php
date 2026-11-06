@@ -105,12 +105,13 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
         'submissionTitle' => [
             'inputType' => 'text',
             'eval' => [
-                'decodeEntities' => true,
-                'maxlength' => 255,
+                'useRawRequestData' => true,
+                'maxlength' => 1024,
                 'tl_class' => 'w50',
             ],
             'sql' => [
                 'type' => Types::STRING,
+                'length' => 1024,
                 'default' => '',
             ],
         ],

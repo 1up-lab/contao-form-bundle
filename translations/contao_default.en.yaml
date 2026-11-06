@@ -3,4 +3,4 @@ CTE:
         - 'Form'
         - 'Includes a form.'
 ERR:
-    invalidSubmissionTitle: 'The submission title cannot be parsed: %s'
+    invalidSubmissionTitle: 'The submission label is invalid: %s'
