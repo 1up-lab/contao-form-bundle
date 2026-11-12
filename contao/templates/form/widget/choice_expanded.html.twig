@@ -23,7 +23,7 @@
 <div{% block options_attributes %}{{ options_attributes }}{% endblock %}>
     {%- for child in form -%}
         {%- block option -%}
-            <span>{{ form_widget(child) }} {{ form_label(child, null, {translation_domain: choice_translation_domain|default(null)}) }}</span>
+            <span>{{ form_widget(child) }} {{ form_label(child, null, {translation_domain: choice_translation_domain|default(null), required: false}) }}</span>
         {%- endblock -%}
     {%- endfor -%}
 </div>

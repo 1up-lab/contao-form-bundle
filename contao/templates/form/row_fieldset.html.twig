@@ -4,7 +4,7 @@
     well as for groups and steps.
 
         <fieldset class="form-row form-row--choice">
-          <legend>Your interests</legend>
+          <legend>Your interests<span class="form-label__required" aria-hidden="true">*</span></legend>
           <div class="form-row__options">…</div>
           <ul class="form-errors">…</ul>
         </fieldset>
@@ -15,6 +15,7 @@
 
     Optional variables:
         @var string|false label
+        @var bool required
         @var array row_attr
         @var \Contao\CoreBundle\String\HtmlAttributes row_attributes
 #}
@@ -31,7 +32,14 @@
 
 <fieldset{% block row_attributes %}{{ row_attributes }}{% endblock %}>
     {%- block row_legend -%}
-        {% if label is not same as(false) and label is not empty %}<legend>{{ label }}</legend>{% endif %}
+        {% if label is not same as(false) and label is not empty %}
+            <legend>
+                {{- label -}}
+                {%- block legend_required -%}
+                    {% if required|default(false) and field_type != 'form' %}<span class="form-label__required" aria-hidden="true">*</span>{% endif %}
+                {%- endblock -%}
+            </legend>
+        {% endif %}
     {%- endblock -%}
     {%- block row_widget %}{{ form_widget(form) }}{% endblock -%}
     {%- block row_errors %}{{ form_errors(form) }}{% endblock -%}
