@@ -7,4 +7,5 @@ services:
         resource: '../src/'
         exclude:
             - '../src/ContaoManager/'
+            - '../src/NotificationCenter/'
             - '../src/OneupContaoFormBundle.php'

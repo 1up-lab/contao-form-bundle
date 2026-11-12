@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
+use Terminal42\NotificationCenterBundle\Terminal42NotificationCenterBundle;
 
 class OneupContaoFormBundle extends AbstractBundle
 {
@@ -22,5 +23,16 @@ class OneupContaoFormBundle extends AbstractBundle
     public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $container): void
     {
         $configurator->import('../config/services.yaml');
+
+        if ($this->hasNotificationCenter($container)) {
+            $configurator->import('../config/notification_center.yaml');
+        }
+    }
+
+    private function hasNotificationCenter(ContainerBuilder $container): bool
+    {
+        $bundles = (array) $container->getParameter('kernel.bundles');
+
+        return \in_array(Terminal42NotificationCenterBundle::class, $bundles, true);
     }
 }

@@ -19,6 +19,8 @@ use Contao\Model;
  * @property string $recipient
  * @property string $subject
  * @property string $emailTemplate
+ * @property bool $sendNotification
+ * @property int $notification
  *
  * @method static FormModel|null findById($id, array $opt = [])
  */

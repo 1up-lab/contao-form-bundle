@@ -4,6 +4,7 @@ tl_oneup_form:
     submission_legend: 'Einreichungs-Einstellungen'
     multistep_legend: 'Multistep-Einstellungen'
     email_legend: 'E-Mail-Einstellungen'
+    notification_legend: 'Notification Center'
     submissions:
         - 'Einreichungen'
         - 'Alle übermittelten Formulardaten des Formulars %s anzeigen.'
@@ -37,3 +38,9 @@ tl_oneup_form:
     emailTemplate:
         - 'E-Mail Template'
         - 'Wählen Sie ein E-Mail Template aus.'
+    sendNotification:
+        - 'Benachrichtigung senden'
+        - 'Beim Absenden des Formulars eine Benachrichtigung über das Notification Center senden.'
+    notification:
+        - 'Benachrichtigung'
+        - 'Wählen Sie die Benachrichtigung aus. Nachrichten, Empfänger und Sprachen werden im Notification Center verwaltet.'

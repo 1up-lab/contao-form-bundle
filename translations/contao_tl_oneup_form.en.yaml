@@ -4,6 +4,7 @@ tl_oneup_form:
     submission_legend: 'Submission settings'
     multistep_legend: 'Multistep settings'
     email_legend: 'Email settings'
+    notification_legend: 'Notification Center'
     submissions:
         - 'Submissions'
         - 'Show all submitted form data for form %s.'
@@ -37,3 +38,9 @@ tl_oneup_form:
     emailTemplate:
         - 'Email template'
         - 'Choose an email template.'
+    sendNotification:
+        - 'Send notification'
+        - 'Send a Notification Center notification when the form is submitted.'
+    notification:
+        - 'Notification'
+        - 'Choose the notification to send. Messages, recipients and languages are managed in the Notification Center.'

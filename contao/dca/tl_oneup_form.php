@@ -203,5 +203,29 @@ $GLOBALS['TL_DCA']['tl_oneup_form'] = [
                 'default' => '',
             ],
         ],
+        'sendNotification' => [
+            'inputType' => 'checkbox',
+            'eval' => [
+                'submitOnChange' => true,
+            ],
+            'sql' => [
+                'type' => Types::BOOLEAN,
+                'default' => false,
+            ],
+        ],
+        'notification' => [
+            'inputType' => 'select',
+            'eval' => [
+                'mandatory' => true,
+                'includeBlankOption' => true,
+                'chosen' => true,
+                'tl_class' => 'w50',
+            ],
+            'sql' => [
+                'type' => Types::INTEGER,
+                'unsigned' => true,
+                'default' => 0,
+            ],
+        ],
     ],
 ];
