@@ -262,7 +262,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
         ',
         'altcha' => '
             {title_legend},name,type;
-            {config_legend,altchaAuto,altchaHideLogo,altchaHideFooter,altchaFloating;
+            {config_legend},altchaAuto,altchaHideLogo,altchaHideFooter,altchaFloating;
             {publish_legend},published;
         ',
     ],
