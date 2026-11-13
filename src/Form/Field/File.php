@@ -28,6 +28,8 @@ class File extends AbstractField implements FieldInterface
 
     public function resolveConstraints(FieldModel $model, array $constraints): array
     {
+        $constraints = parent::resolveConstraints($model, $constraints);
+
         $constraints[] = new FileConstraint(
             maxSize: $this->getMaxFileSize(),
             extensions: array_fill_keys($this->getAllowedExtensions(), []),

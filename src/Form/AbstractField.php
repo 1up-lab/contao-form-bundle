@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oneup\ContaoFormBundle\Form;
 
 use Oneup\ContaoFormBundle\Model\FieldModel;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 abstract class AbstractField
 {
@@ -92,6 +93,18 @@ abstract class AbstractField
 
     public function resolveConstraints(FieldModel $model, array $constraints): array
     {
+        if (!$model->required) {
+            return $constraints;
+        }
+
+        foreach ($constraints as $constraint) {
+            if ($constraint instanceof NotBlank) {
+                return $constraints;
+            }
+        }
+
+        $constraints[] = new NotBlank();
+
         return $constraints;
     }
 }
