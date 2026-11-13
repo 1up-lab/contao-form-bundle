@@ -30,10 +30,11 @@ class Text extends AbstractField implements FieldInterface
 {
     public function resolveOptions(FieldModel $model): array
     {
-        $options = [
-            ...parent::resolveOptions($model),
-            'trim' => $model->trim,
-        ];
+        $options = parent::resolveOptions($model);
+
+        if ('password' !== $model->type) {
+            $options['trim'] = $model->trim;
+        }
 
         if ($model->placeholder) {
             $options['attr']['placeholder'] = $model->placeholder;
