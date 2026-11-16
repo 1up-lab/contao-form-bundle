@@ -22,6 +22,6 @@ class Hidden extends AbstractField implements FieldInterface
 
     public function resolveData(FieldModel $model): mixed
     {
-        return $model->value ?: null;
+        return '' !== $model->value ? $model->value : null;
     }
 }
