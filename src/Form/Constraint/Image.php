@@ -15,6 +15,7 @@ class Image extends File implements ConstraintInterface
     protected array $messageOptions = [
         'maxSizeMessage',
         'extensionsMessage',
+        'mimeTypesMessage',
         'minWidthMessage',
         'maxWidthMessage',
         'minHeightMessage',

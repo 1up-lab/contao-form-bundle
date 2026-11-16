@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
 #[AsConstraint('url', UrlConstraint::class)]
 class Url extends AbstractConstraint implements ConstraintInterface
 {
+    protected array $messageOptions = ['message', 'tldMessage'];
+
     public function resolveOptions(ConstraintModel $model): array
     {
         return [

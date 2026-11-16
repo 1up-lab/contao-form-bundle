@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\Length as LengthConstraint;
 #[AsConstraint('length', LengthConstraint::class)]
 class Length extends AbstractConstraint implements ConstraintInterface
 {
-    protected array $messageOptions = ['minMessage', 'maxMessage'];
+    protected array $messageOptions = ['minMessage', 'maxMessage', 'exactMessage'];
 
     public function resolveOptions(ConstraintModel $model): array
     {
