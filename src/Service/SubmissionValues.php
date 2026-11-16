@@ -11,6 +11,7 @@ use Oneup\ContaoFormBundle\Form\Type\ContaoStepType;
 use Symfony\Component\Form\Button;
 use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Flow\FormFlowInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -47,7 +48,7 @@ class SubmissionValues
         $values = [];
 
         foreach ($form as $child) {
-            if ($child instanceof Button) {
+            if ($this->isExcluded($child)) {
                 continue;
             }
 
@@ -80,7 +81,7 @@ class SubmissionValues
         $data = [];
 
         foreach ($form as $child) {
-            if ($child instanceof Button) {
+            if ($this->isExcluded($child)) {
                 continue;
             }
 
@@ -94,6 +95,15 @@ class SubmissionValues
         }
 
         return $data;
+    }
+
+    private function isExcluded(FormInterface $child): bool
+    {
+        if ($child instanceof Button) {
+            return true;
+        }
+
+        return $child->getConfig()->getType()->getInnerType() instanceof PasswordType;
     }
 
     private function hasChildren(FormInterface $child): bool
