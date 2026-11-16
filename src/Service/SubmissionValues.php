@@ -10,8 +10,13 @@ use Oneup\ContaoFormBundle\Form\Builder\FormBuilder;
 use Oneup\ContaoFormBundle\Form\Type\ContaoStepType;
 use Symfony\Component\Form\Button;
 use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\WeekType;
 use Symfony\Component\Form\Flow\FormFlowInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -71,9 +76,31 @@ class SubmissionValues
 
         return [
             ...$value,
-            'text' => $this->valueFormatter->format($this->getDisplayData($child), $storedFiles),
+            'text' => $this->getText($child, $storedFiles),
             'links' => $this->getFileLinks($child->getData(), $storedFiles),
         ];
+    }
+
+    private function getText(FormInterface $child, StoredFiles $storedFiles): string
+    {
+        $viewData = $child->getViewData();
+
+        if ($this->isShownAsEntered($child) && \is_string($viewData)) {
+            return $viewData;
+        }
+
+        return $this->valueFormatter->format($this->getDisplayData($child), $storedFiles);
+    }
+
+    private function isShownAsEntered(FormInterface $child): bool
+    {
+        $innerType = $child->getConfig()->getType()->getInnerType();
+
+        return $innerType instanceof DateType
+            || $innerType instanceof BirthdayType
+            || $innerType instanceof TimeType
+            || $innerType instanceof WeekType
+            || $innerType instanceof PercentType;
     }
 
     private function getData(FormInterface $form): array

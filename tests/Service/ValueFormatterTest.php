@@ -9,6 +9,8 @@ use Oneup\ContaoFormBundle\File\StoredFiles;
 use Oneup\ContaoFormBundle\Service\ValueFormatter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Translation\Loader\ArrayLoader;
+use Symfony\Component\Translation\Translator;
 
 class ValueFormatterTest extends TestCase
 {
@@ -17,7 +19,7 @@ class ValueFormatterTest extends TestCase
      */
     public function testFormatsValuesAsText(mixed $value, string $expected): void
     {
-        self::assertSame($expected, (new ValueFormatter())->format($value, new StoredFiles()));
+        self::assertSame($expected, $this->createFormatter()->format($value, new StoredFiles()));
     }
 
     public static function valueProvider(): iterable
@@ -28,6 +30,9 @@ class ValueFormatterTest extends TestCase
         yield 'unchecked' => [false, ''];
         yield 'date' => [new \DateTimeImmutable('2026-10-21 14:30'), '2026-10-21 14:30'];
         yield 'list' => [['Course A', '', null, 'Course B'], 'Course A, Course B'];
+        yield 'interval' => [new \DateInterval('P1Y2M'), '1 year, 2 months'];
+        yield 'negative interval' => [(new \DateTimeImmutable('2026-01-02'))->diff(new \DateTimeImmutable('2026-01-01')), '-1 day'];
+        yield 'empty interval' => [new \DateInterval('P0D'), ''];
         yield 'object' => [new \stdClass(), ''];
     }
 
@@ -41,7 +46,20 @@ class ValueFormatterTest extends TestCase
 
         self::assertSame(
             'files/uploads/cv.pdf, photo.jpg',
-            (new ValueFormatter())->format([$stored, $notStored], $storedFiles),
+            $this->createFormatter()->format([$stored, $notStored], $storedFiles),
         );
+    }
+
+    private function createFormatter(): ValueFormatter
+    {
+        $translator = new Translator('en');
+        $translator->addLoader('array', new ArrayLoader());
+        $translator->addResource('array', [
+            'interval.years' => '%count% year|%count% years',
+            'interval.months' => '%count% month|%count% months',
+            'interval.days' => '%count% day|%count% days',
+        ], 'en', 'oneup_form_bundle');
+
+        return new ValueFormatter($translator);
     }
 }

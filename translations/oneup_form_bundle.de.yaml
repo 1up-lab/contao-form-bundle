@@ -2,3 +2,11 @@ form:
     previous: 'Zurück'
     next: 'Weiter'
     finish: 'Senden'
+
+interval:
+    years: '%count% Jahr|%count% Jahre'
+    months: '%count% Monat|%count% Monate'
+    days: '%count% Tag|%count% Tage'
+    hours: '%count% Stunde|%count% Stunden'
+    minutes: '%count% Minute|%count% Minuten'
+    seconds: '%count% Sekunde|%count% Sekunden'
