@@ -4,3 +4,4 @@ CTE:
         - 'Includes a form.'
 ERR:
     invalidSubmissionTitle: 'The submission label is invalid: %s'
+    invalidRegexPattern: 'The pattern is not a valid regular expression. It needs delimiters, e.g. /^[a-z]+$/.'

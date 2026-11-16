@@ -4,3 +4,4 @@ CTE:
         - 'Ein Formular hinzufügen.'
 ERR:
     invalidSubmissionTitle: 'Die Bezeichnung der Einreichungen ist ungültig: %s'
+    invalidRegexPattern: 'Das Muster ist kein gültiger regulärer Ausdruck. Es benötigt Trennzeichen, z. B. /^[a-z]+$/.'
