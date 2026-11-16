@@ -121,7 +121,6 @@ tl_oneup_form_field:
         number: 'Number'
         password: 'Password'
         percent: 'Percent'
-        radio: 'Radio'
         range: 'Range'
         reset: 'Reset'
         search: 'Search'

@@ -133,7 +133,6 @@ tl_oneup_form_field:
         number: 'Zahl'
         password: 'Passwort'
         percent: 'Prozent'
-        radio: 'Radio-Button'
         range: 'Bereich'
         reset: 'Zurücksetzen'
         search: 'Suche'

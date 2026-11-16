@@ -181,14 +181,6 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             {expert_legend},required;
             {publish_legend},published;
         ',
-        'radio' => '
-            {title_legend},name,type,alias;
-            {label_legend},label,labelHtml;
-            {help_legend},help,helpHtml;
-            {config_legend},checked;
-            {expert_legend},required;
-            {publish_legend},published;
-        ',
         'range' => '
             {title_legend},name,type;
             {publish_legend},published;
