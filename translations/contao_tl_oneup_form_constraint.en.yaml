@@ -26,6 +26,9 @@ tl_oneup_form_constraint:
     matchPattern:
         - 'Input must match the pattern'
         - 'Disable to require that the input does not match the pattern.'
+    protocols:
+        - 'Allowed protocols'
+        - 'URLs starting with any other protocol are rejected.'
     requireTopLevelDomain:
         - 'Require a top-level domain'
         - 'Disable to also accept URLs such as https://localhost.'

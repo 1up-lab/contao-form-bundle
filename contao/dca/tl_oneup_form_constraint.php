@@ -85,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_constraint'] = [
         ',
         'url' => '
             {title_legend},type;
-            {option_legend},requireTopLevelDomain;
+            {option_legend},protocols,requireTopLevelDomain;
             {message_legend},overwriteMessage;
         ',
         'wordCount' => '
@@ -303,6 +303,29 @@ $GLOBALS['TL_DCA']['tl_oneup_form_constraint'] = [
             'sql' => [
                 'type' => Types::BOOLEAN,
                 'default' => true,
+            ],
+        ],
+        'protocols' => [
+            'inputType' => 'checkbox',
+            'options' => [
+                'file',
+                'ftp',
+                'https',
+                'http',
+                'imap',
+                'irc',
+                'nntp',
+                'wss',
+            ],
+            'default' => ['https', 'http'],
+            'eval' => [
+                'multiple' => true,
+                'mandatory' => true,
+                'tl_class' => 'clr',
+            ],
+            'sql' => [
+                'type' => Types::BLOB,
+                'notnull' => false,
             ],
         ],
         'requireTopLevelDomain' => [

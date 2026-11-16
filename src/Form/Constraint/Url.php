@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oneup\ContaoFormBundle\Form\Constraint;
 
+use Contao\StringUtil;
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
@@ -17,9 +18,17 @@ class Url extends AbstractConstraint implements ConstraintInterface
 
     public function resolveOptions(ConstraintModel $model): array
     {
-        return [
+        $options = [
             ...parent::resolveOptions($model),
             'requireTld' => (bool) $model->requireTopLevelDomain,
         ];
+
+        $protocols = (array) StringUtil::deserialize($model->protocols, true);
+
+        if ($protocols) {
+            $options['protocols'] = array_values($protocols);
+        }
+
+        return $options;
     }
 }

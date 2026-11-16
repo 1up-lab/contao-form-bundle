@@ -20,6 +20,7 @@ use Contao\Model\Collection;
  * @property int|null $max
  * @property string $pattern
  * @property bool $matchPattern
+ * @property string|null $protocols
  * @property bool $requireTopLevelDomain
  * @property string $maxSize
  * @property string $extensions

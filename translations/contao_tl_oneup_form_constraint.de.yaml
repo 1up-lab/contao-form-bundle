@@ -26,6 +26,9 @@ tl_oneup_form_constraint:
     matchPattern:
         - 'Eingabe muss dem Muster entsprechen'
         - 'Deaktivieren, um zu verlangen, dass die Eingabe dem Muster nicht entspricht.'
+    protocols:
+        - 'Erlaubte Protokolle'
+        - 'URLs mit einem anderen Protokoll werden abgelehnt.'
     requireTopLevelDomain:
         - 'Top-Level-Domain verlangen'
         - 'Deaktivieren, um auch URLs wie https://localhost zu akzeptieren.'
