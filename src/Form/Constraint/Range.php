@@ -17,11 +17,11 @@ class Range extends AbstractConstraint implements ConstraintInterface
     {
         $options = [];
 
-        if ($model->min) {
+        if (null !== $model->min) {
             $options['min'] = (int) $model->min;
         }
 
-        if ($model->max) {
+        if (null !== $model->max) {
             $options['max'] = (int) $model->max;
         }
 
