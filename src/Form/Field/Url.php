@@ -19,7 +19,7 @@ class Url extends AbstractField implements FieldInterface
         $options = [
             ...parent::resolveOptions($model),
             'trim' => $model->trim,
-            'default_protocol' => $model->defaultProtocol,
+            'default_protocol' => $this->resolveDefaultProtocol($model),
         ];
 
         if ($model->placeholder) {
@@ -27,5 +27,16 @@ class Url extends AbstractField implements FieldInterface
         }
 
         return $options;
+    }
+
+    private function resolveDefaultProtocol(FieldModel $model): string|null
+    {
+        $protocol = str_replace('://', '', (string) $model->defaultProtocol);
+
+        if ('' === $protocol) {
+            return null;
+        }
+
+        return $protocol;
     }
 }

@@ -431,7 +431,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
             ],
             'eval' => [
                 'chosen' => true,
-                'mandatory' => true,
+                'includeBlankOption' => true,
                 'tl_class' => 'w50',
             ],
             'sql' => [
