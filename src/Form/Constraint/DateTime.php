@@ -6,10 +6,11 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\DateTime as DateTimeConstraint;
 
-#[AsConstraint('dateTime', DateTimeConstraint::class)]
+#[AsConstraint('dateTime', DateTimeConstraint::class, group: ConstraintGroup::Date)]
 class DateTime extends AbstractConstraint implements ConstraintInterface
 {
 }

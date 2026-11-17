@@ -6,10 +6,11 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\NotBlank as NotBlankConstraint;
 
-#[AsConstraint('notBlank', NotBlankConstraint::class)]
+#[AsConstraint('notBlank', NotBlankConstraint::class, group: ConstraintGroup::Basic)]
 class NotBlank extends AbstractConstraint implements ConstraintInterface
 {
 }

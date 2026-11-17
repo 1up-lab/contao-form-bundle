@@ -6,10 +6,11 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractComparisonConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\NotEqualTo as NotEqualToConstraint;
 
-#[AsConstraint('notEqualTo', NotEqualToConstraint::class)]
+#[AsConstraint('notEqualTo', NotEqualToConstraint::class, group: ConstraintGroup::Comparison)]
 class NotEqualTo extends AbstractComparisonConstraint implements ConstraintInterface
 {
 }

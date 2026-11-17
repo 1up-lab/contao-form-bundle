@@ -6,11 +6,12 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Symfony\Component\Validator\Constraints\Range as RangeConstraint;
 
-#[AsConstraint('range', RangeConstraint::class)]
+#[AsConstraint('range', RangeConstraint::class, group: ConstraintGroup::Number)]
 class Range extends AbstractConstraint implements ConstraintInterface
 {
     public function resolveOptions(ConstraintModel $model): array

@@ -15,4 +15,8 @@ interface ConstraintInterface
     public function getConstraintType(): string;
 
     public function resolveOptions(ConstraintModel $model): array;
+
+    public function getName(): string;
+
+    public function getGroup(): string;
 }

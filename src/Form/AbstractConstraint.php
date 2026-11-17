@@ -10,6 +10,7 @@ abstract class AbstractConstraint
 {
     protected string $name;
     protected string $constraintType;
+    protected string $group = 'basic';
     protected array $messageOptions = ['message'];
 
     public function getName(): string
@@ -32,6 +33,18 @@ abstract class AbstractConstraint
     public function setConstraintType(string $constraintType): self
     {
         $this->constraintType = $constraintType;
+
+        return $this;
+    }
+
+    public function getGroup(): string
+    {
+        return $this->group;
+    }
+
+    public function setGroup(string $group): self
+    {
+        $this->group = $group;
 
         return $this;
     }

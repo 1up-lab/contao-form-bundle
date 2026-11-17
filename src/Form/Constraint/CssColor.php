@@ -6,10 +6,11 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\CssColor as CssColorConstraint;
 
-#[AsConstraint('cssColor', CssColorConstraint::class)]
+#[AsConstraint('cssColor', CssColorConstraint::class, group: ConstraintGroup::String)]
 class CssColor extends AbstractConstraint implements ConstraintInterface
 {
 }

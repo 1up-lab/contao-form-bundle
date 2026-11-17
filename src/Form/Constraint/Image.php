@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Symfony\Component\Validator\Constraints\Image as ImageConstraint;
 
-#[AsConstraint('image', ImageConstraint::class)]
+#[AsConstraint('image', ImageConstraint::class, group: ConstraintGroup::File)]
 class Image extends File implements ConstraintInterface
 {
     protected array $messageOptions = [

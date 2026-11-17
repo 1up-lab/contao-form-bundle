@@ -6,11 +6,12 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Symfony\Component\Validator\Constraints\Length as LengthConstraint;
 
-#[AsConstraint('length', LengthConstraint::class)]
+#[AsConstraint('length', LengthConstraint::class, group: ConstraintGroup::String)]
 class Length extends AbstractConstraint implements ConstraintInterface
 {
     protected array $messageOptions = ['minMessage', 'maxMessage', 'exactMessage'];

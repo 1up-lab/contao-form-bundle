@@ -6,11 +6,12 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Symfony\Component\Validator\Constraints\Regex as RegexConstraint;
 
-#[AsConstraint('regex', RegexConstraint::class)]
+#[AsConstraint('regex', RegexConstraint::class, group: ConstraintGroup::String)]
 class Regex extends AbstractConstraint implements ConstraintInterface
 {
     public function resolveOptions(ConstraintModel $model): array

@@ -6,10 +6,11 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractComparisonConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\GreaterThan as GreaterThanConstraint;
 
-#[AsConstraint('greaterThan', GreaterThanConstraint::class)]
+#[AsConstraint('greaterThan', GreaterThanConstraint::class, group: ConstraintGroup::Comparison)]
 class GreaterThan extends AbstractComparisonConstraint implements ConstraintInterface
 {
 }

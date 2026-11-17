@@ -6,6 +6,7 @@ namespace Oneup\ContaoFormBundle\DependencyInjection\Compiler;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Attribute\AsField;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\FieldGroup;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -40,12 +41,14 @@ class FormPass implements CompilerPassInterface
             }
 
             $id = \sprintf('%s.%s', $reflector->getName(), $attribute->name);
+            $group = $attribute->group instanceof ConstraintGroup ? $attribute->group->value : $attribute->group;
 
             $container->register($id, $reflector->getName())
                 ->setAutowired(true)
                 ->addTag('oneup_contao_form.constraint', ['type' => $attribute->name])
                 ->addMethodCall('setName', [$attribute->name])
                 ->addMethodCall('setConstraintType', [$attribute->constraintType])
+                ->addMethodCall('setGroup', [$group])
             ;
         });
     }

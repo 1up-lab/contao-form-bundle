@@ -6,10 +6,11 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\Country as CountryConstraint;
 
-#[AsConstraint('country', CountryConstraint::class)]
+#[AsConstraint('country', CountryConstraint::class, group: ConstraintGroup::Choice)]
 class Country extends AbstractConstraint implements ConstraintInterface
 {
 }

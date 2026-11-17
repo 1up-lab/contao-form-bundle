@@ -6,10 +6,11 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\PositiveOrZero as PositiveOrZeroConstraint;
 
-#[AsConstraint('positiveOrZero', PositiveOrZeroConstraint::class)]
+#[AsConstraint('positiveOrZero', PositiveOrZeroConstraint::class, group: ConstraintGroup::Number)]
 class PositiveOrZero extends AbstractConstraint implements ConstraintInterface
 {
 }

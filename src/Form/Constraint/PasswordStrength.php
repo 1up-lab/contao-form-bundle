@@ -6,10 +6,11 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\PasswordStrength as PasswordStrengthConstraint;
 
-#[AsConstraint('passwordStrength', PasswordStrengthConstraint::class)]
+#[AsConstraint('passwordStrength', PasswordStrengthConstraint::class, group: ConstraintGroup::String)]
 class PasswordStrength extends AbstractConstraint implements ConstraintInterface
 {
 }

@@ -6,11 +6,12 @@ namespace Oneup\ContaoFormBundle\Form\Constraint;
 
 use Oneup\ContaoFormBundle\Attribute\AsConstraint;
 use Oneup\ContaoFormBundle\Form\AbstractConstraint;
+use Oneup\ContaoFormBundle\Form\ConstraintGroup;
 use Oneup\ContaoFormBundle\Form\ConstraintInterface;
 use Oneup\ContaoFormBundle\Model\ConstraintModel;
 use Symfony\Component\Validator\Constraints\File as FileConstraint;
 
-#[AsConstraint('file', FileConstraint::class)]
+#[AsConstraint('file', FileConstraint::class, group: ConstraintGroup::File)]
 class File extends AbstractConstraint implements ConstraintInterface
 {
     protected array $messageOptions = ['maxSizeMessage', 'extensionsMessage'];
