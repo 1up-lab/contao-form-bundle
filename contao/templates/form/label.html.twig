@@ -7,6 +7,8 @@
         </label>
 
     If no label was set, the name of the field is humanized and used instead.
+    Setting "label_html" to true will output the label raw and therefore needs
+    to be trusted.
 
     Mandatory variables:
         @var string name
@@ -15,6 +17,7 @@
     Optional variables:
         @var string id
         @var string|false label
+        @var bool label_html
         @var string|false translation_domain
         @var array label_attr
         @var \Contao\CoreBundle\String\HtmlAttributes label_attributes
@@ -34,7 +37,8 @@
     {%- block label %}
         <label{% block label_attributes %}{{ label_attributes }}{% endblock %}>
             {%- block label_text -%}
-                {{ translation_domain is same as(false) ? label : label|trans(label_translation_parameters|default({}), translation_domain) }}
+                {%- set label = translation_domain is same as(false) ? label : label|trans(label_translation_parameters|default({}), translation_domain) -%}
+                {{- label_html|default(false) ? label|raw : label -}}
             {%- endblock -%}
             {%- block label_required -%}
                 {% if required %}<span class="form-label__required" aria-hidden="true">*</span>{% endif %}
