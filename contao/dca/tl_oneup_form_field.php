@@ -129,6 +129,7 @@ $GLOBALS['TL_DCA']['tl_oneup_form_field'] = [
         ',
         'file' => '
             {title_legend},name,type;
+            {label_legend},label,labelHtml;
             {config_legend},multipleFiles,attachToEmail,storeFile;
             {publish_legend},published;
         ',
